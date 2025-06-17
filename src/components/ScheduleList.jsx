@@ -1,7 +1,11 @@
 import "./ScheduleList.css";
-
+import ScheduleItem from "./ScheduleItem";
 const ScheduleList = () => {
-  return <div className="ScheduleList">일정 나오는ㄴ 구역</div>;
+  return (
+    <div className="ScheduleList">
+      <ScheduleItem></ScheduleItem>
+    </div>
+  );
 };
 
 export default ScheduleList;

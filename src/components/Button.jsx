@@ -13,8 +13,8 @@ const Button = ({ text, onClick, classtype }) => {
 
   */
   return (
-    <div>
-      <button className={`${classtype}`} onClick={onClick}>
+    <div className="Button">
+      <button className={` ${classtype}`} onClick={onClick}>
         {text}
       </button>
     </div>
