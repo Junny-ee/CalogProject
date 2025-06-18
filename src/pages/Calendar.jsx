@@ -4,9 +4,11 @@ import Summary from "../components/Summary";
 const Calendar = () => {
   return (
     <div>
-      <FrontCalendar />
-      <Summary />
-      <ScheduleList />
+      <>
+        <FrontCalendar />
+        <Summary />
+        <ScheduleList />
+      </>
     </div>
   );
 };
