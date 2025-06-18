@@ -1,0 +1,27 @@
+.tag_write_container {
+  border: none;
+  padding: 8px;
+}
+
+.tag_input_field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.tag_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag_item {
+  background-color: #fcf7ce;
+  padding: 4px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}

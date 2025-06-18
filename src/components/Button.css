@@ -5,16 +5,16 @@
 }
 
 .Button .Create {
-  color: black;
+  color: rgb(255, 0, 0);
 }
 .Button .Editer {
-  color: black;
+  color: rgb(131, 29, 226);
 }
 .Button .Delete {
-  color: black;
+  color: rgb(92, 139, 17);
 }
 .Button .Theme {
-  color: black;
+  color: rgb(30, 153, 122);
 }
 .Button .ListToggle {
   color: black;
