@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./BackBoard.css";
+
 import BackPostList from "./BackPostList";
 import { useNavigate } from "react-router-dom";
 // props: id, title, createDate, content, tag
