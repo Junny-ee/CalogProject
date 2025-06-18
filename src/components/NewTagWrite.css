@@ -1,27 +1,37 @@
 .tag_write_container {
-  border: none;
-  padding: 8px;
+  width: 100%;
+  background-color: #f0f6ff;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 10px 10px 0px 10px;
+  margin: 0 0 10px 0;
 }
 
 .tag_input_field {
   width: 100%;
   padding: 10px;
-  margin-bottom: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   box-sizing: border-box;
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 .tag_list {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
 }
 
 .tag_item {
   background-color: #fcf7ce;
-  padding: 4px 8px;
-  border-radius: 12px;
-  cursor: pointer;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 20px;
   font-size: 14px;
+  cursor: pointer;
+}
+
+.tag_item:hover {
+  background-color: #f7e8a1;
 }

@@ -1,15 +1,20 @@
-import { useState } from "react";
 import "./NewTagWrite.css";
-
+import { useState } from "react";
+// 태그 개수 제한
 const NewTagWrite = ({ tags, setTags }) => {
   const [input, setInput] = useState("");
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && input.trim()) {
       e.preventDefault();
-      const newTag = input.trim();
-      if (!tags.includes(newTag)) {
+
+      const newTag = input.trim().toLowerCase();
+      const lowerCaseTag = tags.map((tag) => tag.toLowerCase());
+      if (!lowerCaseTag.includes(newTag)) {
         setTags([...tags, newTag]);
+      }
+      if (tags.length >= 10) {
+        alert("태그는 10개까지만 입력가능합니다!");
       }
       setInput("");
     }
