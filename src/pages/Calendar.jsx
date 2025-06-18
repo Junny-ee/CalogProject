@@ -2,20 +2,17 @@ import BackBoard from "../components/BackBoard";
 import FrontCalendar from "../components/FrontCalendar";
 import ScheduleList from "../components/ScheduleList";
 import Summary from "../components/Summary";
-import { useState } from "react";
+import "./Calendar.css";
 const Calendar = () => {
-  const [turnCalendar, setTurnCalendar] = useState(true);
   return (
-    <div>
-      {turnCalendar ? (
-        <>
-          <FrontCalendar setTurnCalendar={setTurnCalendar} />
-          <Summary />
-          <ScheduleList />
-        </>
-      ) : (
-        <BackBoard setTurnCalender={setTurnCalendar} />
-      )}
+    <div className="Calendar">
+      <div className="left-content">
+        <FrontCalendar />
+        <Summary />
+      </div>
+      <div className="right-content">
+        <ScheduleList />
+      </div>
     </div>
   );
 };

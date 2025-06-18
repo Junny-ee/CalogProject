@@ -1,0 +1,25 @@
+.Calendar {
+  display: flex;
+  min-height: 100vh;
+}
+
+.Calendar .right-content {
+  flex: 1;
+  padding: 1rem;
+}
+
+.Calendar .left-content {
+  display: flex;
+  flex: 2;
+  padding: 1rem;
+  flex-direction: column;
+}
+.Calendar .left-content > div:first-child {
+  /* 캘린더 영역 고정 높이 */
+  height: 60%;
+  min-height: 300px; /* 필요 시 */
+}
+.Calendar .left-content > div:last-child {
+  /* 요약창: 나머지 공간 모두 차지 */
+  flex-grow: 1;
+}

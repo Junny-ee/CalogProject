@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import "./FrontCalendar.css";
+
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -23,7 +25,7 @@ const localizer = momentLocalizer(moment);
 const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
   const [date, setDate] = useState(new Date());
   const calendarRef = useRef(null);
-
+  const nav = useNavigate();
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
@@ -61,7 +63,7 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
   return (
     <div>
       <h3>{moment(date).format("MMMM YYYY")}</h3>
-      <button onClick={() => setTurnCalendar(false)}>뒤집는 버튼</button>
+      <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button>
 
       <div className="FrontCalendar" ref={calendarRef}>
         <Calendar
@@ -82,6 +84,5 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
       </div>
     </div>
   );
-};
 
 export default FrontCalendar;

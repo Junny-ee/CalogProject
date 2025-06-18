@@ -1,0 +1,27 @@
+.Button {
+  border: none;
+  margin: 10px;
+  padding: 10px;
+}
+
+.Button .Create {
+  color: rgb(255, 0, 0);
+}
+.Button .Editer {
+  color: rgb(131, 29, 226);
+}
+.Button .Delete {
+  color: rgb(92, 139, 17);
+}
+.Button .Theme {
+  color: rgb(30, 153, 122);
+}
+.Button .ListToggle {
+  color: black;
+}
+.Button .ScreenChange {
+  color: black;
+}
+.Button .Back {
+  color: black;
+}

@@ -1,0 +1,50 @@
+.post_item {
+  display: flex; 
+  align-items: center; 
+  width: 70%; 
+  border: 1px solid black; 
+  padding: 10px; 
+  margin-bottom: 15px; 
+  box-sizing: border-box; 
+}
+
+.content_wrapper {
+  flex-grow: 1; 
+  padding-right: 10px; 
+}
+
+.content_wrapper:hover {
+  cursor: pointer;
+}
+
+.content_header {
+  display: inline-block;
+  margin-bottom: 5px; 
+  font-weight: bold;
+}
+
+.content_body {
+  margin-bottom: 10px; 
+}
+.content_date{
+  font-weight: 300;
+}
+
+.tag:hover {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.tag {
+  display: inline-block;
+  background-color: antiquewhite;
+  border-radius: 20px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+input[type="checkbox"] {
+  margin-left: 15px; 
+  flex-shrink: 0;
+  transform: scale(1.5); 
+}
