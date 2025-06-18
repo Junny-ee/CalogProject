@@ -29,6 +29,9 @@ function ModalWindow() {
         overlayClassName="modal-overlay" // 모달 오버레이에 대한 클래스
       >
         <h2 className="modal-title">일정 추가</h2>
+        시작 날짜
+        <input type="date" />
+        종료 날짜
         <input type="date" />
         <input type="text" placeholder="제목 입력" />
         <textarea></textarea>
