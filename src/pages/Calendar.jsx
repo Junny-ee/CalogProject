@@ -1,3 +1,4 @@
+import BackBoard from "../components/BackBoard";
 import FrontCalendar from "../components/FrontCalendar";
 import ScheduleList from "../components/ScheduleList";
 import Summary from "../components/Summary";

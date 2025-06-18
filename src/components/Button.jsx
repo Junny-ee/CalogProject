@@ -14,7 +14,7 @@ const Button = ({ text, onClick, classtype }) => {
   */
   return (
     <div className="Button">
-      <button className={` ${classtype}`} onClick={onClick}>
+      <button className={`${classtype}`} onClick={onClick}>
         {text}
       </button>
     </div>
