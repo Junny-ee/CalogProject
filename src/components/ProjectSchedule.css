@@ -1,6 +1,6 @@
-.ScheduleItem {
+.ProjectSchedule {
   border: 1px solid #000;
 }
-.item_contents {
+.project_contents {
   cursor: pointer;
 }

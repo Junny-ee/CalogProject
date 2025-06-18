@@ -1,11 +1,11 @@
 /* 모달 오버레이 스타일 (배경) */
-.modal-overlay {
+.modal_overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75); /* 투명도 있는 검은색 배경 */
+  background-color: rgba(0, 0, 0, 0.3); /* 투명도 있는 검은색 배경 */
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
@@ -13,7 +13,7 @@
 }
 
 /* 모달 내용 스타일 */
-.modal-content {
+.modal_content {
   background: white;
   padding: 30px;
   border-radius: 8px;
@@ -27,18 +27,10 @@
   gap: 15px; /* 요소들 사이의 간격 */
 }
 
-/* 모달 제목 스타일 */
-.modal-title {
-  color: #333;
-  margin-bottom: 15px; /* input과의 간격 조정 */
-  font-size: 1.8em;
-  text-align: center;
-}
-
-/* 입력 필드 (input, textarea) 공통 스타일 */
-.modal-content input[type="date"],
-.modal-content input[type="text"],
-.modal-content textarea {
+/* 입력 필드 (input[type="text"], input[type="datetime-local"], textarea) 공통 스타일 */
+.modal_content input[type="text"],
+.modal_content input[type="datetime-local"],
+.modal_content textarea {
   width: calc(100% - 20px); /* 패딩 고려 */
   padding: 10px;
   border: 1px solid #ddd;
@@ -47,55 +39,136 @@
   box-sizing: border-box; /* 패딩과 보더가 너비에 포함되도록 */
 }
 
-.modal-content textarea {
+.modal_content textarea {
   min-height: 100px; /* 최소 높이 */
   resize: vertical; /* 세로로만 크기 조절 가능 */
 }
 
 /* 포커스 시 입력 필드 스타일 */
-.modal-content input:focus,
-.modal-content textarea:focus {
+.modal_content input:focus,
+.modal_content textarea:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   outline: none;
 }
 
-/* '+' 버튼 스타일 */
-.open-modal-button {
-  background-color: #28a745; /* 녹색 */
-  color: white;
-  border: none;
-  border-radius: 50%; /* 원형 버튼 */
-  width: 50px; /* 너비와 높이를 같게 설정 */
-  height: 50px; /* 너비와 높이를 같게 설정 */
-  font-size: 2em; /* '+' 기호 크기 */
+/* 라디오 버튼 래퍼 */
+.Option_wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  gap: 10px; /* 라디오 버튼들 사이 간격 */
+  margin-bottom: 10px; /* 아래 요소와의 간격 */
 }
 
-.open-modal-button:hover {
-  background-color: #218838;
-  transform: scale(1.05); /* 약간 확대 */
+/* 라디오 버튼 숨기기 */
+.btn_check {
+  position: absolute;
+  clip: rect(0, 0, 0, 0); /* 요소를 시각적으로 숨김 */
+  pointer-events: none; /* 클릭 이벤트를 받지 않음 */
 }
 
-/* 모달 닫기 버튼 스타일 */
-.close-modal-button {
-  background-color: #6c757d; /* 회색 */
-  color: white;
+/* 라디오 버튼과 연결된 라벨 (버튼처럼 보이게) */
+.btn {
+  display: inline-block;
+  padding: 0.375rem 0.75rem; /* 버튼 내부 여백 */
+  font-size: 1rem; /* 폰트 크기 */
+  font-weight: 400; /* 폰트 굵기 */
+  line-height: 1.5; /* 줄 간격 */
+  color: #212529; /* 기본 텍스트 색상 */
+  background-color: #f8f9fa; /* 기본 배경 색상 (밝은 회색) */
+  border: 1px solid #ced4da; /* 테두리 */
+  border-radius: 0.375rem; /* 모서리 둥글게 */
+  cursor: pointer; /* 마우스 오버 시 포인터 변경 */
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* 부드러운 전환 효과 */
+  user-select: none; /* 텍스트 드래그 방지 */
+}
+
+/* 라디오 버튼이 선택되었을 때 라벨 스타일 변경 */
+/* input[type="radio"]#ID:checked + label.클래스명 */
+.btn_check:checked + .btn {
+  color: #fff; /* 선택 시 텍스트 색상 (흰색) */
+  background-color: #0d6efd; /* 선택 시 배경 색상 (파란색) */
+  border-color: #0d6efd; /* 선택 시 테두리 색상 */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* 선택 시 그림자 효과 */
+}
+
+/* 포커스 시 스타일 (접근성 향상) */
+.btn_check:focus + .btn {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  border-color: #0a58ca;
+}
+
+/* 비활성화된 상태의 버튼 */
+.btn_check:disabled + .btn {
+  pointer-events: none;
+  opacity: 0.65;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+  color: #6c757d;
+}
+
+/* 모달 내 버튼 컨테이너 */
+.modal_button-box {
+  display: flex;
+  justify-content: flex-end; /* 버튼들을 오른쪽으로 정렬 */
+  gap: 10px; /* 버튼 사이 간격 */
+  width: 100%; /* 부모 너비에 꽉 차도록 */
+  margin-top: 20px; /* 위에 있는 요소들과 간격 */
+}
+
+/* 모달 저장/닫기 버튼 공통 스타일 */
+.create_modal_button,
+.close_modal_button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1em;
-  align-self: flex-end; /* flex 컨테이너 내에서 오른쪽으로 정렬 */
-  margin-top: 10px; /* 위쪽 여백 */
   transition: background-color 0.3s ease;
 }
 
-.close-modal-button:hover {
+/* 모달 저장 버튼 스타일 */
+.create_modal_button {
+  background-color: #0ee031d3; /* 녹색 계열 */
+  color: white;
+}
+
+.create_modal_button:hover {
+  background-color: #089720d3;
+}
+
+/* 모달 닫기 버튼 스타일 */
+.close_modal_button {
+  background-color: #6c757d; /* 회색 */
+  color: white;
+}
+
+.close_modal_button:hover {
   background-color: #5a6268;
+}
+
+/* 날짜 입력 필드 라벨과 인풋 사이 간격 조정 */
+.modal_content label {
+  margin-right: 10px;
+}
+.modal_content input[type="datetime-local"] {
+  width: auto; /* 자동 너비 조정 */
+  flex-grow: 1; /* flex 아이템으로 공간 채우기 */
+}
+
+/* 날짜 선택 섹션 레이아웃 개선 */
+.modal_content > div:nth-of-type(2) {
+  /* "시작 날짜"와 "종료 날짜"를 포함하는 div */
+  display: flex;
+  flex-direction: column; /* 세로로 정렬 */
+  gap: 10px; /* 각 날짜 줄 사이 간격 */
+}
+.modal_content > div:nth-of-type(2) > div {
+  /* 각 날짜 줄 */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal_content > div:nth-of-type(2) > div label {
+  min-width: 80px; /* 라벨 너비 고정하여 정렬 */
 }
