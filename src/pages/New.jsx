@@ -5,7 +5,7 @@ import "./New.css";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import remarkGfm from "remark-gfm";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { cb } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const New = () => {
   const [tags, setTags] = useState([]);
@@ -30,7 +30,7 @@ const New = () => {
 
       <div className="markdown_preview">
         <h3>미리보기</h3>
-        <ReactMarkdown
+        <ReactMarkdown 
           children={content}
           remarkPlugins={[remarkGfm]}
           components={{
@@ -38,7 +38,7 @@ const New = () => {
               const match = /language-(\w+)/.exec(className || "");
               return !inline && match ? (
                 <SyntaxHighlighter
-                  style={oneDark}
+                  style={cb}
                   language={match[1]}
                   PreTag="div"
                   {...props}
