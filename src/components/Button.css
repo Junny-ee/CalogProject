@@ -25,3 +25,13 @@
 .Button .Back {
   color: black;
 }
+
+/*버튼 스타일 참고용
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.open-modal-button:hover {
+  background-color: #218838;
+  transform: scale(1.05); /* 약간 확대 */

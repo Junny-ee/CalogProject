@@ -1,43 +1,54 @@
-import React, { useState } from "react";
 import Modal from "react-modal";
 import "./ModalWindow.css"; // CSS 파일을 임포트합니다.
 
-// Modal.setAppElement('#root'); // App의 루트 엘리먼트를 지정합니다. index.js에서 설정하는 것이 일반적입니다.
-
-function ModalWindow() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
-
+function ModalWindow({ isOpen, onModal }) {
   return (
     <div>
-      <button onClick={openModal} className="open-modal-button">
-        +
-      </button>
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
+        isOpen={isOpen}
+        onRequestClose={() => onModal(false)}
         contentLabel="Example Modal"
         ariaHideApp={false} // 에러 방지를 위해 추가
-        className="modal-content" // 모달 내용에 대한 클래스
-        overlayClassName="modal-overlay" // 모달 오버레이에 대한 클래스
+        className="modal_content" // 모달 내용에 대한 클래스
+        overlayClassName="modal_overlay" // 모달 오버레이에 대한 클래스
       >
-        <h2 className="modal-title">일정 추가</h2>
-        시작 날짜
-        <input type="date" />
-        종료 날짜
-        <input type="date" />
-        <input type="text" placeholder="제목 입력" />
-        <textarea></textarea>
-        <button onClick={closeModal} className="close-modal-button">
-          모달 닫기
-        </button>
+        <input type="text" placeholder="제목 추가" />
+        <div className="Option_wrapper">
+          <input
+            type="radio"
+            className="btn_check"
+            name="options_base"
+            id="option5"
+            autoComplete="off"
+          />
+          <label className="btn" htmlFor="option5">
+            프로젝트 일정
+          </label>
+          <input
+            type="radio"
+            className="btn_check"
+            name="options_base"
+            id="option6"
+            autoComplete="off"
+          />
+          <label className="btn" htmlFor="option6">
+            할 일
+          </label>
+        </div>
+        <div>
+          <label>시작 날짜</label>
+          <input type="datetime-local" />
+          <br />
+          <label>종료 날짜</label>
+          <input type="datetime-local" />
+        </div>
+        <textarea className="" placeholder="설명 추가"></textarea>
+        <div className="modal_button-box">
+          <button className="create_modal_button">저장</button>
+          <button onClick={() => onModal(false)} className="close_modal_button">
+            닫기
+          </button>
+        </div>
       </Modal>
     </div>
   );
