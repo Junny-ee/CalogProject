@@ -84,5 +84,5 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
       </div>
     </div>
   );
-
+};
 export default FrontCalendar;
