@@ -3,11 +3,11 @@ import ScheduleItem from "./ScheduleItem";
 import ModalWindow from "./ModalWindow";
 import ProjectSchedule from "./ProjectSchedule";
 import Button from "./Button";
-import { useContext, useState } from "react";
-useContext()
+import { useState } from "react";
+
 const ScheduleList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState(""); 
+  const [modalType, setModalType] = useState("");
 
   const openModal = (type) => {
     setIsModalOpen(true);
