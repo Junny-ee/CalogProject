@@ -35,6 +35,11 @@ const ScheduleList = () => {
       </div>
 
       {/* 모달은 ScheduleList에서만 렌더링하고, modalType에 따라 내용을 다르게 표시할 수 있습니다. */}
+      <ModalCreate
+        isOpen={isModalOpen}
+        onModal={closeModal}
+        modalType={modalType}
+      />
     </div>
   );
 };
