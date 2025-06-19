@@ -1,6 +1,7 @@
 .Calendar {
   display: flex;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .Calendar .right-content {
