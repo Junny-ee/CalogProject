@@ -8,13 +8,35 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
   const nav = useNavigate();
   const { setSearchWord, setSearchingTag, setShowSearchBar } =
     useContext(BackBoardDispatchContext);
+  
+  const markdownPreviewLines = () => {
+    if (typeof content !== "string") return [];
+
+    const lines = content.split("\n").slice(0, 2); // 제목(첫 줄) 제외
+
+    return lines
+      .filter((line) => line.trim() !== "") // 빈 줄 제거
+      .map((line) =>
+        line
+          .replace(/^#+\s*/, "") // 제목 기호 제거
+          .replace(/[*_`>~-]/g, "") // 기타 기호 제거
+          .trim()
+      );
+  };
+
   const { onDelete } = useContext(CalogDispatchContext);
   const [isChecked, setIsChecked] = useState(false);
   return (
     <div className="post_item">
       <div className="content_wrapper" onClick={() => nav(`/read/${id}`)}>
         <div className="content_header">{title}</div>
-        <div className="content_body">{content}</div>
+        <div className="content_body">
+          {" "}
+          {markdownPreviewLines().map((line, idx) => (
+            <p key={idx}>{line}</p>
+          ))}
+        </div>
+
         {tag ? (
           <div
             className="tag"

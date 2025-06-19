@@ -7,12 +7,14 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   resize: none;
+  line-height: 1.5;
+  flex: 1;
 }
 
 .button_content {
-  margin-top: 10px;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 10px;
 }
 
 .markdown_preview {
@@ -26,4 +28,6 @@
   white-space: pre-wrap; /* 줄바꿈과 공백 유지 */
   word-wrap: break-word; /* 너무 긴 단어도 줄바꿈 */
   overflow-wrap: break-word;
+  line-height: 1.5;
+  flex: 1;
 }

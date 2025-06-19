@@ -1,6 +1,7 @@
 import "./Title.css";
 
 const Title = ({ title, setTitle }) => {
+
   return (
     <input
       className="title_input"
@@ -9,6 +10,8 @@ const Title = ({ title, setTitle }) => {
       value={title}
       onChange={(e) => setTitle(e.target.value)}
     />
+
+    
   );
 };
 

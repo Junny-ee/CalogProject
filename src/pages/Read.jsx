@@ -1,7 +1,11 @@
 import { useContext } from "react";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { useNavigate, useParams } from "react-router-dom";
 import { postContent } from "../util/postContent";
 import "./Read.css";
+import remarkGfm from "remark-gfm";
+import { cb } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CalogDispatchContext, CalogStateContext } from "../App";
 const Read = ({ title, createDate, content, tag }) => {
   const { onDelete } = useContext(CalogDispatchContext);
@@ -33,7 +37,29 @@ const Read = ({ title, createDate, content, tag }) => {
         <div className="read_title_content">{rightNum.title}</div>
         <div className="read_tag_content">{spreadTag}</div>
         <div className="read_content">
-          <p>{rightNum.content}</p>
+          <ReactMarkdown
+            children={rightNum.content}
+            remarkPlugins={[remarkGfm]}
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    style={cb}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  >
+                    {String(children).replace(/\n$/, "")}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+          />
         </div>
       </div> */}
     </>

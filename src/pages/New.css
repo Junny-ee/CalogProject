@@ -4,11 +4,12 @@
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  /* max-width: 800px; 원하는 너비 설정 */
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .title_content {
+  margin-top: 40px;
   padding: 10px 0;
   display: flex;
   align-items: center;
@@ -28,7 +29,6 @@
 
 /* 글 작성 영역: 화면 여유 공간을 모두 사용 */
 .New > .write_content {
-  flex-grow: 1;
   padding: 10px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -37,17 +37,18 @@
   min-height: 0; /* flex-item overflow 방지 */
   border: 1px solid #ccc;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /* 버튼 */
 .New > .button_content {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 15px;
 }
 
 /* 미리보기 */
 .markdown_preview {
-  flex-grow: 1;
   margin-top: 10px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -55,4 +56,5 @@
   border-radius: 8px;
   overflow-y: auto;
   min-height: 0;
+  height: 280px;
 }
