@@ -60,7 +60,9 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
       }
     };
   }, [date]); // date 바뀔때마다 useEffect 다시 실행됨 //즉 addEventListener 등록하겠단 의미
-
+  const onClose = () => {
+    setmodalOpen(false);
+  };
   return (
     <div>
       <div className="HeaderCalendar">
@@ -95,9 +97,7 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
 
       <CalModalWindow
         isOpen={modalOpen}
-        onClose={() => {
-          setmodalOpen(false);
-        }}
+        onClose={onClose}
         // selectedDate={date}
         onDateChange={(selectedDate) => {
           setDate(selectedDate);
