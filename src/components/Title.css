@@ -1,0 +1,10 @@
+.title_input {
+  height: 100%;
+  width: 100%;
+  font-size: xx-large;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 30px;
+}
