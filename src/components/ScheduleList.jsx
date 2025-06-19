@@ -3,17 +3,19 @@ import ScheduleItem from "./ScheduleItem";
 import ModalCreate from "./ModalCreate";
 import ProjectSchedule from "./ProjectSchedule";
 import Button from "./Button";
-import { useState } from "react";
-
-const ScheduleList = () => {
+import { useContext, useState } from "react";
+import {
+  ScheduleStateContext,
+  ScheduleDispatchContext,
+} from "../pages/Calendar";
+const ScheduleList = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("");
-
+  const schedule_data = useContext(ScheduleStateContext);
   const openModal = (type) => {
     setIsModalOpen(true);
     setModalType(type);
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
     setModalType("");
@@ -33,6 +35,13 @@ const ScheduleList = () => {
             onClick={() => openModal("project")}
           />
         </div>
+        <div>
+          {data
+            .filter((project) => project.type === "project")
+            .map((project) => (
+              <ScheduleItem key={project.id} data={item} />
+            ))}
+        </div>
         <div className="ScheduleList_Todo">
           <p>일일 일정</p>
           <Button
@@ -40,6 +49,13 @@ const ScheduleList = () => {
             classtype={"Create"}
             onClick={() => openModal("item")}
           />
+        </div>
+        <div>
+          {data
+            .filter((item) => item.type === "item")
+            .map((item) => (
+              <ScheduleItem key={item.id} data={item} />
+            ))}
         </div>
       </div>
 
