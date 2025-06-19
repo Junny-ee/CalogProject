@@ -1,0 +1,29 @@
+.write_content_textarea {
+  width: 100%;
+  height: 300px; /* 혹은 flex로 처리할 수도 있음 */
+  font-size: 1rem;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: none;
+}
+
+.button_content {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.markdown_preview {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #fafafa;
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap; /* 줄바꿈과 공백 유지 */
+  word-wrap: break-word; /* 너무 긴 단어도 줄바꿈 */
+  overflow-wrap: break-word;
+}
