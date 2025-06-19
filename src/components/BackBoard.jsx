@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import "./BackBoard.css";
 
 import BackPostList from "./BackPostList";
 import { useNavigate } from "react-router-dom";
 // props: id, title, createDate, content, tag
+export const BackBoardDispatchContext = createContext();
 const BackBoard = () => {
 
+  // postContent
   const postMockData = [
     { id: 1, title: '첫 번째 게시물', createDate: new Date("2023-01-15").getTime(), tag: '리액트', content: '이것은 블로그의 첫 번째 게시물입니다. 리액트의 기본 개념과 컴포넌트 구조에 대해 다룹니다. 앞으로 다양한 웹 개발 주제를 함께 탐구해 나갈 예정이니 많은 기대 부탁드립니다.' },
     { id: 2, title: 'Redux를 이용한 상태 관리', createDate: new Date("2023-02-01").getTime(), tag: '리덕스', content: '리액트 애플리케이션에서 복잡한 상태를 효율적으로 관리하기 위한 Redux의 기본적인 사용법과 핵심 원리들을 설명합니다. 액션, 리듀서, 스토어의 개념을 자세히 알아보세요.' },
@@ -58,12 +60,24 @@ const BackBoard = () => {
     { id: 49, title: '웹 소켓을 이용한 게임 개발', createDate: new Date("2024-09-04").getTime(), tag: '게임 개발', content: '실시간 통신이 중요한 웹 기반 멀티플레이어 게임을 개발하기 위해 WebSocket을 활용하는 방법을 알아봅니다. 클라이언트-서버 통신 설계와 구현 예제를 다룹니다.' },
     { id: 50, title: 'Web Vitals 이해하기', createDate: new Date("2024-09-17").getTime(), tag: '웹 성능', content: '사용자 경험을 측정하는 핵심 지표인 Core Web Vitals(LCP, FID, CLS)의 개념과 중요성을 설명합니다. 웹 성능을 개선하고 검색 순위를 높이는 데 활용하세요.' }
   ];
+
+  const [contents, setContents] = useState(postMockData);
+
+  const deleteContent = (id) => {
+    const deletedContents = [...contents].filter(content => content.id !== id);
+    setContents(deletedContents);
+  };
+
+  const [searchWord, setSearchWord] = useState("");
+  const [searchingTag, setSearchingTag] = useState("");
+  const [showSearchBar, setShowSearchBar] = useState(true);
   const nav = useNavigate();
+
   const [scrolled, setScrolled] = useState(false);
+
   function onScroll() {
     if (window.scrollY >= 150) {
       setScrolled(true);
-      console.log(scrolled);
     } else {
       setScrolled(false);
     }
@@ -78,12 +92,45 @@ const BackBoard = () => {
   const moveToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const onChange = (event) => {
+    setSearchWord(event.target.value);
+  }
+  const filteredContents = contents.filter(item => {
+    const lowerCaseSearchWord = searchWord.toLowerCase();
+    const titleIncludes = item.title.toLowerCase().includes(lowerCaseSearchWord);
+    const contentIncludes = item.content.toLowerCase().includes(lowerCaseSearchWord);
+    const tagIncludes = item.tag ? item.tag.toLowerCase().includes(lowerCaseSearchWord) : null;
+    return titleIncludes || contentIncludes || tagIncludes;
+  });
+  const filteredContentsByTag = contents.filter(item => {
+    const tagIncludes = item.tag ? item.tag.toLowerCase().includes(searchingTag.toLowerCase()) : null;
+    return tagIncludes;
+  })
   return (
     <div>
       <button onClick={() => nav("/")}>캘린더 이동 버튼</button>
+      <button className="button_home" onClick={() => (nav(0), setSearchingTag(""))}>홈 버튼(새로고침)</button>
       {scrolled ? (<button id="moveToTopButton" onClick={moveToTop}>페이지 맨 위로 가는 버튼</button>) : (null)}
+      {showSearchBar ? (<div className="search">
+        <input
+          type="text"
+          value={searchWord}
+          className="search_input"
+          placeholder="검색어를 입력하세요"
+          onChange={onChange}
+        />
+      </div>) : (null)}
       <div className="list_wrapper">
-        <BackPostList data={postMockData} />
+        <BackBoardDispatchContext.Provider value={{ deleteContent, setSearchWord, setSearchingTag, setShowSearchBar }}>
+          {searchingTag ?
+            (<div>
+              <h2 className="tag_header">{`#${searchingTag}`}</h2>
+              <BackPostList data={filteredContentsByTag} searchingTag={searchingTag} setSearchingTag={setSearchingTag} />
+            </div>)
+            :
+            (<BackPostList data={filteredContents} />)}
+        </BackBoardDispatchContext.Provider>
       </div>
     </div>
   )
