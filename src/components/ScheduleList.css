@@ -6,27 +6,31 @@
   display: flex;
   border: 1px solid #000;
 }
+.ScheduleList_Todo {
+  border: 1px solid #000;
+  display: flex;
+  align-items: stretch;
+}
 .right-content {
   position: relative;
-  width: 300px; 
+  width: 300px;
   flex-shrink: 0;
-  
-  transform: translateX(100%); 
-  opacity: 0; 
-  pointer-events: none; 
-  transition: transform 0.3s ease-in-out, 
-              opacity 0.3s ease-in-out, 
-              width 0.3s ease-in-out;
-  overflow: hidden; 
+
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
+    width 0.3s ease-in-out;
+  overflow: hidden;
 }
 
 .right-content.open {
-  transform: translateX(0); 
-  width: 300px; 
-  opacity: 1; 
+  transform: translateX(0);
+  width: 300px;
+  opacity: 1;
   pointer-events: auto;
 }
 
 .right-content:not(.open) {
-  width: 0; 
+  width: 0;
 }
