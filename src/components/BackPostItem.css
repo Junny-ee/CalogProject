@@ -23,10 +23,20 @@
   display: inline-block;
   margin-bottom: 5px; 
   font-weight: bold;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .content_body {
   margin-bottom: 10px; 
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .content_date{
   font-weight: 300;
@@ -43,6 +53,10 @@
   border-radius: 20px;
   padding: 10px;
   margin-right: 10px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 input[type="checkbox"] {
