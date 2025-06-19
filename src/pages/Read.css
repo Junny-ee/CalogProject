@@ -1,3 +1,31 @@
+.Read {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.read_title_content {
+  padding: 10px;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+.read_tag_content {
+  padding: 0 10px;
+}
+
+.read_content {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  flex-grow: 1;
+  white-space: pre-wrap; /* 줄바꿈과 공백 유지 */
+  word-wrap: break-word; /* 너무 긴 단어도 줄바꿈 */
+  overflow-wrap: break-word;
+  overflow-y: auto;
+  line-height: 1.5; /* 줄 간격 설정 */
+}
 h1{
   display: -webkit-box;
   -webkit-box-orient: vertical;

@@ -5,8 +5,8 @@ import ScheduleList from "../components/ScheduleList";
 import Summary from "../components/Summary";
 import "./Calendar.css";
 const Calendar = () => {
-  const [isScheduleListOpen, setIsScheduleListOpen] = useState(false)
-  const [isSummaryOpen, setIsSummaryOpen] = useState(false)
+  const [isScheduleListOpen, setIsScheduleListOpen] = useState(true)
+  const [isSummaryOpen, setIsSummaryOpen] = useState(true)
   const toggleScheduleList = () => {
     setIsScheduleListOpen(!isScheduleListOpen);
   }

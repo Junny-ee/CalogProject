@@ -26,3 +26,10 @@
   opacity: 1; 
   pointer-events: auto; 
 }
+.Summary_Header {
+  display: flex;
+}
+
+.Summary_Contents {
+  padding: 5px;
+}
