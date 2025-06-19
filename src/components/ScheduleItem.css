@@ -1,5 +1,6 @@
 .ScheduleItem {
   border: 1px solid #000;
+  display: flex;
 }
 .item_contents {
   cursor: pointer;
