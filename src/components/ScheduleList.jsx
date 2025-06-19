@@ -11,7 +11,7 @@ const ScheduleList = () => {
 
   const openModal = (type) => {
     setIsModalOpen(true);
-    setModalType(type); // create, project, item
+    setModalType(type); // projectCreate, itemCreate, projectEdit, itemEdit,
   };
 
   const closeModal = () => {
@@ -23,12 +23,6 @@ const ScheduleList = () => {
     <div className="ScheduleList">
       <div className="ScheduleList_Wirte">
         <h4>할일목록</h4>
-        {/* '생성' 버튼 클릭 시 'create' 타입의 모달 열기 */}
-        <Button
-          text={"+"}
-          classtype={"Create"}
-          onClick={() => openModal("create")}
-        />
       </div>
 
       <div>
@@ -41,11 +35,6 @@ const ScheduleList = () => {
       </div>
 
       {/* 모달은 ScheduleList에서만 렌더링하고, modalType에 따라 내용을 다르게 표시할 수 있습니다. */}
-      <ModalCreate
-        isOpen={isModalOpen}
-        onModal={closeModal} // 모달 닫기 함수 전달
-        modalType={modalType} // 어떤 타입의 모달인지 ModalCreate 전달 (필요하다면)
-      />
     </div>
   );
 };
