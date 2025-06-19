@@ -4,41 +4,61 @@ import "./FrontCalendar.css";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, createContext, useContext } from "react";
 import CalModalWindow from "./CalModalWindow";
 
 // 테스터용 임시 데이터
-const events = [
-  {
-    title: "회의",
-    start: new Date(2025, 5, 15, 10, 0),
-    end: new Date(2025, 5, 15, 12, 0),
-  },
-  {
-    title: "점심 약속",
-    start: new Date(2025, 5, 20, 13, 0),
-    end: new Date(2025, 5, 20, 14, 0),
-  },
-];
+// const events = [
+//   {
+//     title: "회의",
+//     start: new Date(2025, 5, 15, 10, 0),
+//     end: new Date(2025, 5, 18, 12, 0),
+//   },
+//   {
+//     title: "미팅",
+//     start: new Date(2025, 5, 15, 10, 0),
+//     end: new Date(2025, 5, 16, 12, 0),
+//   },
+//   {
+//     title: "프로젝트",
+//     start: new Date(2025, 5, 16, 13, 0),
+//     end: new Date(2025, 5, 20, 14, 0),
+//   },
+// ];
+
+const CalendarContext = createContext(null);
+//selectedDate, setselectedDate 같은 값 담음
+export const CalendarProvider = ({ children }) => {
+  const [selectedDate, setselectedDate] = useState(null);
+
+  return (
+    <CalendarContext.Provider value={{ selectedDate, setselectedDate }}>
+      {children}
+    </CalendarContext.Provider>
+  );
+};
+
+export const useCalendar = () => {
+  const context = useContext(CalendarContext);
+  if (context === undefined) {
+    throw new Error("useCalendar는 CalendarProvider 내에서 사용되어야 합니다.");
+  }
+  return context;
+};
 
 const localizer = momentLocalizer(moment);
 
-const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
+const FrontCalendar = ({ events }) => {
   const [date, setDate] = useState(new Date());
   const [modalOpen, setmodalOpen] = useState(false);
   const calendarRef = useRef(null);
   const nav = useNavigate();
+  const { selectedDate, setselectedDate } = useCalendar();
 
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
-    if (e.deltaY < 0) {
-      // 휠 위 → 이전 달
-      newDate.setMonth(newDate.getMonth() - 1);
-    } else {
-      // 휠 아래 → 다음 달
-      newDate.setMonth(newDate.getMonth() + 1);
-    }
+    newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달  // 휠 아래 → 다음 달
     setDate(newDate);
   };
 
@@ -61,6 +81,10 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
     };
   }, [date]); // date 바뀔때마다 useEffect 다시 실행됨 //즉 addEventListener 등록하겠단 의미
 
+  const onClose = () => {
+    setmodalOpen(false);
+  };
+
   return (
     <div>
       <div className="HeaderCalendar">
@@ -80,11 +104,26 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
           localizer={localizer}
           events={events}
           date={date} // 달력의 날짜 상태를 내가 제어할지 라이브러리에 맡길지 결정됨
-          defaultView="month"
-          views={["month", "agenda"]}
+          defaultView="month" //{defaultView || "month"}
+          views={["month", "agenda"]} //{["month"]}
           startAccessor="start"
           endAccessor="end"
           toolbar={false}
+          selectable="ignoreEvents"
+          longPressThreshold={1}
+          popup
+          onSelectEvent={(event) => {
+            setselectedDate(event.start);
+          }} // 써둔 일정 임시데이터에서 날짜만 저장
+          onSelectSlot={(slotInfo) => {
+            // setselectedDate(slotInfo.start); // 일정 비어있는 날짜 클릭해도 날짜 저장
+            const clicked = slotInfo.start;
+            setselectedDate((prev) =>
+              prev?.toLocaleDateString() === clicked.toLocaleDateString()
+                ? new Date(clicked)
+                : clicked
+            );
+          }}
         />
         {/*defaultView  처음 렌더링될 때 보여줄 기본 뷰 모드 :월간 보기
         events : 일정목록 
@@ -95,9 +134,7 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
 
       <CalModalWindow
         isOpen={modalOpen}
-        onClose={() => {
-          setmodalOpen(false);
-        }}
+        onClose={onClose}
         // selectedDate={date}
         onDateChange={(selectedDate) => {
           setDate(selectedDate);
