@@ -1,14 +1,17 @@
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
 import "./BackBoardMain.css";
-import { postContent } from "../util/postContent";
 import BackPostList from "./BackPostList";
 import { useNavigate } from "react-router-dom";
+import { CalogStateContext } from "../App";
+
 // props: id, title, createDate, content, tag
 export const BackBoardDispatchContext = createContext();
+
 const BackBoard = () => {
   // postContent
+  const postContent = useContext(CalogStateContext);
   const [contents, setContents] = useState(postContent);
-
+  console.log(postContent);
   const deleteContent = (id) => {
     const deletedContents = [...contents].filter(
       (content) => content.id !== id
@@ -20,6 +23,10 @@ const BackBoard = () => {
   const [searchingTag, setSearchingTag] = useState("");
   const [showSearchBar, setShowSearchBar] = useState(true);
   const nav = useNavigate();
+
+  useEffect(() => {
+    setContents(postContent);
+  }, [postContent]);
 
   const [scrolled, setScrolled] = useState(false);
 
@@ -44,25 +51,38 @@ const BackBoard = () => {
   const onChange = (event) => {
     setSearchWord(event.target.value);
   };
+
   const filteredContents = contents.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
+
     const titleIncludes = item.title
       .toLowerCase()
       .includes(lowerCaseSearchWord);
     const contentIncludes = item.content
       .toLowerCase()
       .includes(lowerCaseSearchWord);
-    const tagIncludes = item.tag
-      ? item.tag.toLowerCase().includes(lowerCaseSearchWord)
-      : null;
+
+    const tagIncludes = Array.isArray(item.tag)
+      ? item.tag.some(
+          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+        )
+      : typeof item.tag === "string"
+      ? item.tag.includes(lowerCaseSearchWord)
+      : false;
+
     return titleIncludes || contentIncludes || tagIncludes;
   });
+
   const filteredContentsByTag = contents.filter((item) => {
-    const tagIncludes = item.tag
-      ? item.tag.toLowerCase().includes(searchingTag.toLowerCase())
-      : null;
+    const tagIncludes = Array.isArray(item.tag)
+      ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
+      : typeof item.tag === "string"
+      ? item.tag.includes(searchingTag.toLowerCase())
+      : false;
+
     return tagIncludes;
   });
+
   return (
     <div>
       <button onClick={() => nav("/")}>캘린더 이동 버튼</button>

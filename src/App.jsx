@@ -87,6 +87,7 @@ function App() {
       type: "INIT",
       data: parsedData,
     });
+
     // 디스패치 함수가 실행되어 데이터 스테이트의 초기값을 설정한 뒤 로딩 종료 처리
     setIsLoading(false);
   }, []); // 마운트 될 때만 실행되도록 deps를 빈 배열로 지정

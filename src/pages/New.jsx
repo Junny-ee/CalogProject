@@ -1,5 +1,5 @@
-import { useContext, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CalogDispatchContext } from "../App";
 import ContentBox from "../components/ContentBox";
 import NewTagWrite from "../components/NewTagWrite";
@@ -13,17 +13,12 @@ const New = () => {
   const { onCreate } = useContext(CalogDispatchContext);
   const nav = useNavigate();
 
-  // const onSubmitButtonClick = () => {
-  //   const input = {
-  //     id:id,
-  //     title: title,
-  //     tag: tags,
-  //     content,
-  //   };
-  //   onSubmit(input);
-  // };
+  const isChange = title.trim() !== "" && content.trim() !== "";
 
   const onSubmitButtonClick = () => {
+    if (!isChange) {
+      return alert("제목이나 내용이 비어있습니다!");
+    }
     const currentId = onCreate(title, tags, content);
     nav(`/read/${currentId}`, { replace: true });
   };

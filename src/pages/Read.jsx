@@ -1,7 +1,11 @@
 import { useContext } from "react";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { useNavigate, useParams } from "react-router-dom";
 import { CalogStateContext } from "../App";
 import "./Read.css";
+import remarkGfm from "remark-gfm";
+import { cb } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const Read = () => {
   const nav = useNavigate();
@@ -42,7 +46,29 @@ const Read = () => {
         <div className="read_title_content">{rightNum.title}</div>
         <div className="read_tag_content">{spreadTag}</div>
         <div className="read_content">
-          <p>{rightNum.content}</p>
+          <ReactMarkdown
+            children={rightNum.content}
+            remarkPlugins={[remarkGfm]}
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    style={cb}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                  >
+                    {String(children).replace(/\n$/, "")}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+          />
         </div>
       </div>
     </>
