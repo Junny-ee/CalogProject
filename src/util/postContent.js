@@ -393,8 +393,8 @@ export const postContent = [
   },
   {
     id: 50,
-    title: "Web Vitals 이해하기",
-    createDate: new Date("2024-09-17").getTime(),
+    title: "프로젝트 발표날 ㅠ",
+    createDate: new Date("2025-06-26").getTime(),
     tag: "웹 성능",
     content:
       "사용자 경험을 측정하는 핵심 지표인 Core Web Vitals(LCP, FID, CLS)의 개념과 중요성을 설명합니다. 웹 성능을 개선하고 검색 순위를 높이는 데 활용하세요.",

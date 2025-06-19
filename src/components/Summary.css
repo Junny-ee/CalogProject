@@ -3,3 +3,10 @@
   flex-grow: 1;
   min-height: 200px;
 }
+.Summary_Header {
+  display: flex;
+}
+
+.Summary_Contents {
+  padding: 5px;
+}
