@@ -4,7 +4,7 @@ import Edit from "./pages/Edit";
 import New from "./pages/New";
 import Read from "./pages/Read";
 import Notfound from "./pages/Notfound";
-import BackBoard from "./components/BackBoard";
+import BackBoardMain from "./components/BackBoardMain";
 import { createContext, useEffect, useReducer, useRef, useState } from "react";
 
 // 실제 작성한 글 데이터를 관리하기 위한 함수
@@ -91,16 +91,18 @@ function App() {
     setIsLoading(false);
   }, []); // 마운트 될 때만 실행되도록 deps를 빈 배열로 지정
 
-  const onCreate = (createDate, tag, content) => {
+  const onCreate = (title, tag, content) => {
+    const currentId = idRef.current++;
     dispatch({
       type: "CREATE",
       data: {
-        id: idRef.current++,
-        createDate,
+        id: currentId,
+        title,
         tag,
         content,
       },
     });
+    return currentId;
   };
 
   const onUpdate = (id, createDate, tag, content) => {
@@ -130,7 +132,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Calendar />} />
             <Route path="/new" element={<New />} />
-            <Route path="/backboard" element={<BackBoard />} />
+            <Route path="/backboard" element={<BackBoardMain />} />
             <Route path="/edit/:id" element={<Edit />} />
             <Route path="/read/:id" element={<Read />} />
             <Route path="/*" element={<Notfound />} />

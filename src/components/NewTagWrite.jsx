@@ -7,14 +7,23 @@ const NewTagWrite = ({ tags, setTags }) => {
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && input.trim()) {
       e.preventDefault();
+      if (tags.length >= 10) {
+        alert("태그는 10개까지만 입력가능합니다!");
+        return;
+      }
+
+      if (input.includes("#")) {
+        alert("태그에 '#' 기호는 사용 불가능합니다!");
+        return;
+      } else if (input.includes("/")) {
+        alert("태그에 '/' 기호는 사용 불가능합니다!");
+        return;
+      }
 
       const newTag = input.trim().toLowerCase();
       const lowerCaseTag = tags.map((tag) => tag.toLowerCase());
       if (!lowerCaseTag.includes(newTag)) {
         setTags([...tags, newTag]);
-      }
-      if (tags.length >= 10) {
-        alert("태그는 10개까지만 입력가능합니다!");
       }
       setInput("");
     }

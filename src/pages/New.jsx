@@ -12,21 +12,20 @@ const New = () => {
   const [content, setContent] = useState("");
   const { onCreate } = useContext(CalogDispatchContext);
   const nav = useNavigate();
-  const idRef = useRef(1);
+
+  // const onSubmitButtonClick = () => {
+  //   const input = {
+  //     id:id,
+  //     title: title,
+  //     tag: tags,
+  //     content,
+  //   };
+  //   onSubmit(input);
+  // };
 
   const onSubmitButtonClick = () => {
-    const input = {
-      id: idRef.current++,
-      title: title,
-      tag: tags,
-      content,
-    };
-    onSubmit(input);
-  };
-
-  const onSubmit = (input) => {
-    onCreate(input.id, input.title, input.tag, input.content);
-    nav("/read/id", { replace: true });
+    const currentId = onCreate(title, tags, content);
+    nav(`/read/${currentId}`, { replace: true });
   };
 
   return (
