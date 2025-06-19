@@ -6,26 +6,25 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState, useEffect, useRef, createContext, useContext } from "react";
 import CalModalWindow from "./CalModalWindow";
-import Summary from "./Summary";
 
 // 테스터용 임시 데이터
-const events = [
-  {
-    title: "회의",
-    start: new Date(2025, 5, 15, 10, 0),
-    end: new Date(2025, 5, 18, 12, 0),
-  },
-  {
-    title: "미팅",
-    start: new Date(2025, 5, 15, 10, 0),
-    end: new Date(2025, 5, 16, 12, 0),
-  },
-  {
-    title: "프로젝트",
-    start: new Date(2025, 5, 16, 13, 0),
-    end: new Date(2025, 5, 20, 14, 0),
-  },
-];
+// const events = [
+//   {
+//     title: "회의",
+//     start: new Date(2025, 5, 15, 10, 0),
+//     end: new Date(2025, 5, 18, 12, 0),
+//   },
+//   {
+//     title: "미팅",
+//     start: new Date(2025, 5, 15, 10, 0),
+//     end: new Date(2025, 5, 16, 12, 0),
+//   },
+//   {
+//     title: "프로젝트",
+//     start: new Date(2025, 5, 16, 13, 0),
+//     end: new Date(2025, 5, 20, 14, 0),
+//   },
+// ];
 
 const CalendarContext = createContext(null);
 //selectedDate, setselectedDate 같은 값 담음
@@ -49,24 +48,17 @@ export const useCalendar = () => {
 
 const localizer = momentLocalizer(moment);
 
-const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
+const FrontCalendar = ({ events }) => {
   const [date, setDate] = useState(new Date());
   const [modalOpen, setmodalOpen] = useState(false);
   const calendarRef = useRef(null);
   const nav = useNavigate();
-
   const { selectedDate, setselectedDate } = useCalendar();
 
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
-    if (e.deltaY < 0) {
-      // 휠 위 → 이전 달
-      newDate.setMonth(newDate.getMonth() - 1);
-    } else {
-      // 휠 아래 → 다음 달
-      newDate.setMonth(newDate.getMonth() + 1);
-    }
+    newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달  // 휠 아래 → 다음 달
     setDate(newDate);
   };
 
@@ -88,9 +80,11 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
       }
     };
   }, [date]); // date 바뀔때마다 useEffect 다시 실행됨 //즉 addEventListener 등록하겠단 의미
+
   const onClose = () => {
     setmodalOpen(false);
   };
+
   return (
     <div>
       <div className="HeaderCalendar">
@@ -104,6 +98,7 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
       </div>
 
       <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button>
+
       <div className="FrontCalendar" ref={calendarRef}>
         <Calendar
           localizer={localizer}
@@ -136,19 +131,6 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
         endAccessor : event.end 값을 끝 시간으로 사용함.
         */}
       </div>
-      <Summary
-        item={
-          selectedDate
-            ? events.filter(
-                // 날짜 있으면 필터된 일정리스트
-                (e) =>
-                  e.start.toLocaleDateString() ===
-                  selectedDate.toLocaleDateString() //일정 시작 날짜랑 선택된 날짜 같은지 비교
-              )
-            : [] // 날짜 선택 없으면 빈 배열
-        }
-        date={selectedDate} //summary로 전달
-      />
 
       <CalModalWindow
         isOpen={modalOpen}
