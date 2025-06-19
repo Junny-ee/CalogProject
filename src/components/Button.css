@@ -1,36 +1,36 @@
 .Button {
   border: none;
-  margin: 10px;
-  padding: 10px;
+  padding: 15px;
+}
+
+.Button button {
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .Button .Create {
-  color: rgb(255, 0, 0);
-  cursor: pointer;
+  background-color: #f6eaf0;
 }
 .Button .Editer {
   color: rgb(131, 29, 226);
-  cursor: pointer;
 }
 .Button .Delete {
   color: rgb(92, 139, 17);
-  cursor: pointer;
 }
 .Button .Theme {
   color: rgb(30, 153, 122);
-  cursor: pointer;
 }
 .Button .ListToggle {
   color: black;
-  cursor: pointer;
 }
 .Button .ScreenChange {
   color: black;
-  cursor: pointer;
 }
 .Button .Back {
   color: black;
-  cursor: pointer;
 }
 
 /*버튼 스타일 참고용
