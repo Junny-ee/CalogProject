@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { CalogDispatchContext } from "../App";
 import ContentBox from "../components/ContentBox";
 import NewTagWrite from "../components/NewTagWrite";
@@ -7,14 +7,17 @@ import Title from "../components/Title";
 import "./New.css";
 
 const New = () => {
+  const [title, setTitle] = useState("");
   const [tags, setTags] = useState([]);
   const [content, setContent] = useState("");
   const { onCreate } = useContext(CalogDispatchContext);
   const nav = useNavigate();
+  const idRef = useRef(1);
 
   const onSubmitButtonClick = () => {
     const input = {
-      createDate: new Date(),
+      id: idRef.current++,
+      title: title,
       tag: tags,
       content,
     };
@@ -22,14 +25,14 @@ const New = () => {
   };
 
   const onSubmit = (input) => {
-    onCreate(input.createDate.getTime(), input.emotionId, input.content);
+    onCreate(input.id, input.title, input.tag, input.content);
     nav("/read/id", { replace: true });
   };
 
   return (
     <div className="New">
       <div className="title_content">
-        <Title />
+        <Title title={title} setTitle={setTitle} />
       </div>
       <div className="date_content">{new Date().toLocaleDateString()}</div>
       <div className="tag_content">
