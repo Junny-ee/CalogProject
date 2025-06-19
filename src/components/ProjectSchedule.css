@@ -1,5 +1,7 @@
 .ProjectSchedule {
   border: 1px solid #000;
+  display: flex;
+  align-items: stretch;
 }
 .project_contents {
   cursor: pointer;

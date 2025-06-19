@@ -1,8 +1,6 @@
-// ProjectSchedule.js
 import "./ProjectSchedule.css";
-// import ModalWindow from "./ModalWindow"; // ProjectSchedule에서 직접 모달을 렌더링하지 않음
 import { useState } from "react";
-
+import Button from "./Button";
 const mockdata = {
   isChecked: false,
   content: "프로젝트 일정",
@@ -27,14 +25,9 @@ const ProjectSchedule = ({ onItemClick }) => {
 
   return (
     <div className="ProjectSchedule">
-      <div>
-        <input type="checkbox" className="checkBox" onClick={onCreate} />
-        {/* <a> 태그 클릭 시 부모의 모달 열기 함수 호출 */}
-        <a className="project_contents" onClick={handleItemClick}>
-          {Schedule.content}
-        </a>
-        {/* ProjectSchedule 에서는 ModalWindow를 직접 렌더링하지 않습니다. */}
-      </div>
+      {/* <a> 태그 클릭 시 부모의 모달 열기 함수 호출 */}
+      <a className="project_contents">{Schedule.content}</a>
+      <Button classtype={"Create"} text={"+"} onClick={handleItemClick} />
     </div>
   );
 };
