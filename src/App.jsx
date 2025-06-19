@@ -133,8 +133,8 @@ function App() {
         <CalogDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
           <CalendarProvider>
             <Routes>
-              <Route path="/" element={<FrontCalendar />} />
               <Route path="/" element={<Calendar />} />
+              <Route path="/" element={<FrontCalendar />} />
               <Route path="/new" element={<New />} />
               <Route path="/backboard" element={<BackBoardMain />} />
               <Route path="/edit/:id" element={<Edit />} />

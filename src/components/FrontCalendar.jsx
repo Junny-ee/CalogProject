@@ -103,8 +103,7 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
         </button>
       </div>
 
-      <button onClick={() => nav("/backboardmain")}>백보드 이동 버튼</button>
-
+      <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button>
       <div className="FrontCalendar" ref={calendarRef}>
         <Calendar
           localizer={localizer}
@@ -122,8 +121,6 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
             setselectedDate(event.start);
           }} // 써둔 일정 임시데이터에서 날짜만 저장
           onSelectSlot={(slotInfo) => {
-            console.log("✅ slotInfo:", slotInfo);
-            console.log("일정없는 날짜 선택됨:", slotInfo.start);
             // setselectedDate(slotInfo.start); // 일정 비어있는 날짜 클릭해도 날짜 저장
             const clicked = slotInfo.start;
             setselectedDate((prev) =>
