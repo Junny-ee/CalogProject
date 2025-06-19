@@ -10,10 +10,7 @@ const Summary = ({ date }) => {
   const todaySummary = postContent.filter(
     (date) => date.createDate === check.getTime()
   ); // 날짜 일치하는 객체 가져오기
-  console.log(check.toLocaleDateString());
   return (
-      {/* <h4>{check.toLocaleDateString()}</h4> 나중에 데이터받으면 수정 */}
-        {/* 렌더링 확인 코드  */}
     <div className="Summary">
       <div className="Summary_Header">
         <h4>
