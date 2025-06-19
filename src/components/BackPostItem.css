@@ -7,7 +7,9 @@
   margin-bottom: 15px; 
   box-sizing: border-box; 
 }
-
+.button_delete{
+  cursor: pointer;
+}
 .content_wrapper {
   flex-grow: 1; 
   padding-right: 10px; 
