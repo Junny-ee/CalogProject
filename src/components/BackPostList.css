@@ -1,18 +1,10 @@
-.list_wrapper{
-  overflow-y: scroll;
-  scrollbar-width: none;
-  height: 80%;
+.buttons{
+  position: absolute;
+  top: 5%;
 }
-.tag_all{
+.contents_wrapper{
   display: flex;
   flex-direction: column;
-}
-.tag_wrapper ul {
-  max-height: 80%; 
-  overflow-y: auto; 
-  list-style: none; 
-  padding: 0; 
-  margin: 0;
 }
 .tags:hover{
   font-weight: bolder;
@@ -20,15 +12,24 @@
 }
 .tag_wrapper {
   position: fixed; 
-  top: 100px;
-  left: 10%; 
+  top: 20%;
+  right: 10%; 
   width: 200px; 
-  height: 100%;
+  height: 60%;
   padding: 20px; 
   box-sizing: border-box; 
   border: 1px solid black;
+  overflow: scroll;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  text-overflow: ellipsis;
 }
-.tag_header{
-  text-align: center;
-  font-weight: bold;
+.tag_wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.tags{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -64,7 +64,7 @@ const BackBoard = () => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
         )
       : typeof item.tag === "string"
       ? item.tag.includes(lowerCaseSearchWord)
@@ -79,6 +79,7 @@ const BackBoard = () => {
       : typeof item.tag === "string"
       ? item.tag.includes(searchingTag.toLowerCase())
       : false;
+
 
     return tagIncludes;
   });

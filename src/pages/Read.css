@@ -26,3 +26,35 @@
   overflow-y: auto;
   line-height: 1.5; /* 줄 간격 설정 */
 }
+h1{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.read_createDate{
+  margin-bottom: 3%;
+  font-weight: 300;
+}
+
+.read_content{
+  margin-bottom: 3%;
+}
+
+.read_tag{
+  display: inline-block;
+  background-color: antiquewhite;
+  border-radius: 20px;
+  padding: 10px;
+  margin-right: 10px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.read_tag:hover {
+  font-weight: bolder;
+  cursor: pointer;
+}

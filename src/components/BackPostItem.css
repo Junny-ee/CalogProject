@@ -23,6 +23,11 @@
   display: inline-block;
   margin-bottom: 5px;
   font-weight: bold;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .content_body {
@@ -31,6 +36,11 @@
   line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .content_date {
@@ -48,6 +58,10 @@
   border-radius: 20px;
   padding: 10px;
   margin-right: 10px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 input[type="checkbox"] {
