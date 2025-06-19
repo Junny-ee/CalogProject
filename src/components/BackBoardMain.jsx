@@ -36,7 +36,6 @@ const BackBoard = () => {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
-
   const moveToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

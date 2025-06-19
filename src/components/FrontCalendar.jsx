@@ -103,8 +103,8 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
         </button>
       </div>
 
-      <button onClick={() => nav("/backboardmain")}>백보드 이동 버튼</button>
 
+      <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button>
       <div className="FrontCalendar" ref={calendarRef}>
         <Calendar
           localizer={localizer}
