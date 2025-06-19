@@ -12,9 +12,13 @@ const Summary = ({ date }) => {
   ); // 날짜 일치하는 객체 가져오기
   console.log(check.toLocaleDateString());
   return (
+      {/* <h4>{check.toLocaleDateString()}</h4> 나중에 데이터받으면 수정 */}
+        {/* 렌더링 확인 코드  */}
     <div className="Summary">
       <div className="Summary_Header">
-        <h4>{check.toLocaleDateString()}</h4> {/* 나중에 데이터받으면 수정 */}
+        <h4>
+          {date ? new Date(date).toLocaleDateString() : "날짜를 선택하세요"}
+        </h4>
         <Button text={"+"} classtype={"Create"} onClick={() => nav("/new")} />
       </div>
       <div className="Summary_Contests">
