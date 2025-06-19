@@ -1,3 +1,4 @@
+import Button from "./Button";
 import "./ScheduleItem.css";
 // import ModalWindow from "./ModalWindow"; // ScheduleItem에서 직접 모달을 렌더링하지 않음
 import { useState } from "react";
@@ -24,12 +25,9 @@ const ScheduleItem = ({ onItemClick }) => {
 
   return (
     <div className="ScheduleItem">
-      <div>
-        <input type="checkbox" className="checkBox" onClick={onCreate} />
-        {/* <a> 태그 클릭 시 부모의 모달 열기 함수 호출 */}
-        <a className="item_contents" onClick={handleItemClick}>{Schedule.content}</a>
-        {/* ScheduleItem 에서는 ModalWindow 를 직접 렌더링 하지 않습니다. */}
-      </div>
+      <a className="item_contents">{Schedule.content}</a>
+      {/* ScheduleItem 에서는 ModalWindow 를 직접 렌더링 하지 않습니다. */}
+      <Button classtype={"Create"} text={"+"} onClick={handleItemClick} />
     </div>
   );
 };
