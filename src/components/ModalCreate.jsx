@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
-import "./ModalWindow.css";
+import "./ModalCreate.css";
 
-function ModalWindow({ isOpen, onModal, modalType }) {
+function ModalCreate({ isOpen, onModal, modalType }) {
   // 입력 필드와 라디오 버튼의 상태를 관리합니다.
   const [title, setTitle] = useState("");
   const [selectedOption, setSelectedOption] = useState(""); // 라디오 버튼 선택 상태
@@ -136,4 +136,4 @@ function ModalWindow({ isOpen, onModal, modalType }) {
   );
 }
 
-export default ModalWindow;
+export default ModalCreate;

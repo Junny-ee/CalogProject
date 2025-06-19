@@ -1,6 +1,6 @@
 import "./ScheduleList.css";
 import ScheduleItem from "./ScheduleItem";
-import ModalWindow from "./ModalWindow";
+import ModalCreate from "./ModalCreate";
 import ProjectSchedule from "./ProjectSchedule";
 import Button from "./Button";
 import { useState } from "react";
@@ -41,10 +41,10 @@ const ScheduleList = () => {
       </div>
 
       {/* 모달은 ScheduleList에서만 렌더링하고, modalType에 따라 내용을 다르게 표시할 수 있습니다. */}
-      <ModalWindow
+      <ModalCreate
         isOpen={isModalOpen}
         onModal={closeModal} // 모달 닫기 함수 전달
-        modalType={modalType} // 어떤 타입의 모달인지 ModalWindow에 전달 (필요하다면)
+        modalType={modalType} // 어떤 타입의 모달인지 ModalCreate 전달 (필요하다면)
       />
     </div>
   );
