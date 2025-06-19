@@ -1,43 +1,136 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
-import "./ModalWindow.css"; // CSS 파일을 임포트합니다.
+import "./ModalWindow.css";
 
-// Modal.setAppElement('#root'); // App의 루트 엘리먼트를 지정합니다. index.js에서 설정하는 것이 일반적입니다.
+function ModalWindow({ isOpen, onModal, modalType }) {
+  // 입력 필드와 라디오 버튼의 상태를 관리합니다.
+  const [title, setTitle] = useState("");
+  const [selectedOption, setSelectedOption] = useState(""); // 라디오 버튼 선택 상태
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [description, setDescription] = useState("");
 
-function ModalWindow() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  useEffect(() => {
+    if (!isOpen) {
+      setTitle("");
+      setSelectedOption("");
+      setStartDate("");
+      setEndDate("");
+      setDescription("");
+    }
+  }, [isOpen]);
 
-  const openModal = () => {
-    setModalIsOpen(true);
+  // '저장' 버튼 클릭 시 실행될 함수
+  const handleSave = () => {
+    // 현재 입력된 모든 값을 콘솔에 출력 (실제로는 서버로 전송하거나 상위 컴포넌트로 전달)
+    console.log({
+      title,
+      selectedOption,
+      startDate,
+      endDate,
+      description,
+    });
+    onModal(false); // 모달 닫기
+    // 저장 후 상태 초기화는 useEffect에서 처리됩니다.
   };
 
-  const closeModal = () => {
-    setModalIsOpen(false);
+  // modalType에 따라 모달 제목을 결정하는 함수
+  const getModalTitle = () => {
+    if (modalType === "create") {
+      return "새로운 항목 생성";
+    } else if (modalType === "project") {
+      return "프로젝트 일정 수정";
+    } else if (modalType === "item") {
+      return "할 일 수정";
+    }
+    return "상세 정보"; // 기본 제목
   };
 
   return (
     <div>
-      <button onClick={openModal} className="open-modal-button">
-        +
-      </button>
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal"
-        ariaHideApp={false} // 에러 방지를 위해 추가
-        className="modal-content" // 모달 내용에 대한 클래스
-        overlayClassName="modal-overlay" // 모달 오버레이에 대한 클래스
+        isOpen={isOpen} // 모달 열림/닫힘 상태
+        onRequestClose={() => onModal(false)} // 오버레이 클릭 또는 Esc 키 누를 때 모달 닫기
+        contentLabel={getModalTitle()} // 모달의 접근성 레이블 (동적 제목)
+        ariaHideApp={false} // React-modal의 경고를 방지하기 위해 추가
+        className="modal_content" // 모달 내용에 적용할 CSS 클래스
+        overlayClassName="modal_overlay" // 모달 오버레이에 적용할 CSS 클래스
       >
-        <h2 className="modal-title">일정 추가</h2>
-        시작 날짜
-        <inpugt type="date" />
-        종료 날짜
-        <input type="date" />
-        <input type="text" placeholder="제목 입력" />
-        <textarea></textarea>
-        <button onClick={closeModal} className="close-modal-button">
-          모달 닫기
-        </button>
+        {/* 제목 입력 필드 */}
+        <input
+          type="text"
+          placeholder={getModalTitle()} // placeholder도 동적 제목 활용
+          value={title}
+          onChange={(e) => setTitle(e.target.value)} // 입력 값 변경 시 상태 업데이트
+        />
+
+        {/* 라디오 버튼 옵션 래퍼 */}
+        <div className="Option_wrapper">
+          {/* '프로젝트 일정' 라디오 버튼 */}
+          <input
+            type="radio"
+            className="btn_check"
+            name="options_base" // 같은 그룹의 라디오 버튼은 동일한 name을 가집니다.
+            id="option1"
+            autoComplete="off"
+            value="projectSchedule" // 이 라디오 버튼의 값
+            checked={selectedOption === "projectSchedule"} // 현재 선택된 라디오 버튼인지 확인
+            onChange={(e) => setSelectedOption(e.target.value)} // 선택 변경 시 상태 업데이트
+          />
+          <label className="btn" htmlFor="option1">
+            프로젝트 일정
+          </label>
+
+          {/* '할 일' 라디오 버튼 */}
+          <input
+            type="radio"
+            className="btn_check"
+            name="options_base" // 같은 그룹의 라디오 버튼은 동일한 name을 가집니다.
+            id="option2"
+            autoComplete="off"
+            value="todo" // 이 라디오 버튼의 값
+            checked={selectedOption === "todo"} // 현재 선택된 라디오 버튼인지 확인
+            onChange={(e) => setSelectedOption(e.target.value)} // 선택 변경 시 상태 업데이트
+          />
+          <label className="btn" htmlFor="option2">
+            할 일
+          </label>
+        </div>
+
+        {/* 날짜 선택 */}
+        <div>
+          <label>시작 날짜</label>
+          <input
+            type="datetime-local"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
+          />
+          <br />
+          <label>종료 날짜</label>
+          <input
+            type="datetime-local"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
+          />
+        </div>
+
+        {/* 설명 추가 */}
+        <textarea
+          className="modal_description"
+          placeholder="설명 추가"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)} // 입력 값 변경 시 상태 업데이트
+        ></textarea>
+
+        {/* 수정, 저장, 닫기 버튼 */}
+        <div className="modal_button-box">
+          <button className="create_modal_button" onClick={handleSave}>
+            저장
+          </button>
+          <button onClick={() => onModal(false)} className="close_modal_button">
+            닫기
+          </button>
+        </div>
       </Modal>
     </div>
   );
