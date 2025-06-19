@@ -34,6 +34,7 @@ function reducer(state, action) {
       // 삭제 요청이 발생한 작성한 글 id와 기존에 작성한 글들의 id를 비교하여
       // 다른 id를 가진 작성한 글들만 새로운 배열로 반환
       nextState = state.filter((data) => String(data.id) !== String(action.id));
+
       break;
 
     default:

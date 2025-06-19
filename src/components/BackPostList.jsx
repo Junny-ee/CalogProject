@@ -7,7 +7,7 @@ const BackPostList = ({ data }) => {
   const nav = useNavigate();
   const [sortType, setSortType] = useState("latest");
   const [tags, setTags] = useState([]);
-  const { deleteContent, setSearchingTag } = useContext(BackBoardDispatchContext);
+  const { setSearchingTag } = useContext(BackBoardDispatchContext);
   const getSortedData = () => {
     return data.toSorted((prev, next) => {
       if (sortType === "oldest") {
@@ -15,11 +15,6 @@ const BackPostList = ({ data }) => {
       } else {
         return Number(next.createDate) - Number(prev.createDate);
       }
-    });
-  };
-  const deleteSelectedContents = () => {
-    data.forEach((item) => {
-      deleteContent(item.id);
     });
   };
 
@@ -35,7 +30,7 @@ const BackPostList = ({ data }) => {
       <div className="buttons">
         {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>최신순</button>) : (<button onClick={() => setSortType("latest")}>오래된 순</button>)}
         <button onClick={() => nav("/new")}>작성하기</button>
-        <button onClick={deleteSelectedContents}>체크된 글 삭제하기(미구현, 현재 하나씩 삭제됨)</button>
+        <button>체크된 글 삭제하기(미구현)</button>
         <input type="checkbox" />
       </div>
       <div className="contents_wrapper">
