@@ -23,6 +23,16 @@ const events = [
     start: new Date(2025, 5, 16, 13, 0),
     end: new Date(2025, 5, 20, 14, 0),
   },
+  {
+    title: "미팅",
+    start: new Date(2025, 5, 15, 10, 0),
+    end: new Date(2025, 5, 16, 12, 0),
+  },
+  {
+    title: "미팅",
+    start: new Date(2025, 5, 15, 10, 0),
+    end: new Date(2025, 5, 16, 12, 0),
+  },
 ];
 
 const Calendar = () => {
