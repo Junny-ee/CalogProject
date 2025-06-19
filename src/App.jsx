@@ -98,6 +98,7 @@ function App() {
       type: "CREATE",
       data: {
         id: currentId,
+        createDate: new Date().getTime(),
         title,
         tag,
         content,
