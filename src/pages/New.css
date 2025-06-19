@@ -23,7 +23,7 @@
 .New > .tag_content {
   background-color: #529aec1a;
   border-radius: 10px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   width: 100%;
 }
 

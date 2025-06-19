@@ -29,9 +29,12 @@ const New = () => {
         <Title title={title} setTitle={setTitle} />
       </div>
       <div className="date_content">{new Date().toLocaleDateString()}</div>
-      <div className="tag_content">
-        <NewTagWrite tags={tags} setTags={setTags} />
+      <div style={{height:"99px"}}>
+        <div className="tag_content">
+          <NewTagWrite tags={tags} setTags={setTags} />
+        </div>
       </div>
+
       <div className="write_content">
         <ContentBox
           content={content}
