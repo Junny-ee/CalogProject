@@ -29,13 +29,11 @@
 
 /* 글 작성 영역: 화면 여유 공간을 모두 사용 */
 .New > .write_content {
-  padding: 10px;
   box-sizing: border-box;
   border-radius: 8px;
   resize: none;
   font-size: medium;
   min-height: 0; /* flex-item overflow 방지 */
-  border: 1px solid #ccc;
   margin-top: 20px;
   margin-bottom: 20px;
 }
