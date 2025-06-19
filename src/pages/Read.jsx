@@ -4,7 +4,7 @@ import "./Read.css";
 const Read = ({ title, createDate, content, tag }) => {
   const nav = useNavigate();
   const params = useParams();
-  const targetContent = postContent.find(content => Number(content.id) === Number(params.id));
+  const targetContent = postContent.find(content => String(content.id) === String(params.id));
   return (
     <>
       <button onClick={() => nav(-1)}>뒤로가는 버튼</button>
@@ -14,7 +14,7 @@ const Read = ({ title, createDate, content, tag }) => {
       <div className="read_createDate">{new Date(targetContent.createDate).toLocaleDateString()}</div>
       <div className="read_content">{targetContent.content}</div>
       {/* 글 상세보기 창에서 태그 클릭시 태그별 검색 작동 필요*/}
-      <div className="read_tag" onClick={() => { nav(-1) }}>{`#${targetContent.tag}`}</div>
+      {targetContent.tag ? (<div className="read_tag" onClick={() => { nav(-1) }}>{`#${targetContent.tag}`}</div>) : null}
     </>
   )
 };
