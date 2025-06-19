@@ -1,10 +1,11 @@
+import BackBoardMain from "../components/BackBoardMain";
+
 const BackBoard = () => {
   return (
     <div>
-      <BackBoard />
+      <BackBoardMain />
     </div>
-  )
-
+  );
 };
 
 export default BackBoard;

@@ -5,6 +5,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState, useEffect, useRef } from "react";
+import CalModalWindow from "./CalModalWindow";
 
 // 테스터용 임시 데이터
 const events = [
@@ -24,12 +25,13 @@ const localizer = momentLocalizer(moment);
 
 const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
   const [date, setDate] = useState(new Date());
+  const [modalOpen, setmodalOpen] = useState(false);
   const calendarRef = useRef(null);
   const nav = useNavigate();
+
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
-
     if (e.deltaY < 0) {
       // 휠 위 → 이전 달
       newDate.setMonth(newDate.getMonth() - 1);
@@ -37,7 +39,6 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
       // 휠 아래 → 다음 달
       newDate.setMonth(newDate.getMonth() + 1);
     }
-
     setDate(newDate);
   };
 
@@ -62,7 +63,16 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
 
   return (
     <div>
-      <h3>{moment(date).format("MMMM YYYY")}</h3>
+      <div className="HeaderCalendar">
+        <button
+          onClick={() => {
+            setmodalOpen(true);
+          }}
+        >
+          {moment(date).format("MMMM YYYY")}
+        </button>
+      </div>
+
       <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button>
 
       <div className="FrontCalendar" ref={calendarRef}>
@@ -71,7 +81,7 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
           events={events}
           date={date} // 달력의 날짜 상태를 내가 제어할지 라이브러리에 맡길지 결정됨
           defaultView="month"
-          views={["month", "week", "day", "agenda"]}
+          views={["month", "agenda"]}
           startAccessor="start"
           endAccessor="end"
           toolbar={false}
@@ -82,6 +92,18 @@ const FrontCalendar = ({ setTurnCalendar, defaultView }) => {
         endAccessor : event.end 값을 끝 시간으로 사용함.
         */}
       </div>
+
+      <CalModalWindow
+        isOpen={modalOpen}
+        onClose={() => {
+          setmodalOpen(false);
+        }}
+        // selectedDate={date}
+        onDateChange={(selectedDate) => {
+          setDate(selectedDate);
+          setmodalOpen(false);
+        }}
+      />
     </div>
   );
 };

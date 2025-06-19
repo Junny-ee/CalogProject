@@ -1,5 +1,8 @@
-
-.tag_all{
+.buttons{
+  position: absolute;
+  top: 5%;
+}
+.contents_wrapper{
   display: flex;
   flex-direction: column;
 }
@@ -9,10 +12,10 @@
 }
 .tag_wrapper {
   position: fixed; 
-  top: 100px;
-  left: 10%; 
+  top: 20%;
+  right: 10%; 
   width: 200px; 
-  height: 70%;
+  height: 60%;
   padding: 20px; 
   box-sizing: border-box; 
   border: 1px solid black;
@@ -24,11 +27,9 @@
 .tag_wrapper::-webkit-scrollbar {
   display: none;
 }
-/* .tag_header{
-  text-align: center;
-  font-weight: bold;
-} */
+
 .tags{
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
