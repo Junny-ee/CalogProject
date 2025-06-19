@@ -22,14 +22,17 @@ const BackPostList = ({ data, searchingTag, setSearchingTag }) => {
   useEffect(() => {
     setContentsAmount(data.length)
   }, [data])
-  // 최적화를 위해 글 등록시 추가/+1 삭제/-1로 바꾸는 것 고려하기
+  // 글 등록시 추가/+1 삭제/-1로 바꾸는 것 고려하기
   const sortedData = getSortedData();
 
   return (
     <>
-      {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>최신순</button>) : (<button onClick={() => setSortType("latest")}>오래된 순</button>)}
-      <button onClick={() => nav("/new")}>작성하기</button>
-      <button>체크된 글 삭제하기(미구현)</button>
+      <div>
+        {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>최신순</button>) : (<button onClick={() => setSortType("latest")}>오래된 순</button>)}
+        <button onClick={() => nav("/new")}>작성하기</button>
+        <button>체크된 글 삭제하기(미구현)</button>
+      </div>
+
       <div className="list_wrapper">
         <div className="tag_all">
           {sortedData.map((item) => (
@@ -37,8 +40,7 @@ const BackPostList = ({ data, searchingTag, setSearchingTag }) => {
           ))}
         </div>
         <div className="tag_wrapper">
-          <div className="tag_header">태그 목록(구현 중)</div>
-          <div className="tags">{`전체보기 (${contentsAmount})`}</div>
+          <div className="tags" onClick={() => nav(0)}>{`전체보기 (${contentsAmount})`}</div>
           <div>{tags.map((tag) =>
             <div className="tags" onClick={() => setSearchingTag(tag)}>{tag}</div>)
           }</div>

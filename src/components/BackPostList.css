@@ -1,18 +1,7 @@
-.list_wrapper{
-  overflow-y: scroll;
-  scrollbar-width: none;
-  height: 80%;
-}
+
 .tag_all{
   display: flex;
   flex-direction: column;
-}
-.tag_wrapper ul {
-  max-height: 80%; 
-  overflow-y: auto; 
-  list-style: none; 
-  padding: 0; 
-  margin: 0;
 }
 .tags:hover{
   font-weight: bolder;
@@ -23,12 +12,23 @@
   top: 100px;
   left: 10%; 
   width: 200px; 
-  height: 100%;
+  height: 70%;
   padding: 20px; 
   box-sizing: border-box; 
   border: 1px solid black;
+  overflow: scroll;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  text-overflow: ellipsis;
 }
-.tag_header{
+.tag_wrapper::-webkit-scrollbar {
+  display: none;
+}
+/* .tag_header{
   text-align: center;
   font-weight: bold;
+} */
+.tags{
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

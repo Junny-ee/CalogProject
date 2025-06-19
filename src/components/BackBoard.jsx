@@ -9,7 +9,7 @@ const BackBoard = () => {
 
   // postContent
   const postMockData = [
-    { id: 1, title: '첫 번째 게시물', createDate: new Date("2023-01-15").getTime(), tag: '리액트', content: '이것은 블로그의 첫 번째 게시물입니다. 리액트의 기본 개념과 컴포넌트 구조에 대해 다룹니다. 앞으로 다양한 웹 개발 주제를 함께 탐구해 나갈 예정이니 많은 기대 부탁드립니다.' },
+    { id: 1, title: '첫 번째 게시물', createDate: new Date("2023-01-15").getTime(), tag: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', content: '이것은 블로그의 첫 번째 게시물입니다. 리액트의 기본 개념과 컴포넌트 구조에 대해 다룹니다. 앞으로 다양한 웹 개발 주제를 함께 탐구해 나갈 예정이니 많은 기대 부탁드립니다.' },
     { id: 2, title: 'Redux를 이용한 상태 관리', createDate: new Date("2023-02-01").getTime(), tag: '리덕스', content: '리액트 애플리케이션에서 복잡한 상태를 효율적으로 관리하기 위한 Redux의 기본적인 사용법과 핵심 원리들을 설명합니다. 액션, 리듀서, 스토어의 개념을 자세히 알아보세요.' },
     { id: 3, title: 'JavaScript 비동기 처리 이해하기', createDate: new Date("2023-02-20").getTime(), tag: '자바스크립트', content: '자바스크립트의 비동기 처리는 웹 개발에서 필수적인 요소입니다. 콜백, Promise, async/await을 통해 비동기 코드를 어떻게 작성하고 관리하는지 쉽게 설명해 드립니다.' },
     { id: 4, title: 'CSS Grid 완벽 가이드', createDate: new Date("2023-03-05").getTime(), tag: 'CSS', content: '복잡한 레이아웃을 만들 때 CSS Grid는 강력한 도구입니다. Grid 컨테이너와 아이템의 속성들을 깊이 있게 다루고, 실제 예제를 통해 활용법을 익혀보세요.' },
