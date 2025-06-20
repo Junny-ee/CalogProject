@@ -18,11 +18,23 @@ const BackPostList = ({ data, entireData }) => {
     });
   };
 
-  useEffect(() => {
-    setTags([...new Set(entireData.map(item => item.tag))]);
-  }, [entireData])
+  // useEffect(() => {
+  //   setTags([...new Set(entireData.map(item => item.tag))]);
+  // }, [entireData])
 
-  // 글 등록시 추가/+1 삭제/-1로 바꾸는 것 고려하기
+
+  useEffect(() => {
+    let allTags = [];
+    entireData.forEach((item) => {
+      if (Array.isArray(item.tag)) {
+        allTags = allTags.concat(item.tag);
+      } else if (typeof item.tag === "string" && item.tag.trim() !== "") {
+        allTags.push(item.tag);
+      }
+    });
+    setTags([...new Set(allTags)]);
+  }, [entireData]);
+
   const sortedData = getSortedData();
 
   return (
@@ -40,11 +52,11 @@ const BackPostList = ({ data, entireData }) => {
       </div>
       <div className="tag_wrapper">
         <h3>태그 목록(미완성)</h3>
-        {/* 태그 클릭시 검색, 태그 중복 제거, 태그 개수 표시 필요 */}
+        {/* 개별 태그 개수 표시, (선택)태그별 조회 상태에서 검색 필요*/}
         <div className="tags" onClick={() => setSearchingTag("")}>{`전체보기 (${entireData.length})`}</div>
 
         <div>{tags.map((tag) =>
-          <div className="tags" onClick={() => setSearchingTag(tag)}>{tag}</div>)
+          <div className="tags" key={tag} onClick={() => setSearchingTag(tag)}>{tag}</div>)
         }</div>
       </div>
 

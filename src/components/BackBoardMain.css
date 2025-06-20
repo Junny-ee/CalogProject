@@ -35,6 +35,11 @@ img {
   background-color: #fff;
 }
 
+.search:focus-within {
+  border: 3px solid black;
+}
+
+
 .search_input {
   flex-grow: 1;
   padding: 10px 15px;
@@ -85,5 +90,5 @@ img {
 }
 .close_button:hover{
   font-weight: bolder;
-  color: #333;
+  color: black;
 }
