@@ -1,10 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CalogDispatchContext } from "../App";
 import ContentBox from "../components/ContentBox";
 import NewTagWrite from "../components/NewTagWrite";
 import Title from "../components/Title";
 import "./New.css";
+import Button from "../components/Button";
 
 const New = () => {
   const [title, setTitle] = useState("");
@@ -12,6 +13,11 @@ const New = () => {
   const [content, setContent] = useState("");
   const { onCreate } = useContext(CalogDispatchContext);
   const nav = useNavigate();
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const isChange = title.trim() !== "" && content.trim() !== "";
 
@@ -25,22 +31,37 @@ const New = () => {
 
   return (
     <div className="New">
-      <div className="title_content">
-        <Title title={title} setTitle={setTitle} />
-      </div>
-      <div className="date_content">{new Date().toLocaleDateString()}</div>
-      <div style={{height:"99px"}}>
-        <div className="tag_content">
-          <NewTagWrite tags={tags} setTags={setTags} />
-        </div>
-      </div>
-
-      <div className="write_content">
-        <ContentBox
-          content={content}
-          setContent={setContent}
-          onSubmitButtonClick={onSubmitButtonClick}
+      <div className="header_content">
+        <img src="/logo_image_width.png" alt="가로 버전 로고" />
+        <Button
+          text={"✕"}
+          onClick={() => {
+            nav(-1);
+          }}
+          classtype={"Cancel"}
         />
+      </div>
+      <div className="content_wrapper">
+        <div className="title_content">
+          <Title title={title} setTitle={setTitle} inputRef={inputRef} />
+        </div>
+        <div className="date_content">{new Date().toLocaleDateString()}</div>
+        <div style={{ height: "99px" }}>
+          <div className="tag_content">
+            <NewTagWrite tags={tags} setTags={setTags} />
+          </div>
+        </div>
+
+        <div className="write_content">
+          <ContentBox content={content} setContent={setContent} />
+        </div>
+        <div className="button_content">
+          <Button
+            text={"작성 완료"}
+            classtype={"Create"}
+            onClick={onSubmitButtonClick}
+          />
+        </div>
       </div>
     </div>
   );

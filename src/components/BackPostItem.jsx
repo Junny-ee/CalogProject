@@ -6,48 +6,40 @@ import { CalogDispatchContext } from "../App";
 // 태그 여러 개 구현 필요
 const BackPostItem = ({ id, title, createDate, content, tag }) => {
   const nav = useNavigate();
-  const { setSearchWord, setSearchingTag, setShowSearchBar } =
-    useContext(BackBoardDispatchContext);
-  
-  const markdownPreviewLines = () => {
-    if (typeof content !== "string") return [];
-
-    const lines = content.split("\n").slice(0, 2); // 제목(첫 줄) 제외
-
-    return lines
-      .filter((line) => line.trim() !== "") // 빈 줄 제거
-      .map((line) =>
-        line
-          .replace(/^#+\s*/, "") // 제목 기호 제거
-          .replace(/[*_`>~-]/g, "") // 기타 기호 제거
-          .trim()
-      );
-  };
+  const { setSearchWord, setSearchingTag, setShowSearchBar } = useContext(
+    BackBoardDispatchContext
+  );
 
   const { onDelete } = useContext(CalogDispatchContext);
   const [isChecked, setIsChecked] = useState(false);
+  // 문자열인 경우 ,로 나눠 배열로 변환
+  const tagArray = Array.isArray(tag) ? tag : tag?.split(",");
+
   return (
     <div className="post_item">
       <div className="content_wrapper" onClick={() => nav(`/read/${id}`)}>
         <div className="content_header">{title}</div>
-        <div className="content_body">
-          {" "}
-          {markdownPreviewLines().map((line, idx) => (
-            <p key={idx}>{line}</p>
-          ))}
-        </div>
+        <div className="content_body">{content}</div>
 
-        {tag ? (
-          <div
-            className="tag"
-            onClick={(e) => {
-              e.stopPropagation();
-              setSearchWord("");
-              setSearchingTag(tag);
-              setShowSearchBar(false);
-            }}
-          >{`#${tag}`}</div>
-        ) : null}
+        {tagArray && (
+          <div className="tag_list">
+            {tagArray.map((t, index) => (
+              <span
+                key={index}
+                className="tag"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSearchWord("");
+                  setSearchingTag(t.trim());
+                  setShowSearchBar(false);
+                }}
+              >
+                #{t.trim()}
+              </span>
+            ))}
+          </div>
+        )}
+
         <div className="content_date">
           {new Date(createDate).toLocaleDateString()}
         </div>
