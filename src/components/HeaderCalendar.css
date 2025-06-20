@@ -1,0 +1,13 @@
+.HeaderCalendar {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.HeaderCalendar button {
+  font-size: 18px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+}
