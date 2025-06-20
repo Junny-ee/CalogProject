@@ -6,8 +6,9 @@ const CalDateWrapper = ({ children, value }) => {
   const additionalClass = day === 0 ? "sun" : day === 6 ? "sat" : "";
   return React.cloneElement(children, {
     ...children.props,
-    className: `calendar-date-cell ${additionalClass} ${children.props.className || ""
-      }`,
+    className: `calendar-date-cell ${additionalClass} ${
+      children.props.className || ""
+    }`,
   });
 };
 
