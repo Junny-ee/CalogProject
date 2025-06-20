@@ -5,22 +5,26 @@ import { ScheduleDispatchContext } from "../pages/Calendar";
 
 function ModalEdit({ isOpen, onModal, modalType, data }) {
   const [title, setTitle] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [start, setStartDate] = useState("");
+  const [end, setEndDate] = useState("");
   const [description, setDescription] = useState("");
   const { onUpdate, onDelete } = useContext(ScheduleDispatchContext);
 
   useEffect(() => {
-    if (!isOpen) {
-      setTitle("");
-      setStartDate("");
-      setEndDate("");
-      setDescription("");
+    if (isOpen && data) {
+      setTitle(data.title);
+      setStartDate(data.start);
+      setEndDate(data.end);
+      setDescription(data.contents);
     }
-  }, [isOpen]);
+  }, [isOpen, data]);
 
-  // '저장' 버튼 클릭 시 실행될 함수
   const handleSave = () => {
+    if (modalType === "project") {
+      onUpdate(data.type, data.id, title, start, end, description);
+    } else {
+      onUpdate(data.type, data.id, title, start, end, description);
+    }
     onModal(false); // 모달 닫기
   };
   const handleDelete = () => {
@@ -54,28 +58,28 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
             <input
               type="text"
               placeholder={getModalTitle()}
-              value={data.title}
+              value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <div>
               <label>시작 날짜</label>
               <input
                 type="datetime-local"
-                value={data.startDate}
+                value={start}
                 onChange={(e) => setStartDate(e.target.value)}
               />
               <br />
               <label>종료 날짜</label>
               <input
                 type="datetime-local"
-                value={data.endDate}
+                value={end}
                 onChange={(e) => setEndDate(e.target.value)}
               />
             </div>
             <textarea
               className="modal_description"
               placeholder="설명 추가"
-              value={data.contents}
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
             <div className="modal_button-box">
@@ -99,21 +103,21 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
             <input
               type="text"
               placeholder={getModalTitle()}
-              value={data.title}
+              value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <div>
               <label>날짜 선택</label>
               <input
                 type="datetime-local"
-                value={data.startDate}
+                value={start}
                 onChange={(e) => setStartDate(e.target.value)}
               />
             </div>
             <textarea
               className="modal_description"
               placeholder="설명 추가"
-              value={data.contents}
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
             <div className="modal_button-box">
