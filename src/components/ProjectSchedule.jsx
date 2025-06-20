@@ -1,33 +1,25 @@
 import "./ProjectSchedule.css";
 import { useState } from "react";
 import Button from "./Button";
-const mockdata = {
-  isChecked: false,
-  content: "프로젝트 일정",
-};
 
 // ProjectSchedule에서도 모달을 열기 위한 콜백 함수를 prop으로 받습니다.
-const ProjectSchedule = ({ onItemClick }) => {
-  // prop 이름을 onItemClick으로 통일
-  const [Schedule, setSechdule] = useState(mockdata); // 목데이터(나중에는 글 객체)
-  const date = new Date().toLocaleDateString(); // date 변수는 사용되지 않음
-
-  const onCreate = () => {
-    // 체크박스 클릭 시 동작
-  };
-
+const ProjectSchedule = ({ data, onItemClick }) => {
   const handleItemClick = () => {
-    // 항목 클릭 시 부모 컴포넌트의 모달 열기 함수 호출
     if (onItemClick) {
-      onItemClick();
+      onItemClick(data);
     }
   };
 
   return (
     <div className="ProjectSchedule">
-      {/* <a> 태그 클릭 시 부모의 모달 열기 함수 호출 */}
-      <a className="project_contents">{Schedule.content}</a>
-      <Button classtype={"Create"} text={"+"} onClick={handleItemClick} />
+      <div className="ProjectSchedule_header">
+        <a className="ProjectSchedule_title" onClick={handleItemClick}>
+          {data.title}
+        </a>
+      </div>
+      <div className="ProjectSchedule_contents">
+        <p>{data.contents}</p>
+      </div>
     </div>
   );
 };

@@ -3,19 +3,29 @@ import ScheduleItem from "./ScheduleItem";
 import ModalCreate from "./ModalCreate";
 import ProjectSchedule from "./ProjectSchedule";
 import Button from "./Button";
-import { useState } from "react";
-
+import { useContext, useState } from "react";
+import { ScheduleStateContext } from "../pages/Calendar";
+import ModalEdit from "./ModalEdit";
 const ScheduleList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditerOpen, setIsEditerOpen] = useState(false);
   const [modalType, setModalType] = useState("");
-
+  const schedule_data = useContext(ScheduleStateContext);
+  const [findData, setFindData] = useState(null);
   const openModal = (type) => {
     setIsModalOpen(true);
     setModalType(type);
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
+    setModalType("");
+  };
+  const editModalopen = (data) => {
+    setIsEditerOpen(true);
+    setFindData(data);
+  };
+  const editModalclose = () => {
+    setIsEditerOpen(false);
     setModalType("");
   };
 
@@ -33,6 +43,17 @@ const ScheduleList = () => {
             onClick={() => openModal("project")}
           />
         </div>
+        <div>
+          {schedule_data
+            .filter((item) => item.type === "project")
+            .map((item) => (
+              <ProjectSchedule
+                key={item.id}
+                data={item}
+                onItemClick={editModalopen}
+              />
+            ))}
+        </div>
         <div className="ScheduleList_Todo">
           <p>일일 일정</p>
           <Button
@@ -41,13 +62,28 @@ const ScheduleList = () => {
             onClick={() => openModal("item")}
           />
         </div>
+        <div>
+          {schedule_data
+            .filter((item) => item.type === "item")
+            .map((item) => (
+              <ScheduleItem
+                key={item.id}
+                data={item}
+                onItemClick={editModalopen}
+              />
+            ))}
+        </div>
       </div>
-
-      {/* 모달은 ScheduleList에서만 렌더링하고, modalType에 따라 내용을 다르게 표시할 수 있습니다. */}
       <ModalCreate
         isOpen={isModalOpen}
         onModal={closeModal}
         modalType={modalType}
+      />
+      <ModalEdit
+        isOpen={isEditerOpen}
+        onModal={editModalclose}
+        modalType={modalType}
+        data={findData}
       />
     </div>
   );
