@@ -5,8 +5,8 @@ import { ScheduleDispatchContext } from "../pages/Calendar";
 
 function ModalCreate({ isOpen, onModal, modalType }) {
   const [title, setTitle] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [start, setStartDate] = useState("");
+  const [end, setEndDate] = useState("");
   const [contents, setcontents] = useState("");
   const { onCreate } = useContext(ScheduleDispatchContext);
   useEffect(() => {
@@ -20,7 +20,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
 
   // '저장' 버튼 클릭 시 실행될 함수
   const handleSave = () => {
-    onCreate(modalType, title, startDate, endDate, contents);
+    onCreate(modalType, title, start, end, contents);
     onModal(false);
   };
 
@@ -55,14 +55,14 @@ function ModalCreate({ isOpen, onModal, modalType }) {
               <label>시작 날짜</label>
               <input
                 type="datetime-local"
-                value={startDate}
+                value={start}
                 onChange={(e) => setStartDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
               />
               <br />
               <label>종료 날짜</label>
               <input
                 type="datetime-local"
-                value={endDate}
+                value={end}
                 onChange={(e) => setEndDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
               />
             </div>
@@ -97,7 +97,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
               <label>날짜 선택</label>
               <input
                 type="datetime-local"
-                value={startDate}
+                value={start}
                 onChange={(e) => setStartDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
               />
             </div>

@@ -9,10 +9,18 @@ const ProjectSchedule = ({ data, onItemClick }) => {
       onItemClick(data);
     }
   };
-
+  const startDate = new Date(data.start).getTime();
+  const endDate = new Date(data.end).getTime();
+  const Dday = endDate - startDate;
   return (
     <div className="ProjectSchedule">
       <div className="ProjectSchedule_header">
+        <div>
+          <p>{new Date(data.start).toLocaleDateString()}</p>
+          <p>{`D-day ${
+            !new Date(Dday).getDate() <= 1 ? new Date(Dday).getDate() - 1 : ""
+          }`}</p>
+        </div>
         <a className="ProjectSchedule_title" onClick={handleItemClick}>
           {data.title}
         </a>
