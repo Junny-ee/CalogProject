@@ -6,7 +6,6 @@ import "./FrontCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import CalModalWindow from "./CalModalWindow";
 import HeaderCalendar from "./HeaderCalendar";
-import CalDateWrapper from "./CalDateWrapper";
 
 const CalendarContext = createContext(null);
 export const CalendarProvider = ({ children }) => {
@@ -116,7 +115,6 @@ const FrontCalendar = ({ events }) => {
             // 날짜 선택 전에는 기본 강조 유지 (스타일 덮지 않음)
             return {};
           }}
-          components={{ dateCellWrapper: CalDateWrapper }}
         />
         {/*defaultView  처음 렌더링될 때 보여줄 기본 뷰 모드 :월간 보기
         events : 일정목록 

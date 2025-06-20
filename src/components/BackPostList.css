@@ -1,26 +1,27 @@
-.buttons{
+.buttons {
   position: absolute;
   top: 5%;
 }
-.contents_wrapper{
+.contents_wrapper {
   display: flex;
   flex-direction: column;
+  width: 800px;
 }
-.tags:hover{
+.tags:hover {
   font-weight: bolder;
   cursor: pointer;
 }
 .tag_wrapper {
-  position: fixed; 
+  position: fixed;
   top: 20%;
-  right: 10%; 
-  width: 200px; 
+  right: 10%;
+  width: 200px;
   height: 60%;
-  padding: 20px; 
-  box-sizing: border-box; 
+  padding: 20px;
+  box-sizing: border-box;
   border: 1px solid black;
   overflow: scroll;
-  -ms-overflow-style: none; 
+  -ms-overflow-style: none;
   scrollbar-width: none;
   text-overflow: ellipsis;
 }
@@ -28,7 +29,7 @@
   display: none;
 }
 
-.tags{
+.tags {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
