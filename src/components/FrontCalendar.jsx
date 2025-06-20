@@ -1,33 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import "./FrontCalendar.css";
-
+import { useState, useEffect, useRef, createContext, useContext } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import "./FrontCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useState, useEffect, useRef, createContext, useContext } from "react";
 import CalModalWindow from "./CalModalWindow";
-
-// 테스터용 임시 데이터
-// const events = [
-//   {
-//     title: "회의",
-//     start: new Date(2025, 5, 15, 10, 0),
-//     end: new Date(2025, 5, 18, 12, 0),
-//   },
-//   {
-//     title: "미팅",
-//     start: new Date(2025, 5, 15, 10, 0),
-//     end: new Date(2025, 5, 16, 12, 0),
-//   },
-//   {
-//     title: "프로젝트",
-//     start: new Date(2025, 5, 16, 13, 0),
-//     end: new Date(2025, 5, 20, 14, 0),
-//   },
-// ];
+import HeaderCalendar from "./HeaderCalendar";
+import CalDateWrapper from "./CalDateWrapper";
 
 const CalendarContext = createContext(null);
-//selectedDate, setselectedDate 같은 값 담음
 export const CalendarProvider = ({ children }) => {
   const [selectedDate, setselectedDate] = useState(null);
 
@@ -87,15 +68,7 @@ const FrontCalendar = ({ events }) => {
 
   return (
     <div>
-      <div className="HeaderCalendar">
-        <button
-          onClick={() => {
-            setmodalOpen(true);
-          }}
-        >
-          {moment(date).format("MMMM YYYY")}
-        </button>
-      </div>
+      <HeaderCalendar date={date} onClick={() => setmodalOpen(true)} />
 
       <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button>
 
@@ -124,6 +97,26 @@ const FrontCalendar = ({ events }) => {
                 : clicked
             );
           }}
+          dayPropGetter={(date) => {
+            const isToday = moment(date).isSame(moment(), "day");
+            const isSelected =
+              selectedDate && moment(date).isSame(moment(selectedDate), "day");
+
+            // 날짜가 선택된 경우엔 오늘 강조를 제거하고 선택된 날짜에만 강조
+            if (selectedDate) {
+              return {
+                style: {
+                  backgroundColor: isSelected ? "#ffe2f0" : undefined,
+                  // 오늘이면 강조 제거
+                  ...(isToday ? { backgroundColor: "transparent" } : {}),
+                },
+              };
+            }
+
+            // 날짜 선택 전에는 기본 강조 유지 (스타일 덮지 않음)
+            return {};
+          }}
+          components={{ dateCellWrapper: CalDateWrapper }}
         />
         {/*defaultView  처음 렌더링될 때 보여줄 기본 뷰 모드 :월간 보기
         events : 일정목록 
