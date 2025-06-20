@@ -19,21 +19,41 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
         <div className="content_header">{title}</div>
         <div className="content_body">{content}</div>
 
-        {tag &&
-          tag.map((item, index) => (
-            <div
-              key={index}
-              className="tag"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSearchWord("");
-                setSearchingTag(item);
-                setShowSearchBar(false);
-              }}
-            >
-              {`#${item}`}
-            </div>
-          ))}
+
+        {/* {tagArray && (
+          <div className="tag_list">
+            {tagArray.map((t, index) => (
+              <span
+                key={index}
+                className="tag"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSearchWord("");
+                  setSearchingTag(t.trim());
+                  setShowSearchBar(false);
+                }}
+              >
+                #{t.trim()}
+              </span>
+            ))}
+          </div>
+        )} */}
+
+        {tag && tag.map((item, index) => (
+          <div
+            key={index}
+            className="tag"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSearchWord("");
+              setSearchingTag(item);
+              setShowSearchBar(false);
+            }}
+          >
+            {`#${item}`}
+          </div>
+        ))}
+
         <div className="content_date">
           {new Date(createDate).toLocaleDateString()}
         </div>

@@ -54,7 +54,7 @@ const BackBoard = () => {
 
   const filteredContents = contents.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
-    console.log(item.title);
+    console.log(item.tag);
     const titleIncludes = item.title
       .toLowerCase()
       .includes(lowerCaseSearchWord);
