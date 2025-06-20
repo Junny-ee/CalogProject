@@ -49,7 +49,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
         className="modal_content" // 모달 내용에 적용할 CSS 클래스
         overlayClassName="modal_overlay" // 모달 오버레이에 적용할 CSS 클래스
       >
-        {modalType === "project" ? ( // 프로젝트 일정
+        {data.type === "project" ? ( // 프로젝트 일정
           <div>
             <input
               type="text"
@@ -80,7 +80,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
             ></textarea>
             <div className="modal_button-box">
               <button className="create_modal_button" onClick={handleSave}>
-                저장
+                수정
               </button>
               <button className="delete_modal_button" onClick={handleDelete}>
                 삭제
@@ -118,7 +118,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
             ></textarea>
             <div className="modal_button-box">
               <button className="create_modal_button" onClick={handleSave}>
-                저장
+                수정
               </button>
               <button className="delete_modal_button" onClick={handleDelete}>
                 삭제
