@@ -8,7 +8,7 @@ import {
   ScheduleStateContext,
   ScheduleDispatchContext,
 } from "../pages/Calendar";
-const ScheduleList = ({ data }) => {
+const ScheduleList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("");
   const schedule_data = useContext(ScheduleStateContext);
@@ -20,7 +20,6 @@ const ScheduleList = ({ data }) => {
     setIsModalOpen(false);
     setModalType("");
   };
-
   return (
     <div className="ScheduleList">
       <div className="ScheduleList_Wirte">
@@ -36,10 +35,10 @@ const ScheduleList = ({ data }) => {
           />
         </div>
         <div>
-          {data
-            .filter((project) => project.type === "project")
-            .map((project) => (
-              <ScheduleItem key={project.id} data={item} />
+          {schedule_data
+            .filter((item) => item.type === "project")
+            .map((item) => (
+              <ProjectSchedule key={item.id} data={item} />
             ))}
         </div>
         <div className="ScheduleList_Todo">
@@ -51,7 +50,7 @@ const ScheduleList = ({ data }) => {
           />
         </div>
         <div>
-          {data
+          {schedule_data
             .filter((item) => item.type === "item")
             .map((item) => (
               <ScheduleItem key={item.id} data={item} />

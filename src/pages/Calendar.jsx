@@ -73,118 +73,113 @@ const Calendar = () => {
     setIsSummaryOpen(!isSummaryOpen);
   };
   // 여기부터 context랑 reducer 함수
-  // useEffect(() => {
-  //   const storedData = localStorage.getItem("schedule");
-  //   if (!storedData) {
-  //     setIsLoading(false); // 로딩완료
-  //   }
-  //   const parseData = JSON.parse(storedData);
-  //   let maxId = 0;
-  //   parseData.forEach((item) => {
-  //     if (Number(item.id) > maxId) {
-  //       maxId = item.id;
-  //     }
-  //   });
+  useEffect(() => {
+    const storedData = localStorage.getItem("schedule");
+    if (!storedData) {
+      setIsLoading(false); // 로딩완료
+    }
+    const parseData = JSON.parse(storedData);
+    let maxId = 0;
+    parseData.forEach((item) => {
+      if (Number(item.id) > maxId) {
+        maxId = item.id;
+      }
+    });
 
-  //   calendarRef.current = maxId + 1;
+    calendarRef.current = maxId + 1;
 
-  //   dispatch({
-  //     name: "init",
-  //     data: parseData,
-  //   });
-  //   setIsLoading(false);
-  // }, []);
-  // const onCreate = (type, title, startDate, endDate, contents) => {
-  //   dispatch({
-  //     name: "create",
-  //     data: {
-  //       type,
-  //       id: calendarRef.current++,
-  //       title, // key와 value 가 같을경우 하나만 써도 됨
-  //       startDate,
-  //       endDate,
-  //       contents,
-  //     },
-  //   });
-  // };
-  // const onUpdate = (type, id, title, startDate, endDate, contents) => {
-  //   dispatch({
-  //     name: "update",
-  //     data: {
-  //       type,
-  //       id,
-  //       title,
-  //       startDate,
-  //       endDate,
-  //       contents,
-  //     },
-  //   });
-  // };
-  // const onDelete = (id) => {
-  //   dispatch({
-  //     name: "delete",
-  //     id,
-  //   });
-  // };
-  // if (isLoading) {
-  //   return <div>데이터 로딩중입니다...</div>;
-  // }
-  const mockData = [
-    // test용 위에 적용시 제거
-    {
-      name: "item",
-      id: 1,
-      title: "테스트",
-      startDate: new Date("2025-06-20").getTime(),
-      endDate: new Date("2025-06-21").getTime(),
-      contents: "기본글",
-    },
-    {
-      name: "project",
-      id: 2,
-      title: "테스트",
-      startDate: new Date("2025-06-20").getTime(),
-      endDate: new Date("2025-06-21").getTime(),
-      contents: "기본글",
-    },
-  ];
+    dispatch({
+      name: "init",
+      data: parseData,
+    });
+    setIsLoading(false);
+  }, []);
+  const onCreate = (type, title, startDate, endDate, contents) => {
+    dispatch({
+      name: "create",
+      data: {
+        type,
+        id: calendarRef.current++,
+        title, // key와 value 가 같을경우 하나만 써도 됨
+        startDate,
+        endDate,
+        contents,
+      },
+    });
+  };
+  const onUpdate = (type, id, title, startDate, endDate, contents) => {
+    dispatch({
+      name: "update",
+      data: {
+        type,
+        id,
+        title,
+        startDate,
+        endDate,
+        contents,
+      },
+    });
+  };
+  const onDelete = (id) => {
+    dispatch({
+      name: "delete",
+      id,
+    });
+  };
+  // const mockdata = [
+  //   {
+  //     type: "item",
+  //     id: calendarRef.current++,
+  //     title: "테스트 제목1", // key와 value 가 같을경우 하나만 써도 됨
+  //     startDate: new Date("2025-06-20"),
+  //     endDate: new Date("2025-06-21"),
+  //     contents: "테스트 내용1",
+  //   },
+  // ];
+  // localStorage.setItem("schedule", JSON.stringify(mockdata));
+
+  if (isLoading) {
+    return <div>로딩 중...</div>; // 데이터 로딩 중 스피너 등을 표시할 수 있습니다.
+  }
   return (
     <>
-      {/* <ScheduleStateContext.Provider value={calendarData}>
+      <ScheduleStateContext.Provider value={calendarData}>
         <ScheduleDispatchContext.Provider
           value={{ onCreate, onUpdate, onDelete }}
-        > */}
-      <div className="Calendar">
-        <div className="left-content">
-          <button className="button_schedule" onClick={toggleScheduleList}>
-            할 일 목록 펼침/닫힘 버튼
-          </button>
-          <button className="button_summary" onClick={toggleSummary}>
-            요약창 펼침/닫힘 버튼
-          </button>
+        >
+          <div className="Calendar">
+            <div className="left-content">
+              <button className="button_schedule" onClick={toggleScheduleList}>
+                할 일 목록 펼침/닫힘 버튼
+              </button>
+              <button className="button_summary" onClick={toggleSummary}>
+                요약창 펼침/닫힘 버튼
+              </button>
 
-          <FrontCalendar events={events} />
-          <div className={`under-content ${isSummaryOpen ? "open" : ""}`}>
-            <Summary
-              item={
-                selectedDate
-                  ? events.filter(
-                      (e) =>
-                        e.start.toLocaleDateString() ===
-                        selectedDate.toLocaleDateString()
-                    )
-                  : []
-              }
-              date={selectedDate}
-            />
+              <FrontCalendar events={events} />
+              <div className={`under-content ${isSummaryOpen ? "open" : ""}`}>
+                <Summary
+                  item={
+                    selectedDate
+                      ? events.filter(
+                          (e) =>
+                            e.start.toLocaleDateString() ===
+                            selectedDate.toLocaleDateString()
+                        )
+                      : []
+                  }
+                  date={selectedDate}
+                />
+              </div>
+            </div>
+            <div
+              className={`right-content ${isScheduleListOpen ? "open" : ""}`}
+            >
+              <ScheduleList />
+            </div>
           </div>
-        </div>
-        <div className={`right-content ${isScheduleListOpen ? "open" : ""}`}>
-          <ScheduleList data={mockData} />
-        </div>
-      </div>
-      {/* </ScheduleDispatchContext.Provider>
-      </ScheduleStateContext.Provider> */}
+        </ScheduleDispatchContext.Provider>
+      </ScheduleStateContext.Provider>
     </>
   );
 };
