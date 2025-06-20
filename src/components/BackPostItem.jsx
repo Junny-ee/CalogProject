@@ -35,7 +35,7 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
         <div className="content_header">{title}</div>
         <div className="content_body">{content}</div>
 
-        {tagArray && (
+        {/* {tagArray && (
           <div className="tag_list">
             {tagArray.map((t, index) => (
               <span
@@ -52,7 +52,7 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
               </span>
             ))}
           </div>
-        )}
+        )} */}
 
         {tag && tag.map((item, index) => (
           <div
