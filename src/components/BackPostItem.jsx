@@ -8,7 +8,7 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
   const nav = useNavigate();
   const { setSearchWord, setSearchingTag, setShowSearchBar } =
     useContext(BackBoardDispatchContext);
-  
+
   const markdownPreviewLines = () => {
     if (typeof content !== "string") return [];
 
@@ -27,8 +27,8 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
   const { onDelete } = useContext(CalogDispatchContext);
   const [isChecked, setIsChecked] = useState(false);
   return (
-    <div className="post_item">
-      <div className="content_wrapper" onClick={() => nav(`/read/${id}`)}>
+    <div className="post_item" onClick={() => nav(`/read/${id}`)}>
+      <div className="content_wrapper">
         <div className="content_header">{title}</div>
         <div className="content_body">
           {" "}
@@ -37,23 +37,26 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
           ))}
         </div>
 
-        {tag ? (
+        {tag && tag.map((item, index) => (
           <div
+            key={index}
             className="tag"
             onClick={(e) => {
               e.stopPropagation();
               setSearchWord("");
-              setSearchingTag(tag);
+              setSearchingTag(item);
               setShowSearchBar(false);
             }}
-          >{`#${tag}`}</div>
-        ) : null}
+          >
+            {`#${item}`}
+          </div>
+        ))}
         <div className="content_date">
           {new Date(createDate).toLocaleDateString()}
         </div>
       </div>
-      <input type="checkbox" onClick={() => setIsChecked(true)} />
-      <button className="button_delete" onClick={() => onDelete(id)}>
+      <input type="checkbox" onClick={(e) => { e.stopPropagation(); setIsChecked(true); }} />
+      <button className="button_delete" onClick={(e) => { e.stopPropagation(); onDelete(id) }}>
         삭제하기
       </button>
     </div>

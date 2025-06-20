@@ -65,10 +65,10 @@ const BackBoard = () => {
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
         (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-        )
+      )
       : typeof item.tag === "string"
-      ? item.tag.includes(lowerCaseSearchWord)
-      : false;
+        ? item.tag.includes(lowerCaseSearchWord)
+        : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
@@ -77,8 +77,8 @@ const BackBoard = () => {
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
       : typeof item.tag === "string"
-      ? item.tag.includes(searchingTag.toLowerCase())
-      : false;
+        ? item.tag.includes(searchingTag.toLowerCase())
+        : false;
 
 
     return tagIncludes;
@@ -99,7 +99,7 @@ const BackBoard = () => {
           페이지 맨 위로 가는 버튼
         </button>
       ) : null}
-      {showSearchBar ? (
+      {/* {showSearchBar ? (
         <div className="search">
           <input
             type="text"
@@ -109,7 +109,17 @@ const BackBoard = () => {
             onChange={onChange}
           />
         </div>
-      ) : null}
+      ) : null} */}
+      <div className="search">
+        <input
+          type="text"
+          value={searchWord}
+          className="search_input"
+          placeholder="검색어를 입력하세요"
+          onChange={onChange}
+        />
+      </div>
+      {/* 태그별 조회 시에도 검색창 유지할거면 검색 태그별 조회 상태에서 검색 작동하게 수정하기 */}
       <div className="list_wrapper">
         <BackBoardDispatchContext.Provider
           value={{
@@ -121,15 +131,21 @@ const BackBoard = () => {
         >
           {searchingTag ? (
             <div>
-              <h2 className="tag_header">{`#${searchingTag}`}</h2>
+              <span className="tag_header_wrapper">
+                <span className="tag_text">{`#${searchingTag}`}</span>
+                <button className="close_button" onClick={() => {
+                  setSearchingTag("");
+                }}>×</button>
+              </span>
               <BackPostList
                 data={filteredContentsByTag}
+                entireData={contents}
                 searchingTag={searchingTag}
                 setSearchingTag={setSearchingTag}
               />
             </div>
           ) : (
-            <BackPostList data={filteredContents} />
+            <BackPostList data={filteredContents} entireData={contents} />
           )}
         </BackBoardDispatchContext.Provider>
       </div>

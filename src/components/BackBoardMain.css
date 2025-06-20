@@ -40,3 +40,43 @@
 .search_input::placeholder {
   color: #aaa;
 }
+
+.tag_header_wrapper {
+  font-size: xx-large;
+  font-weight: bolder;
+  background-color: antiquewhite;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin-right: 10px;
+  margin-bottom: 5%;
+  max-width: 200px;
+  min-width: 80px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tag_text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.close_button { 
+  font-size: xx-large;
+  color: gray;
+  cursor: pointer;
+  flex-shrink: 0;
+  border: none; 
+  background: none; 
+  padding: 0; 
+}
+.close_button:hover{
+  font-weight: bolder;
+  color: #333;
+}

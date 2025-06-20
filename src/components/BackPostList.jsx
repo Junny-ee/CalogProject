@@ -3,7 +3,7 @@ import "./BackPostList.css";
 import BackPostItem from "./BackPostItem";
 import { useNavigate } from "react-router-dom";
 import { BackBoardDispatchContext } from "./BackBoardMain";
-const BackPostList = ({ data }) => {
+const BackPostList = ({ data, entireData }) => {
   const nav = useNavigate();
   const [sortType, setSortType] = useState("latest");
   const [tags, setTags] = useState([]);
@@ -19,8 +19,8 @@ const BackPostList = ({ data }) => {
   };
 
   useEffect(() => {
-    setTags([...new Set(data.map(item => item.tag))]);
-  }, [data])
+    setTags([...new Set(entireData.map(item => item.tag))]);
+  }, [entireData])
 
   // 글 등록시 추가/+1 삭제/-1로 바꾸는 것 고려하기
   const sortedData = getSortedData();
@@ -39,8 +39,10 @@ const BackPostList = ({ data }) => {
         ))}
       </div>
       <div className="tag_wrapper">
-        <h3>미완성(태그 클릭시 조회는 작동함)</h3>
-        <div className="tags" onClick={() => nav(0)}>전체보기</div>
+        <h3>태그 목록(미완성)</h3>
+        {/* 태그 클릭시 검색, 태그 중복 제거, 태그 개수 표시 필요 */}
+        <div className="tags" onClick={() => setSearchingTag("")}>{`전체보기 (${entireData.length})`}</div>
+
         <div>{tags.map((tag) =>
           <div className="tags" onClick={() => setSearchingTag(tag)}>{tag}</div>)
         }</div>
