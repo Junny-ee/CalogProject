@@ -7,6 +7,7 @@
   background-color: rgba(160, 160, 160, 0.082);
   border-radius: 50%;
   border: none;
+  cursor: pointer;
 }
 img {
   width: 20px;
@@ -38,7 +39,6 @@ img {
 .search:focus-within {
   border: 3px solid black;
 }
-
 
 .search_input {
   flex-grow: 1;
@@ -79,16 +79,16 @@ img {
   min-width: 0;
 }
 
-.close_button { 
+.close_button {
   font-size: xx-large;
   color: gray;
   cursor: pointer;
   flex-shrink: 0;
-  border: none; 
-  background: none; 
-  padding: 0; 
+  border: none;
+  background: none;
+  padding: 0;
 }
-.close_button:hover{
+.close_button:hover {
   font-weight: bolder;
   color: black;
 }

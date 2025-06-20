@@ -9,7 +9,7 @@ const Summary = ({ date, calendarData }) => {
   const todaySummary = calendarData.filter(
     (date) => date.createDate === check.getTime()
   ); // 날짜 일치하는 객체 가져오기
-  console.log(calendarData);
+  // console.log(calendarData);
 
   return (
     <div className="Summary">
