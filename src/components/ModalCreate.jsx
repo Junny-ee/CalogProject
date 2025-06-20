@@ -5,7 +5,6 @@ import "./ModalCreate.css";
 function ModalCreate({ isOpen, onModal, modalType }) {
   // 입력 필드와 라디오 버튼의 상태를 관리합니다.
   const [title, setTitle] = useState("");
-  const [selectedOption, setSelectedOption] = useState(""); // 라디오 버튼 선택 상태
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [description, setDescription] = useState("");
@@ -13,7 +12,6 @@ function ModalCreate({ isOpen, onModal, modalType }) {
   useEffect(() => {
     if (!isOpen) {
       setTitle("");
-      setSelectedOption("");
       setStartDate("");
       setEndDate("");
       setDescription("");
@@ -23,27 +21,18 @@ function ModalCreate({ isOpen, onModal, modalType }) {
   // '저장' 버튼 클릭 시 실행될 함수
   const handleSave = () => {
     // 현재 입력된 모든 값을 콘솔에 출력 (실제로는 서버로 전송하거나 상위 컴포넌트로 전달)
-    console.log({
-      title,
-      selectedOption,
-      startDate,
-      endDate,
-      description,
-    });
+    localStorage;
     onModal(false); // 모달 닫기
     // 저장 후 상태 초기화는 useEffect에서 처리됩니다.
   };
 
   // modalType에 따라 모달 제목을 결정하는 함수
   const getModalTitle = () => {
-    if (modalType === "create") {
-      return "새로운 항목 생성";
-    } else if (modalType === "project") {
+    if (modalType === "project") {
       return "프로젝트 일정 수정";
     } else if (modalType === "item") {
       return "할 일 수정";
     }
-    return "상세 정보"; // 기본 제목
   };
 
   return (
@@ -56,7 +45,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
         className="modal_content" // 모달 내용에 적용할 CSS 클래스
         overlayClassName="modal_overlay" // 모달 오버레이에 적용할 CSS 클래스
       >
-        {modalType === "project" ? (
+        {modalType === "project" ? ( // 프로젝트 일정
           <div>
             <input
               type="text"
@@ -98,6 +87,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
             </div>
           </div>
         ) : (
+          // 일일 일정
           <div>
             <input
               type="text"
@@ -106,18 +96,11 @@ function ModalCreate({ isOpen, onModal, modalType }) {
               onChange={(e) => setTitle(e.target.value)} // 입력 값 변경 시 상태 업데이트
             />
             <div>
-              <label>시작 날짜</label>
+              <label>날짜 선택</label>
               <input
                 type="datetime-local"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
-              />
-              <br />
-              <label>종료 날짜</label>
-              <input
-                type="datetime-local"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
               />
             </div>
             <textarea

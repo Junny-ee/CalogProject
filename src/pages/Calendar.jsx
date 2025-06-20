@@ -28,9 +28,7 @@ const events = [
 const Calendar = () => {
   const [isScheduleListOpen, setIsScheduleListOpen] = useState(true);
   const [isSummaryOpen, setIsSummaryOpen] = useState(true);
-
   const { selectedDate } = useCalendar(); //날짜 선택 context
-
   const toggleScheduleList = () => {
     setIsScheduleListOpen(!isScheduleListOpen);
   };

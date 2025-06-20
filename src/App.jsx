@@ -34,6 +34,7 @@ function reducer(state, action) {
       // 삭제 요청이 발생한 작성한 글 id와 기존에 작성한 글들의 id를 비교하여
       // 다른 id를 가진 작성한 글들만 새로운 배열로 반환
       nextState = state.filter((data) => String(data.id) !== String(action.id));
+
       break;
 
     default:
@@ -89,6 +90,7 @@ function App() {
       type: "INIT",
       data: parsedData,
     });
+
     // 디스패치 함수가 실행되어 데이터 스테이트의 초기값을 설정한 뒤 로딩 종료 처리
     setIsLoading(false);
   }, []); // 마운트 될 때만 실행되도록 deps를 빈 배열로 지정
@@ -99,6 +101,7 @@ function App() {
       type: "CREATE",
       data: {
         id: currentId,
+        createDate: new Date().getTime(),
         title,
         tag,
         content,
