@@ -6,7 +6,6 @@ import "./FrontCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import CalModalWindow from "./CalModalWindow";
 import HeaderCalendar from "./HeaderCalendar";
-import CalDateWrapper from "./CalDateWrapper";
 
 const CalendarContext = createContext(null);
 export const CalendarProvider = ({ children }) => {
@@ -91,32 +90,49 @@ const FrontCalendar = ({ events }) => {
           onSelectSlot={(slotInfo) => {
             // setselectedDate(slotInfo.start); // 일정 비어있는 날짜 클릭해도 날짜 저장
             const clicked = slotInfo.start;
-            setselectedDate((prev) =>
-              prev?.toLocaleDateString() === clicked.toLocaleDateString()
-                ? new Date(clicked)
-                : clicked
-            );
+            setselectedDate(() => new Date(clicked));
+            // setselectedDate((prev) =>
+            //   prev?.toLocaleDateString() === clicked.toLocaleDateString()
+            //     ? new Date(clicked)
+            //     : clicked
+            // );
           }}
+          // 배경색 마지막 도전......
           dayPropGetter={(date) => {
             const isToday = moment(date).isSame(moment(), "day");
             const isSelected =
               selectedDate && moment(date).isSame(moment(selectedDate), "day");
-
-            // 날짜가 선택된 경우엔 오늘 강조를 제거하고 선택된 날짜에만 강조
-            if (selectedDate) {
+            if (isToday && isSelected) {
+              return { style: { backgroundColor: "#ffe2f0" } };
+            }
+            if (isToday && !isSelected) {
+              return {};
+            }
+            if (isSelected) {
               return {
                 style: {
-                  backgroundColor: isSelected ? "#ffe2f0" : undefined,
-                  // 오늘이면 강조 제거
-                  ...(isToday ? { backgroundColor: "transparent" } : {}),
+                  backgroundColor: "#ffe2f0",
                 },
               };
             }
-
-            // 날짜 선택 전에는 기본 강조 유지 (스타일 덮지 않음)
+            // 날짜 선택 전에 기본
             return {};
           }}
-          components={{ dateCellWrapper: CalDateWrapper }}
+          eventPropGetter={(e) => {
+            const now = new Date();
+            const today = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate()
+            );
+
+            const isPast = e.end < today;
+            const style = {
+              backgroundColor: isPast ? "#e6e6e6" : "#3174ad",
+              // color: isPast ? "#666" : "white",
+            };
+            return { style };
+          }}
         />
         {/*defaultView  처음 렌더링될 때 보여줄 기본 뷰 모드 :월간 보기
         events : 일정목록 

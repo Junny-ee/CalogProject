@@ -30,8 +30,8 @@ const events = [
   },
   {
     title: "미팅",
-    start: new Date(2025, 5, 15, 10, 0),
-    end: new Date(2025, 5, 16, 12, 0),
+    start: new Date(2025, 5, 22, 10, 0),
+    end: new Date(2025, 5, 24, 12, 0),
   },
 ];
 function reducer(state, action) {

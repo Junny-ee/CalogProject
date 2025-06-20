@@ -4,9 +4,23 @@
   margin-bottom: 20px;
 }
 
-.rbc-header:nth-child(1) {
-  color: red; /* 일요일 (Sun) */
+.rbc-day-bg {
+  cursor: pointer;
+  /* background-color: blue; */
 }
+
+.rbc-header:nth-child(1) {
+  color: red; /*일요일 (Sun)*/
+}
+
 .rbc-header:nth-child(7) {
-  color: blue; /* 토요일 (Sat) */
+  color: blue; /*토요일 (Sat)*/
+}
+
+.rbc-month-row .rbc-date-cell:nth-child(1) .rbc-button-link {
+  color: red !important; /* 일요일 숫자 */
+}
+
+.rbc-month-row .rbc-date-cell:nth-child(7) .rbc-button-link {
+  color: blue !important; /* 토요일 숫자 */
 }
