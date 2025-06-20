@@ -77,6 +77,7 @@ const Calendar = () => {
     const storedData = localStorage.getItem("schedule");
     if (!storedData) {
       setIsLoading(false); // 로딩완료
+      return;
     }
     const parseData = JSON.parse(storedData);
     let maxId = 0;
@@ -126,17 +127,6 @@ const Calendar = () => {
       id,
     });
   };
-  // const mockdata = [
-  //   {
-  //     type: "item",
-  //     id: calendarRef.current++,
-  //     title: "테스트 제목1", // key와 value 가 같을경우 하나만 써도 됨
-  //     startDate: new Date("2025-06-20"),
-  //     endDate: new Date("2025-06-21"),
-  //     contents: "테스트 내용1",
-  //   },
-  // ];
-  // localStorage.setItem("schedule", JSON.stringify(mockdata));
 
   if (isLoading) {
     return <div>로딩 중...</div>; // 데이터 로딩 중 스피너 등을 표시할 수 있습니다.

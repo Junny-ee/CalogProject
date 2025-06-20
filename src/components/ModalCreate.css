@@ -138,13 +138,13 @@
   background-color: #089720d3;
 }
 /* 모달 삭제 버튼 스타일 */
-.create_modal_button {
-  background-color: #e017d6d3; /* 적색 계열 */
+.delete_modal_button {
+  background-color: #e01717d3; /* 적색 계열 */
   color: white;
 }
 
-.create_modal_button:hover {
-  background-color: #a3109cd3;
+.delete_modal_button:hover {
+  background-color: #a31010d3;
 }
 
 /* 모달 닫기 버튼 스타일 */

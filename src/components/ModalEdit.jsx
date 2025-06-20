@@ -3,12 +3,13 @@ import Modal from "react-modal";
 import "./ModalCreate.css";
 import { ScheduleDispatchContext } from "../pages/Calendar";
 
-function ModalEdit({ isOpen, onModal, modalType }) {
+function ModalEdit({ isOpen, onModal, modalType, data }) {
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [description, setDescription] = useState("");
   const { onUpdate, onDelete } = useContext(ScheduleDispatchContext);
+
   useEffect(() => {
     if (!isOpen) {
       setTitle("");
@@ -20,16 +21,12 @@ function ModalEdit({ isOpen, onModal, modalType }) {
 
   // '저장' 버튼 클릭 시 실행될 함수
   const handleSave = () => {
-    // 현재 입력된 모든 값을 콘솔에 출력 (실제로는 서버로 전송하거나 상위 컴포넌트로 전달)
-    localStorage;
     onModal(false); // 모달 닫기
-    // 저장 후 상태 초기화는 useEffect에서 처리됩니다.
   };
   const handleDelete = () => {
-    onDelete();
+    onDelete(data.id);
     onModal(false);
   };
-
   // modalType에 따라 모달 제목을 결정하는 함수
   const getModalTitle = () => {
     if (modalType === "project") {
@@ -38,6 +35,9 @@ function ModalEdit({ isOpen, onModal, modalType }) {
       return "할 일 수정";
     }
   };
+  if (!data) {
+    return;
+  }
 
   return (
     <div>
@@ -53,36 +53,36 @@ function ModalEdit({ isOpen, onModal, modalType }) {
           <div>
             <input
               type="text"
-              placeholder={getModalTitle()} // placeholder도 동적 제목 활용
-              value={title}
-              onChange={(e) => setTitle(e.target.value)} // 입력 값 변경 시 상태 업데이트
+              placeholder={getModalTitle()}
+              value={data.title}
+              onChange={(e) => setTitle(e.target.value)}
             />
             <div>
               <label>시작 날짜</label>
               <input
                 type="datetime-local"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
+                value={data.startDate}
+                onChange={(e) => setStartDate(e.target.value)}
               />
               <br />
               <label>종료 날짜</label>
               <input
                 type="datetime-local"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
+                value={data.endDate}
+                onChange={(e) => setEndDate(e.target.value)}
               />
             </div>
             <textarea
               className="modal_description"
               placeholder="설명 추가"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)} // 입력 값 변경 시 상태 업데이트
+              value={data.contents}
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
             <div className="modal_button-box">
               <button className="create_modal_button" onClick={handleSave}>
                 저장
               </button>
-              <button className="delete_modal_button" onClick={handleSave}>
+              <button className="delete_modal_button" onClick={handleDelete}>
                 삭제
               </button>
               <button
@@ -98,27 +98,30 @@ function ModalEdit({ isOpen, onModal, modalType }) {
           <div>
             <input
               type="text"
-              placeholder={getModalTitle()} // placeholder도 동적 제목 활용
-              value={title}
-              onChange={(e) => setTitle(e.target.value)} // 입력 값 변경 시 상태 업데이트
+              placeholder={getModalTitle()}
+              value={data.title}
+              onChange={(e) => setTitle(e.target.value)}
             />
             <div>
               <label>날짜 선택</label>
               <input
                 type="datetime-local"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
+                value={data.startDate}
+                onChange={(e) => setStartDate(e.target.value)}
               />
             </div>
             <textarea
               className="modal_description"
               placeholder="설명 추가"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)} // 입력 값 변경 시 상태 업데이트
+              value={data.contents}
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
             <div className="modal_button-box">
               <button className="create_modal_button" onClick={handleSave}>
                 저장
+              </button>
+              <button className="delete_modal_button" onClick={handleDelete}>
+                삭제
               </button>
               <button
                 onClick={() => onModal(false)}
