@@ -7,7 +7,7 @@
   margin-bottom: 15px;
   box-sizing: border-box;
 }
-.post_item:hover{
+.post_item:hover {
   cursor: pointer;
 }
 .button_delete {
@@ -17,7 +17,6 @@
   flex-grow: 1;
   padding-right: 10px;
 }
-
 
 .content_header {
   display: inline-block;
@@ -39,7 +38,7 @@
   word-break: break-word;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 3;
   line-clamp: 1;
 
   overflow: hidden;
