@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Modal from "react-modal";
 import "./ModalCreate.css";
+import { ScheduleDispatchContext } from "../pages/Calendar";
 
-function ModalEdit({ isOpen, onModal, modalType }) {
-  // 입력 필드와 라디오 버튼의 상태를 관리합니다.
+function ModalEdit({ isOpen, onModal, modalType, data }) {
   const [title, setTitle] = useState("");
-  const [selectedOption, setSelectedOption] = useState(""); // 라디오 버튼 선택 상태
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [description, setDescription] = useState("");
+  const { onUpdate, onDelete } = useContext(ScheduleDispatchContext);
 
   useEffect(() => {
     if (!isOpen) {
       setTitle("");
-      setSelectedOption("");
       setStartDate("");
       setEndDate("");
       setDescription("");
@@ -22,29 +21,23 @@ function ModalEdit({ isOpen, onModal, modalType }) {
 
   // '저장' 버튼 클릭 시 실행될 함수
   const handleSave = () => {
-    // 현재 입력된 모든 값을 콘솔에 출력 (실제로는 서버로 전송하거나 상위 컴포넌트로 전달)
-    console.log({
-      title,
-      selectedOption,
-      startDate,
-      endDate,
-      description,
-    });
     onModal(false); // 모달 닫기
-    // 저장 후 상태 초기화는 useEffect에서 처리됩니다.
   };
-
+  const handleDelete = () => {
+    onDelete(data.id);
+    onModal(false);
+  };
   // modalType에 따라 모달 제목을 결정하는 함수
   const getModalTitle = () => {
-    if (modalType === "create") {
-      return "새로운 항목 생성";
-    } else if (modalType === "project") {
+    if (modalType === "project") {
       return "프로젝트 일정 수정";
     } else if (modalType === "item") {
       return "할 일 수정";
     }
-    return "상세 정보"; // 기본 제목
   };
+  if (!data) {
+    return;
+  }
 
   return (
     <div>
@@ -56,81 +49,89 @@ function ModalEdit({ isOpen, onModal, modalType }) {
         className="modal_content" // 모달 내용에 적용할 CSS 클래스
         overlayClassName="modal_overlay" // 모달 오버레이에 적용할 CSS 클래스
       >
-        {/* 제목 입력 필드 */}
-        <input
-          type="text"
-          placeholder={getModalTitle()} // placeholder도 동적 제목 활용
-          value={title}
-          onChange={(e) => setTitle(e.target.value)} // 입력 값 변경 시 상태 업데이트
-        />
-
-        {/* 라디오 버튼 옵션 래퍼 */}
-        <div className="Option_wrapper">
-          {/* '프로젝트 일정' 라디오 버튼 */}
-          <input
-            type="radio"
-            className="btn_check"
-            name="options_base" // 같은 그룹의 라디오 버튼은 동일한 name을 가집니다.
-            id="option1"
-            autoComplete="off"
-            value="projectSchedule" // 이 라디오 버튼의 값
-            checked={selectedOption === "projectSchedule"} // 현재 선택된 라디오 버튼인지 확인
-            onChange={(e) => setSelectedOption(e.target.value)} // 선택 변경 시 상태 업데이트
-          />
-          <label className="btn" htmlFor="option1">
-            프로젝트 일정
-          </label>
-
-          {/* '할 일' 라디오 버튼 */}
-          <input
-            type="radio"
-            className="btn_check"
-            name="options_base" // 같은 그룹의 라디오 버튼은 동일한 name을 가집니다.
-            id="option2"
-            autoComplete="off"
-            value="todo" // 이 라디오 버튼의 값
-            checked={selectedOption === "todo"} // 현재 선택된 라디오 버튼인지 확인
-            onChange={(e) => setSelectedOption(e.target.value)} // 선택 변경 시 상태 업데이트
-          />
-          <label className="btn" htmlFor="option2">
-            할 일
-          </label>
-        </div>
-
-        {/* 날짜 선택 */}
-        <div>
-          <label>시작 날짜</label>
-          <input
-            type="datetime-local"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
-          />
-          <br />
-          <label>종료 날짜</label>
-          <input
-            type="datetime-local"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)} // 입력 값 변경 시 상태 업데이트
-          />
-        </div>
-
-        {/* 설명 추가 */}
-        <textarea
-          className="modal_description"
-          placeholder="설명 추가"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)} // 입력 값 변경 시 상태 업데이트
-        ></textarea>
-
-        {/* 수정, 저장, 닫기 버튼 */}
-        <div className="modal_button-box">
-          <button className="create_modal_button" onClick={handleSave}>
-            수정
-          </button>
-          <button onClick={() => onModal(false)} className="close_modal_button">
-            닫기
-          </button>
-        </div>
+        {modalType === "project" ? ( // 프로젝트 일정
+          <div>
+            <input
+              type="text"
+              placeholder={getModalTitle()}
+              value={data.title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <div>
+              <label>시작 날짜</label>
+              <input
+                type="datetime-local"
+                value={data.startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+              <br />
+              <label>종료 날짜</label>
+              <input
+                type="datetime-local"
+                value={data.endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
+            <textarea
+              className="modal_description"
+              placeholder="설명 추가"
+              value={data.contents}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+            <div className="modal_button-box">
+              <button className="create_modal_button" onClick={handleSave}>
+                저장
+              </button>
+              <button className="delete_modal_button" onClick={handleDelete}>
+                삭제
+              </button>
+              <button
+                onClick={() => onModal(false)}
+                className="close_modal_button"
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+        ) : (
+          // 일일 일정
+          <div>
+            <input
+              type="text"
+              placeholder={getModalTitle()}
+              value={data.title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <div>
+              <label>날짜 선택</label>
+              <input
+                type="datetime-local"
+                value={data.startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </div>
+            <textarea
+              className="modal_description"
+              placeholder="설명 추가"
+              value={data.contents}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+            <div className="modal_button-box">
+              <button className="create_modal_button" onClick={handleSave}>
+                저장
+              </button>
+              <button className="delete_modal_button" onClick={handleDelete}>
+                삭제
+              </button>
+              <button
+                onClick={() => onModal(false)}
+                className="close_modal_button"
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+        )}
       </Modal>
     </div>
   );

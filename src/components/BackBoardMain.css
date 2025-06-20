@@ -1,9 +1,16 @@
 #moveToTopButton {
   position: fixed;
   bottom: 5%;
-  right: 10%;
-  width: 100px;
-  height: 100px;
+  right: 15%;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(160, 160, 160, 0.082);
+  border-radius: 50%;
+  border: none;
+}
+img {
+  width: 20px;
+  height: 20px;
 }
 .button_home {
   display: block;

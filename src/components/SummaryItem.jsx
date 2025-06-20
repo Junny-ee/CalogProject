@@ -6,6 +6,7 @@ const SummaryItem = ({ item }) => {
     <div className="SummaryItem">
       {item.map((item) => (
         <a
+          key={item.id}
           className="SummaryItem_title"
           onClick={() => nav(`/read/${item.id}`)}
         >

@@ -26,16 +26,33 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
 
   const { onDelete } = useContext(CalogDispatchContext);
   const [isChecked, setIsChecked] = useState(false);
+  // 문자열인 경우 ,로 나눠 배열로 변환
+  const tagArray = Array.isArray(tag) ? tag : tag?.split(",");
+
   return (
     <div className="post_item" onClick={() => nav(`/read/${id}`)}>
       <div className="content_wrapper">
         <div className="content_header">{title}</div>
-        <div className="content_body">
-          {" "}
-          {markdownPreviewLines().map((line, idx) => (
-            <p key={idx}>{line}</p>
-          ))}
-        </div>
+        <div className="content_body">{content}</div>
+
+        {tagArray && (
+          <div className="tag_list">
+            {tagArray.map((t, index) => (
+              <span
+                key={index}
+                className="tag"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSearchWord("");
+                  setSearchingTag(t.trim());
+                  setShowSearchBar(false);
+                }}
+              >
+                #{t.trim()}
+              </span>
+            ))}
+          </div>
+        )}
 
         {tag && tag.map((item, index) => (
           <div

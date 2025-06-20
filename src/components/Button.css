@@ -1,6 +1,6 @@
 .Button {
   border: none;
-  padding: 15px;
+  padding: 20px 0;
 }
 
 .Button button {
@@ -31,6 +31,18 @@
 }
 .Button .Back {
   color: black;
+}
+
+.Button .Cancel {
+  background: none;
+  width: 50px;
+  height: 45px;
+  font-size: xx-large;
+  color: #b8b8b8;
+}
+.Button .Cancel:hover {
+  background-color: red;
+  color: white;
 }
 
 /*버튼 스타일 참고용
