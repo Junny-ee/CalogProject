@@ -1,7 +1,11 @@
-.calendar-date-cell.sun .rbc-day-bg + .rbc-button-link {
-  color: red;
+/* .rbc-date-cell.sun + .button-button-link {
+  color: red !important;
 }
 
-.calendar-date-cell.sat .rbc-day-bg + .rbc-button-link {
-  color: blue;
-}
+.rbc-date-cell.sat + .button-button-link {
+  color: blue !important;
+} */
+
+/* .rbc-button-link {
+  color: red !important;
+} */
