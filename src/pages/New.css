@@ -2,14 +2,32 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   margin: 0 auto;
   overflow: hidden;
 }
 
+.header_content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 80px;
+}
+.header_content img {
+  width: 125px;
+  height: 85px;
+}
+
+.content_wrapper {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  flex-grow: unset;
+}
+
 .title_content {
-  margin-top: 40px;
+  /* margin-top: 10px; */
   padding: 10px 0;
   display: flex;
   align-items: center;
@@ -23,19 +41,17 @@
 .New > .tag_content {
   background-color: #529aec1a;
   border-radius: 10px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   width: 100%;
 }
 
 /* 글 작성 영역: 화면 여유 공간을 모두 사용 */
 .New > .write_content {
-  padding: 10px;
   box-sizing: border-box;
   border-radius: 8px;
   resize: none;
   font-size: medium;
   min-height: 0; /* flex-item overflow 방지 */
-  border: 1px solid #ccc;
   margin-top: 20px;
   margin-bottom: 20px;
 }

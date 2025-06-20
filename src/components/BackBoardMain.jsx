@@ -11,7 +11,7 @@ const BackBoard = () => {
   // postContent
   const postContent = useContext(CalogStateContext);
   const [contents, setContents] = useState(postContent);
-  console.log(postContent);
+
   const deleteContent = (id) => {
     const deletedContents = [...contents].filter(
       (content) => content.id !== id
@@ -54,7 +54,7 @@ const BackBoard = () => {
 
   const filteredContents = contents.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
-
+    console.log(item.title);
     const titleIncludes = item.title
       .toLowerCase()
       .includes(lowerCaseSearchWord);
@@ -64,7 +64,7 @@ const BackBoard = () => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
         )
       : typeof item.tag === "string"
       ? item.tag.includes(lowerCaseSearchWord)
@@ -79,7 +79,6 @@ const BackBoard = () => {
       : typeof item.tag === "string"
       ? item.tag.includes(searchingTag.toLowerCase())
       : false;
-
 
     return tagIncludes;
   });
@@ -96,7 +95,7 @@ const BackBoard = () => {
       </button>
       {scrolled ? (
         <button id="moveToTopButton" onClick={moveToTop}>
-          페이지 맨 위로 가는 버튼
+          <img src="/gotoup.png" />
         </button>
       ) : null}
       {showSearchBar ? (

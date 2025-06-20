@@ -110,11 +110,12 @@ function App() {
     return currentId;
   };
 
-  const onUpdate = (id, createDate, tag, content) => {
+  const onUpdate = (id, title, createDate, tag, content) => {
     dispatch({
       type: "UPDATE",
       data: {
-        id: idRef.current++,
+        id,
+        title,
         createDate,
         tag,
         content,
