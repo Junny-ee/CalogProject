@@ -1,3 +1,8 @@
+.SummaryItem {
+  height: 100px;
+  overflow-y: auto;
+}
+
 .SummaryItem_title {
   cursor: pointer;
 }

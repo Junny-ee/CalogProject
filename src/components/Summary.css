@@ -5,26 +5,23 @@
 }
 .under-content {
   position: relative;
- 
+
   flex-shrink: 0;
-  
 
-  transform: translateY(100%); 
-  opacity: 0; 
-  pointer-events: none; 
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
 
-
-  transition: transform 0.3s ease-in-out, 
-              opacity 0.3s ease-in-out, 
-              width 0.3s ease-in-out;
-  overflow: hidden; 
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
+    width 0.3s ease-in-out;
+  overflow: hidden;
 }
 
 .under-content.open {
   transform: translateY(0);
 
-  opacity: 1; 
-  pointer-events: auto; 
+  opacity: 1;
+  pointer-events: auto;
 }
 .Summary_Header {
   display: flex;
