@@ -11,12 +11,15 @@ const ProjectSchedule = ({ data, onItemClick }) => {
   };
   const startDate = new Date(data.start).getTime();
   const endDate = new Date(data.end).getTime();
-  const Dday = endDate - startDate;
+  const Dday = endDate - new Date().getTime(); // 시간단위로 Dday 적용됨
   return (
     <div className="ProjectSchedule">
       <div className="ProjectSchedule_header">
         <div>
-          <p>{new Date(data.start).toLocaleDateString()}</p>
+          <p>
+            {new Date(data.start).toLocaleDateString()} ~
+            {new Date(data.end).toLocaleDateString()}
+          </p>
           <p>{`D-day ${
             !new Date(Dday).getDate() <= 1 ? new Date(Dday).getDate() - 1 : ""
           }`}</p>

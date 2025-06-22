@@ -1,15 +1,25 @@
 .ScheduleList {
   border: 1px solid #000000;
   height: 900px;
+  display: flex;
+  flex-direction: column;
 }
 .ScheduleList_Wirte {
   display: flex;
   border: 1px solid #000;
+  flex-shrink: 0;
+}
+.SchduleList_Contents {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  overflow: hidden;
 }
 .ScheduleList_Todo {
   border: 1px solid #000;
   display: flex;
   align-items: stretch;
+  flex-shrink: 0;
 }
 .right-content {
   position: relative;
@@ -33,4 +43,17 @@
 
 .right-content:not(.open) {
   width: 0;
+}
+
+.Todo-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.Todo-content.open {
+  max-height: 330px;
+  overflow-y: auto;
 }
