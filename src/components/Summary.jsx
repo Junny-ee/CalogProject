@@ -2,15 +2,23 @@ import "./Summary.css";
 import Button from "./Button";
 import SummaryItem from "./SummaryItem";
 import { useNavigate } from "react-router-dom";
-const Summary = ({ date, calendarData }) => {
+import { useContext, useEffect, useState } from "react";
+import { CalogStateContext } from "../App";
+const Summary = ({ date }) => {
+  // calendarData = 스토리지 데이터
+  // console.log(new Date(calendarData[0].start).getFullYear());
+  const [todaySummary, setTodaySummary] = useState(null);
+  const BackBoardData = useContext(CalogStateContext);
   const nav = useNavigate();
-  const check = new Date("2025-06-26");
-  // const today = Date(date); 추후 데이터 받으면 넣기
-  const todaySummary = calendarData.filter(
-    (date) => date.createDate === check.getTime()
-  ); // 날짜 일치하는 객체 가져오기
-  // console.log(calendarData);
-
+  useEffect(() => {
+    setTodaySummary(
+      BackBoardData.filter(
+        (item) =>
+          new Date(item.createDate).toLocaleDateString() ===
+          new Date(date).toLocaleDateString()
+      )
+    );
+  }, [date]); // 날짜 일치하는 객체 가져오기
   return (
     <div className="Summary">
       <div className="Summary_Header">
@@ -20,7 +28,7 @@ const Summary = ({ date, calendarData }) => {
         <Button text={"+"} classtype={"Create"} onClick={() => nav("/new")} />
       </div>
       <div className="Summary_Contests">
-        <SummaryItem item={todaySummary} />
+        <SummaryItem data={todaySummary} />
       </div>
     </div>
   );
