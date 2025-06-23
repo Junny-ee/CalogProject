@@ -4,16 +4,8 @@ import { BackBoardDispatchContext } from "./BackBoardMain";
 import { useContext, useState, useEffect } from "react";
 import { CalogDispatchContext } from "../App";
 
-// 태그 여러 개 구현 필요
-const BackPostItem = ({
-  id,
-  title,
-  createDate,
-  content,
-  tag,
-  checkedItems,
-  checkedItemHandler,
-}) => {
+const BackPostItem = ({ id, title, createDate, content, tag, checkedItems, checkedItemHandler }) => {
+
   const nav = useNavigate();
   const { setSearchWord, setSearchingTag, setShowSearchBar } = useContext(
     BackBoardDispatchContext
@@ -33,7 +25,7 @@ const BackPostItem = ({
       );
   };
   const { onDelete } = useContext(CalogDispatchContext);
-  const [isChecked, setIsChecked] = useState(checkedItems.includes(id));
+  const [isChecked, setIsChecked] = useState(false);
   const check = ({ target }) => {
     checkedItemHandler(target.value, target.checked);
     setIsChecked(target.checked);

@@ -1,8 +1,21 @@
 .SummaryItem {
   height: 100px;
   overflow-y: auto;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
 .SummaryItem_title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  min-width: 0;
+  flex-grow: 1;
+}
+
+.SummaryItem_title:hover{
   cursor: pointer;
+  font-weight: bolder;
 }
