@@ -120,7 +120,6 @@ const BackBoard = () => {
           onChange={onChange}
         />
       </div>
-      {/* 태그별 조회 시에도 검색창 유지할거면 검색 태그별 조회 상태에서 검색 작동하게 수정하기 */}
       <div className="list_wrapper">
         <BackBoardDispatchContext.Provider
           value={{

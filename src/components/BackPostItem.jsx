@@ -25,7 +25,7 @@ const BackPostItem = ({ id, title, createDate, content, tag, checkedItems, check
       );
   };
   const { onDelete } = useContext(CalogDispatchContext);
-  const [isChecked, setIsChecked] = useState(checkedItems.includes(id));
+  const [isChecked, setIsChecked] = useState(false);
   const check = ({ target }) => {
     checkedItemHandler(target.value, target.checked)
     setIsChecked(target.checked)
