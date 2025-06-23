@@ -2,7 +2,7 @@ import { useEffect, useState, createContext, useContext } from "react";
 import "./BackBoardMain.css";
 import BackPostList from "./BackPostList";
 import { useNavigate } from "react-router-dom";
-import { CalogStateContext } from "../App";
+import { CalogStateContext, TagStateContext } from "../App";
 
 // props: id, title, createDate, content, tag
 export const BackBoardDispatchContext = createContext();
@@ -10,6 +10,8 @@ export const BackBoardDispatchContext = createContext();
 const BackBoard = () => {
   // postContent
   const postContent = useContext(CalogStateContext);
+  const tag = useContext(TagStateContext);
+  console.log(tag);
   const [contents, setContents] = useState(postContent);
 
   const deleteContent = (id) => {
@@ -54,7 +56,6 @@ const BackBoard = () => {
 
   const filteredContents = contents.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
-    console.log(item.tag);
     const titleIncludes = item.title
       .toLowerCase()
       .includes(lowerCaseSearchWord);
@@ -85,15 +86,17 @@ const BackBoard = () => {
 
   return (
     <div className="BackBoardMain">
-      <button
-        className="button_home"
-        onClick={() => (nav(0), setSearchingTag(""))}
-      >
-        <img src="/logo_image_width.png" alt="로고(새로고침)" />
-      </button>
-      <button className="gotoCalendar" onClick={() => nav("/")}>
-        <img src="/calendar.png" alt="캘린더 이동 아이콘" />
-      </button>
+      <div className="button_wrapper">
+        <button
+          className="button_home"
+          onClick={() => (nav(0), setSearchingTag(""))}
+        >
+          <img src="/logo_image_width.png" alt="로고(새로고침)" />
+        </button>
+        <button className="gotoCalendar" onClick={() => nav("/")}>
+          <img src="/calendar.png" alt="캘린더 이동 아이콘" />
+        </button>
+      </div>
 
       {scrolled ? (
         <button id="moveToTopButton" onClick={moveToTop}>
@@ -111,12 +114,6 @@ const BackBoard = () => {
           />
         </div>
       ) : null} */}
-      <button
-        className="serch_btn"
-        onClick={() => setShowSearchBar((prev) => !prev)}
-      >
-        <img src="/search.png" alt="검색창" />
-      </button>
       <div className="search">
         <input
           type="text"

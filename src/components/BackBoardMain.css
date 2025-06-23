@@ -4,11 +4,17 @@
   margin: 0 auto;
   overflow: hidden;
 }
-
+ 
+.button_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 .gotoCalendar {
   background: none;
   border: none;
   cursor: pointer;
+  margin: 5px;
 }
 
 .gotoCalendar > img {
@@ -47,6 +53,7 @@ img {
   justify-content: center;
   align-items: center;
 }
+
 .search {
   display: flex;
   width: 100%;
@@ -61,7 +68,7 @@ img {
 }
 
 .search:focus-within {
-  border: 3px solid black;
+  border: 1px solid black;
 }
 
 .search_input {
