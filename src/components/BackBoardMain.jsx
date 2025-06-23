@@ -64,13 +64,11 @@ const BackBoard = () => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-
-        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-      )
-
+          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+        )
       : typeof item.tag === "string"
-        ? item.tag.includes(lowerCaseSearchWord)
-        : false;
+      ? item.tag.includes(lowerCaseSearchWord)
+      : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
@@ -79,22 +77,24 @@ const BackBoard = () => {
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
       : typeof item.tag === "string"
-        ? item.tag.includes(searchingTag.toLowerCase())
-        : false;
+      ? item.tag.includes(searchingTag.toLowerCase())
+      : false;
 
     return tagIncludes;
   });
 
   return (
-    <div>
-      <button onClick={() => nav("/")}>캘린더 이동 버튼</button>
-
+    <div className="BackBoardMain">
       <button
         className="button_home"
         onClick={() => (nav(0), setSearchingTag(""))}
       >
-        홈 버튼(새로고침)
+        <img src="/logo_image_width.png" alt="로고(새로고침)" />
       </button>
+      <button className="gotoCalendar" onClick={() => nav("/")}>
+        <img src="/calendar.png" alt="캘린더 이동 아이콘" />
+      </button>
+
       {scrolled ? (
         <button id="moveToTopButton" onClick={moveToTop}>
           <img src="/gotoup.png" />
@@ -111,6 +111,12 @@ const BackBoard = () => {
           />
         </div>
       ) : null} */}
+      <button
+        className="serch_btn"
+        onClick={() => setShowSearchBar((prev) => !prev)}
+      >
+        <img src="/search.png" alt="검색창" />
+      </button>
       <div className="search">
         <input
           type="text"
@@ -134,9 +140,14 @@ const BackBoard = () => {
             <div>
               <span className="tag_header_wrapper">
                 <span className="tag_text">{`#${searchingTag}`}</span>
-                <button className="close_button" onClick={() => {
-                  setSearchingTag("");
-                }}>×</button>
+                <button
+                  className="close_button"
+                  onClick={() => {
+                    setSearchingTag("");
+                  }}
+                >
+                  ×
+                </button>
               </span>
               <BackPostList
                 data={filteredContentsByTag}

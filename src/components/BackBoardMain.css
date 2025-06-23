@@ -1,3 +1,21 @@
+.BackBoardMain {
+  padding: 9px 8px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.gotoCalendar {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.gotoCalendar > img {
+  width: 30px;
+  height: 30px;
+}
+
 #moveToTopButton {
   position: fixed;
   bottom: 5%;
@@ -14,10 +32,16 @@ img {
   height: 20px;
 }
 .button_home {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
+
+.button_home > img {
+  width: 125px;
+  height: 85px;
+}
+
 .list_wrapper {
   display: flex;
   justify-content: center;
