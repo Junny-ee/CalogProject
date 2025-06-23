@@ -5,6 +5,7 @@ const SummaryItem = ({ data }) => {
   if (!data) {
     return;
   }
+
   return (
     <div className="SummaryItem">
       {data.map((item) => (
@@ -14,7 +15,6 @@ const SummaryItem = ({ data }) => {
           onClick={() => nav(`/read/${item.id}`)}
         >
           {item.title}
-          <br></br>
         </a>
       ))}
     </div>
