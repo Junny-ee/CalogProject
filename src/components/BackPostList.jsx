@@ -11,10 +11,10 @@ const BackPostList = ({ data, entireData }) => {
   const nav = useNavigate();
   const [sortType, setSortType] = useState("latest");
   const [checkedItems, setCheckedItems] = useState([]);
-  const [tags, setTags] = useState([]);
   const { setSearchingTag } = useContext(BackBoardDispatchContext);
   const { onDelete } = useContext(CalogDispatchContext);
   const tagCount = useContext(TagStateContext);
+
   const getSortedData = () => {
     return data.toSorted((prev, next) => {
       return Number(sortType === "oldest" ? prev.createDate : next.createDate) -
@@ -49,18 +49,6 @@ const BackPostList = ({ data, entireData }) => {
     setCheckedItems([]);
   };
 
-  useEffect(() => {
-    let allTags = [];
-    entireData.forEach((item) => {
-      if (Array.isArray(item.tag)) {
-        allTags = allTags.concat(item.tag);
-      } else if (typeof item.tag === "string" && item.tag.trim() !== "") {
-        allTags.push(item.tag);
-      }
-    });
-    setTags([...new Set(allTags)]);
-  }, [entireData]);
-
   const sortedData = getSortedData();
 
   return (
@@ -78,21 +66,11 @@ const BackPostList = ({ data, entireData }) => {
           checked={checkedItems.length === data.length && data.length > 0}
         />
       </div>
-      <div className="contents_wrapper">
-        {sortedData.map((item) => (
-          <BackPostItem
-            key={String(item.id)}
-            {...item}
-            id={String(item.id)}
-            checkedItems={checkedItems}
-            checkedItemHandler={checkedItemHandler}
-          />
-        ))}
-      </div>
       <div className="tag_wrapper">
-
-
         <h3>태그 목록</h3>
+        <hr />
+        {/* 개별 태그 개수 표시, (선택)태그별 조회 상태에서 검색 필요*/}
+
         <div
           className="tags"
           onClick={() => setSearchingTag("")}
@@ -105,6 +83,17 @@ const BackPostList = ({ data, entireData }) => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="content_wrap">
+        {sortedData.map((item) => (
+          <BackPostItem
+            key={String(item.id)}
+            {...item}
+            id={String(item.id)}
+            checkedItems={checkedItems}
+            checkedItemHandler={checkedItemHandler}
+          />
+        ))}
       </div>
     </>
   );

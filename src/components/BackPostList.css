@@ -7,11 +7,11 @@
   gap: 10px;
 }
 
-.contents_wrapper {
+.content_wrap {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  width: 800px;
+  width: 100%;
 }
 .tags:hover {
   font-weight: bolder;
@@ -19,8 +19,10 @@
 }
 .tag_wrapper {
   position: fixed;
-  top: 20%;
-  right: 10%;
+
+  top: 13%;
+  left: 5%;
+
   width: 200px;
   height: 100vh;
   padding: 20px;
@@ -30,6 +32,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   text-overflow: ellipsis;
+  border: none;
 }
 .tag_wrapper::-webkit-scrollbar {
   display: none;
@@ -39,4 +42,26 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 6px 0;
+}
+
+@media (max-width: 1400px) {
+  .list_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .tag_wrapper {
+    position: static; /* fixed 제거 → 일반 흐름으로 들어감 */
+    border: none;
+    height: auto;
+    padding: 10px 25px 10px 10px;
+    box-sizing: border-box;
+    flex: 1;
+  }
+
+  .content_wrap {
+    width: 100%; /* 콘텐츠도 꽉 차게 */
+    flex: 6;
+  }
 }
