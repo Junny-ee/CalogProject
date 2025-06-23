@@ -1,32 +1,21 @@
 .Summary {
-  border: 1px solid #bb1c1c;
-  flex-grow: 1;
-  min-height: 200px;
-}
-.under-content {
-  position: relative;
-
-  flex-shrink: 0;
-
-  transform: translateY(100%);
-  opacity: 0;
-  pointer-events: none;
-
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
-    width 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  min-height: 0;
 }
 
-.under-content.open {
-  transform: translateY(0);
-
-  opacity: 1;
-  pointer-events: auto;
-}
 .Summary_Header {
   display: flex;
 }
 
 .Summary_Contents {
   padding: 5px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  overflow-y: auto;
+  min-width: 0;
 }
