@@ -4,7 +4,7 @@
   margin: 0 auto;
   overflow: hidden;
 }
- 
+
 .button_wrapper {
   width: 100%;
   display: flex;
@@ -18,8 +18,8 @@
 }
 
 .gotoCalendar > img {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
 
 #moveToTopButton {

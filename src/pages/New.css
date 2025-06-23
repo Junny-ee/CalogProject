@@ -6,6 +6,7 @@
   box-sizing: border-box;
   margin: 0 auto;
   overflow: hidden;
+  gap: 10px;
 }
 
 .header_content {
@@ -35,16 +36,16 @@
 
 .date_content {
   margin-left: auto; /* 오른쪽 끝으로 밀기 */
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   padding: 0 10px;
 }
 
 .New > .tag_content {
   background-color: #529aec1a;
   border-radius: 10px;
-  /* box-sizing: border-box; */
   width: 100%;
   overflow: scroll;
+  margin-bottom: 10px;
 }
 
 /* 글 작성 영역: 화면 여유 공간을 모두 사용 */
@@ -54,15 +55,12 @@
   resize: none;
   font-size: medium;
   min-height: 0; /* flex-item overflow 방지 */
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 /* 버튼 */
 .New > .button_content {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 15px;
 }
 
 /* 미리보기 */

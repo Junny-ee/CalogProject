@@ -25,9 +25,14 @@ const New = () => {
     if (!isChange) {
       return alert("제목이나 내용이 비어있습니다!");
     }
+    if (title.length > 100) {
+      return alert("제목에는 100자 이상 쓸 수 없습니다!")
+    }
     const currentId = onCreate(title, tags, content);
     nav(`/read/${currentId}`, { replace: true });
   };
+
+
 
   return (
     <div className="New">

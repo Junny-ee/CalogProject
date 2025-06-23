@@ -5,8 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { CalogStateContext } from "../App";
 const Summary = ({ date }) => {
+  // calendarData = 스토리지 데이터
+  // console.log(new Date(calendarData[0].start).getFullYear());
   const [todaySummary, setTodaySummary] = useState(null);
   const BackBoardData = useContext(CalogStateContext);
+  const isToday =
+    new Date(date).toLocaleDateString() === new Date().toLocaleDateString();
   const nav = useNavigate();
   useEffect(() => {
     setTodaySummary(
@@ -17,6 +21,7 @@ const Summary = ({ date }) => {
       )
     );
   }, [date]); // 날짜 일치하는 객체 가져오기
+
   return (
     <div className="Summary">
       <div className="Summary_Header">
@@ -33,7 +38,11 @@ const Summary = ({ date }) => {
             return `${dateStr} (${weekday})`;
           })()}
         </h4>
-        <Button text={"+"} classtype={"Create"} onClick={() => nav("/new")} />
+        {isToday ? (
+          <Button text={"+"} classtype={"Create"} onClick={() => nav("/new")} />
+        ) : (
+          ""
+        )}
       </div>
       <div className="Summary_Contests">
         <SummaryItem data={todaySummary} />

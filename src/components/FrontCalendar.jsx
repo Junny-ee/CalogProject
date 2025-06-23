@@ -6,7 +6,8 @@ import "./FrontCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import CalModalWindow from "./CalModalWindow";
 import HeaderCalendar from "./HeaderCalendar";
-import { getHolidayEvents } from "../util/holidayService";
+import { getHolidayEventsByYears } from "../util/holidayService";
+import ModalEdit from "./ModalEdit";
 
 const CalendarContext = createContext(null);
 export const CalendarProvider = ({ children }) => {
@@ -35,34 +36,44 @@ const FrontCalendar = ({ events }) => {
   const calendarRef = useRef(null);
   const nav = useNavigate();
   const { selectedDate, setselectedDate } = useCalendar();
-
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 모달 열고닫기
+  const [selectedEventForEdit, setSelectedEventForEdit] = useState(null); // 수정할 값 저장
+  const handleSelectEvent = (event) => {
+    // 공휴일이 아닌 경우에만 수정 모달을 띄웁니다.
+    if (!event.isHoliday) {
+      setSelectedEventForEdit(event); // 클릭된 이벤트 데이터를 상태에 저장
+      setIsEditModalOpen(true); // 수정 모달 열기
+    } else {
+      alert(`오늘은 ${event.title} 입니다.`);
+    }
+    setselectedDate(new Date(event.start));
+  };
   //공휴일 데이터 가져오기
   useEffect(() => {
     const fetchMergedEvents = async () => {
-      try {
-        const holidays = await getHolidayEvents();
-        const holidayEvents = Array.isArray(holidays)
-          ? holidays.map((h) => ({ ...h, isHoliday: true }))
-          : [];
-
-        setMergedEvents([...events, ...holidayEvents]);
-      } catch (err) {
-        console.error("공휴일 가져오기 실패:", err);
-        setMergedEvents(events); // fallback
-      }
+      const holidays = await getHolidayEventsByYears(); // ← startYear만 넘겨도 동작!
+      setMergedEvents([...events, ...holidays]);
     };
-
     fetchMergedEvents();
   }, [events]);
 
-  //마우스 휠 이벤트
+  //마우스 휠 이벤트 핸들러 함수 정의
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
     newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달  // 휠 아래 → 다음 달
+
+    // const maxYear = new Date().getFullYear() + 2;
+    // const newYear = newDate.getFullYear();
+
+    // if (newYear > maxYear) {
+    //   alert(`⚠️ ${maxYear}년 이후의 공휴일 데이터는 아직 제공되지 않습니다.`);
+    //   return; // 날짜 업데이트 중단
+    // }
+
     setDate(newDate);
   };
-  // 컴포넌트 mount 후 캘린더 영역에 휠 이벤트 등록
+  // 컴포넌트 mount 후 캘린더 영역에 휠 이벤트 등록/해제
   useEffect(() => {
     const calBox = calendarRef.current; // 렌더링이 끝난 후 접근
     if (calBox) {
@@ -78,7 +89,6 @@ const FrontCalendar = ({ events }) => {
   const onClose = () => {
     setmodalOpen(false);
   };
-
   return (
     <div className="FrontCalendar">
       <HeaderCalendar date={date} onClick={() => setmodalOpen(true)} />
@@ -96,9 +106,7 @@ const FrontCalendar = ({ events }) => {
           selectable="ignoreEvents"
           longPressThreshold={1}
           popup
-          onSelectEvent={(event) => {
-            setselectedDate(event.start);
-          }} // 써둔 일정 임시데이터에서 날짜만 저장
+          onSelectEvent={handleSelectEvent} // 써둔 일정 임시데이터에서 날짜만 저장
           onSelectSlot={(slotInfo) => {
             // setselectedDate(slotInfo.start); // 일정 비어있는 날짜 클릭해도 날짜 저장
             const clicked = slotInfo.start;
@@ -134,9 +142,8 @@ const FrontCalendar = ({ events }) => {
             );
             const isPast = new Date(e.end) < today;
             const isHoliday = e.isHoliday;
-
-            let backgroundColor = "#3174ad";
-            let color = "white";
+            let backgroundColor;
+            let color;
 
             if (isHoliday) {
               backgroundColor = "#EB4444";
@@ -144,8 +151,36 @@ const FrontCalendar = ({ events }) => {
             } else if (isPast) {
               backgroundColor = "#e6e6e6";
               color = "#666";
+            } else {
+              // 라디오 버튼으로 선택된 색상을 여기에 적용
+              // `event.color`는 ModalCreate에서 저장된 색상 값 ('blue', 'yellow' 등)을 가집니다.
+              switch (e.color) {
+                case "blue":
+                  backgroundColor = "blue";
+                  color = "white";
+                  break;
+                case "yellow":
+                  backgroundColor = "yellow";
+                  color = "black"; // 노란색 배경에는 검은색 글씨가 잘 보입니다.
+                  break;
+                case "green":
+                  backgroundColor = "green";
+                  color = "white";
+                  break;
+                case "black":
+                  backgroundColor = "black";
+                  color = "white";
+                  break;
+                case "pink":
+                  backgroundColor = "pink";
+                  color = "black"; // 핑크색 배경에는 검은색 글씨가 잘 보입니다.
+                  break;
+                default:
+                  backgroundColor = "#3174ad"; // 기본 이벤트 색상 (React Big Calendar 기본값)
+                  color = "white";
+                  break;
+              }
             }
-
             return {
               style: {
                 backgroundColor,
@@ -172,6 +207,15 @@ const FrontCalendar = ({ events }) => {
           setmodalOpen(false);
         }}
       />
+      {isEditModalOpen &&
+        selectedEventForEdit && ( // 모달이 열려있고 수정할 이벤트 데이터가 있을 때만 렌더링
+          <ModalEdit
+            isOpen={isEditModalOpen}
+            onModal={setIsEditModalOpen} // onModal prop을 setIsEditModalOpen으로 연결
+            modalType={selectedEventForEdit.type} // 이벤트 타입에 따라 'project' 또는 'item' 전달
+            data={selectedEventForEdit} // 클릭된 이벤트 데이터 전달
+          />
+        )}
     </div>
   );
 };
