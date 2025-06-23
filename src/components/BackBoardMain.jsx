@@ -2,7 +2,7 @@ import { useEffect, useState, createContext, useContext } from "react";
 import "./BackBoardMain.css";
 import BackPostList from "./BackPostList";
 import { useNavigate } from "react-router-dom";
-import { CalogStateContext } from "../App";
+import { CalogStateContext, TagStateContext } from "../App";
 
 // props: id, title, createDate, content, tag
 export const BackBoardDispatchContext = createContext();
@@ -10,6 +10,8 @@ export const BackBoardDispatchContext = createContext();
 const BackBoard = () => {
   // postContent
   const postContent = useContext(CalogStateContext);
+  const tag = useContext(TagStateContext);
+  console.log(tag);
   const [contents, setContents] = useState(postContent);
 
   const deleteContent = (id) => {
@@ -54,7 +56,6 @@ const BackBoard = () => {
 
   const filteredContents = contents.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
-    console.log(item.tag);
     const titleIncludes = item.title
       .toLowerCase()
       .includes(lowerCaseSearchWord);
@@ -64,13 +65,11 @@ const BackBoard = () => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-
-        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-      )
-
+          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+        )
       : typeof item.tag === "string"
-        ? item.tag.includes(lowerCaseSearchWord)
-        : false;
+      ? item.tag.includes(lowerCaseSearchWord)
+      : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
@@ -79,22 +78,26 @@ const BackBoard = () => {
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
       : typeof item.tag === "string"
-        ? item.tag.includes(searchingTag.toLowerCase())
-        : false;
+      ? item.tag.includes(searchingTag.toLowerCase())
+      : false;
 
     return tagIncludes;
   });
 
   return (
-    <div>
-      <button onClick={() => nav("/")}>캘린더 이동 버튼</button>
+    <div className="BackBoardMain">
+      <div className="button_wrapper">
+        <button
+          className="button_home"
+          onClick={() => (nav(0), setSearchingTag(""))}
+        >
+          <img src="/logo_image_width.png" alt="로고(새로고침)" />
+        </button>
+        <button className="gotoCalendar" onClick={() => nav("/")}>
+          <img src="/calendar.png" alt="캘린더 이동 아이콘" />
+        </button>
+      </div>
 
-      <button
-        className="button_home"
-        onClick={() => (nav(0), setSearchingTag(""))}
-      >
-        홈 버튼(새로고침)
-      </button>
       {scrolled ? (
         <button id="moveToTopButton" onClick={moveToTop}>
           <img src="/gotoup.png" />
@@ -134,9 +137,14 @@ const BackBoard = () => {
             <div>
               <span className="tag_header_wrapper">
                 <span className="tag_text">{`#${searchingTag}`}</span>
-                <button className="close_button" onClick={() => {
-                  setSearchingTag("");
-                }}>×</button>
+                <button
+                  className="close_button"
+                  onClick={() => {
+                    setSearchingTag("");
+                  }}
+                >
+                  ×
+                </button>
               </span>
               <BackPostList
                 data={filteredContentsByTag}

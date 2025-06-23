@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import "./BackPostItem.css";
 import { BackBoardDispatchContext } from "./BackBoardMain";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CalogDispatchContext } from "../App";
 
 // 태그 여러 개 구현 필요
-const BackPostItem = ({ id, title, createDate, content, tag }) => {
+const BackPostItem = ({ id, title, createDate, content, tag, checkedItems, checkedItemHandler }) => {
   const nav = useNavigate();
   const { setSearchWord, setSearchingTag, setShowSearchBar } = useContext(
     BackBoardDispatchContext
@@ -25,8 +25,19 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
       );
   };
   const { onDelete } = useContext(CalogDispatchContext);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(checkedItems.includes(id));
+  const check = ({ target }) => {
+    checkedItemHandler(target.value, target.checked)
+    setIsChecked(target.checked)
+  }
 
+  useEffect(() => {
+    if (checkedItems.includes(id)) {
+      setIsChecked(true)
+    } else {
+      setIsChecked(false)
+    }
+  }, [checkedItems, id])
   return (
     <div className="post_item" onClick={() => nav(`/read/${id}`)}>
       <div className="contents_wrapper">
@@ -60,10 +71,10 @@ const BackPostItem = ({ id, title, createDate, content, tag }) => {
       </div>
       <input
         type="checkbox"
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsChecked(true);
-        }}
+        checked={isChecked}
+        value={id}
+        onChange={(e) => check(e)}
+        onClick={(e) => e.stopPropagation()}
       />
       <button
         className="button_delete"
