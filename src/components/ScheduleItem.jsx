@@ -7,11 +7,12 @@ const ScheduleItem = ({ data, onItemClick }) => {
       onItemClick(data);
     }
   };
-
   return (
     <div className="ScheduleItem">
       <div className="ScheduleItem_header">
-        <p>{data.startDate}</p>
+        <p>{`${new Date(data.start).getMonth() + 1}.${new Date(
+          data.start
+        ).getDate()}.`}</p>
         <a className="ScheduleItem_title" onClick={handleItemClick}>
           {data.title}
         </a>

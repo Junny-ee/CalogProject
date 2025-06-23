@@ -32,6 +32,6 @@
 }
 
 .Todo-content.open {
-  max-height: 330px;
+  max-height: 280px;
   overflow-y: auto;
 }
