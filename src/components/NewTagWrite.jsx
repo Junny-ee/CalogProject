@@ -1,9 +1,8 @@
 import "./NewTagWrite.css";
-import { useRef, useState } from "react";
+import { useState } from "react";
 // 태그 개수 제한
 const NewTagWrite = ({ tags, setTags }) => {
   const [tagInput, setTagInput] = useState("");
-  const tagRef = useRef(0);
 
   const enterKeyEvent = (e) => {
     // 엔터 키 누른 경우와 공백 제거한 입력값 있는지 판단
@@ -23,10 +22,10 @@ const NewTagWrite = ({ tags, setTags }) => {
         alert("태그에 '/' 기호는 사용 불가능합니다!");
         return;
       }
-      
-      if(tagInput.length > 20) {
-        alert("태그는 20자까지만 쓸 수 있어요!")
-        return
+
+      if (tagInput.length > 20) {
+        alert("태그는 20자까지만 쓸 수 있어요!");
+        return;
       }
 
       // 태그입력값 공백 제거 후 소문자로 변환 처리 후 저장
