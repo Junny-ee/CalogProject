@@ -19,7 +19,7 @@ const ProjectSchedule = ({ data, onItemClick }) => {
           </p>
           <p>
             {endDate > new Date().getTime()
-              ? `D-day ${
+              ? `D-${
                   !new Date(Dday).getDate() <= 1
                     ? new Date(Dday).getDate() - 1
                     : ""

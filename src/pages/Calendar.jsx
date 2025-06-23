@@ -74,26 +74,28 @@ const Calendar = () => {
     });
     setIsLoading(false);
   }, []);
-  const onCreate = (type, title, start, end, contents) => {
+  const onCreate = (type, title, color, start, end, contents) => {
     dispatch({
       name: "create",
       data: {
         type,
         id: calendarRef.current++,
         title, // key와 value 가 같을경우 하나만 써도 됨
+        color,
         start,
         end,
         contents,
       },
     });
   };
-  const onUpdate = (type, id, title, start, end, contents) => {
+  const onUpdate = (type, id, title, color, start, end, contents) => {
     dispatch({
       name: "update",
       data: {
         type,
         id,
         title,
+        color,
         start,
         end,
         contents,

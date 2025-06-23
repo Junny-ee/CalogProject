@@ -35,7 +35,6 @@ const FrontCalendar = ({ events }) => {
   const calendarRef = useRef(null);
   const nav = useNavigate();
   const { selectedDate, setselectedDate } = useCalendar();
-
   //공휴일 데이터 가져오기
   useEffect(() => {
     const fetchMergedEvents = async () => {
@@ -77,7 +76,6 @@ const FrontCalendar = ({ events }) => {
   const onClose = () => {
     setmodalOpen(false);
   };
-
   return (
     <div className="FrontCalendar">
       <HeaderCalendar date={date} onClick={() => setmodalOpen(true)} />
@@ -133,9 +131,8 @@ const FrontCalendar = ({ events }) => {
             );
             const isPast = new Date(e.end) < today;
             const isHoliday = e.isHoliday;
-
-            let backgroundColor = "#3174ad";
-            let color = "white";
+            let backgroundColor;
+            let color;
 
             if (isHoliday) {
               backgroundColor = "#EB4444";
@@ -143,8 +140,36 @@ const FrontCalendar = ({ events }) => {
             } else if (isPast) {
               backgroundColor = "#e6e6e6";
               color = "#666";
+            } else {
+              // 라디오 버튼으로 선택된 색상을 여기에 적용
+              // `event.color`는 ModalCreate에서 저장된 색상 값 ('blue', 'yellow' 등)을 가집니다.
+              switch (e.color) {
+                case "blue":
+                  backgroundColor = "blue";
+                  color = "white";
+                  break;
+                case "yellow":
+                  backgroundColor = "yellow";
+                  color = "black"; // 노란색 배경에는 검은색 글씨가 잘 보입니다.
+                  break;
+                case "green":
+                  backgroundColor = "green";
+                  color = "white";
+                  break;
+                case "black":
+                  backgroundColor = "black";
+                  color = "white";
+                  break;
+                case "pink":
+                  backgroundColor = "pink";
+                  color = "black"; // 핑크색 배경에는 검은색 글씨가 잘 보입니다.
+                  break;
+                default:
+                  backgroundColor = "#3174ad"; // 기본 이벤트 색상 (React Big Calendar 기본값)
+                  color = "white";
+                  break;
+              }
             }
-
             return {
               style: {
                 backgroundColor,
