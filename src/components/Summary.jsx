@@ -9,6 +9,8 @@ const Summary = ({ date }) => {
   // console.log(new Date(calendarData[0].start).getFullYear());
   const [todaySummary, setTodaySummary] = useState(null);
   const BackBoardData = useContext(CalogStateContext);
+  const isToday =
+    new Date(date).toLocaleDateString() === new Date().toLocaleDateString();
   const nav = useNavigate();
   useEffect(() => {
     setTodaySummary(
@@ -19,13 +21,28 @@ const Summary = ({ date }) => {
       )
     );
   }, [date]); // 날짜 일치하는 객체 가져오기
+
   return (
     <div className="Summary">
       <div className="Summary_Header">
+        {/* <h4>{new Date(date).toLocaleDateString()}</h4> */}
         <h4>
-          {date ? new Date(date).toLocaleDateString() : "날짜를 선택하세요"}
+          {(() => {
+            const d = new Date(date);
+            const dateStr = d.toLocaleDateString("ko-KR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            const weekday = d.toLocaleDateString("ko-KR", { weekday: "short" });
+            return `${dateStr} (${weekday})`;
+          })()}
         </h4>
-        <Button text={"+"} classtype={"Create"} onClick={() => nav("/new")} />
+        {isToday ? (
+          <Button text={"+"} classtype={"Create"} onClick={() => nav("/new")} />
+        ) : (
+          ""
+        )}
       </div>
       <div className="Summary_Contests">
         <SummaryItem data={todaySummary} />

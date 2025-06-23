@@ -1,26 +1,92 @@
 .Calendar {
   display: flex;
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  min-width: 0;
   overflow: hidden;
+  align-items: stretch;
+}
+.Calendar .left-content {
+  display: flex;
+  flex: 3;
+  padding: 1rem;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  transition: flex 0.3s ease-in-out;
+}
+
+.Calendar .left-content.summary-open {
+  flex: 1.5;
+}
+
+.FrontCalendar {
+  border: 1px solid #000000;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.FrontCalendar_container {
+  flex-grow: 1;
+  min-height: 700px;
+  overflow: hidden;
+  transition: min-height 0.3s ease-in-out;
+}
+
+.Calendar .left-content.summary-open .FrontCalendar_container {
+  min-height: 450px;
+}
+
+.under-content {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; /* flex-grow는 여기서 제거 */
+  border: 1px solid black;
+}
+
+/* under-content가 열렸을 때 */
+.under-content.open {
+  max-height: 300px;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .Calendar .right-content {
-  flex: 1;
-  padding: 1rem;
+  position: relative;
+  width: 0;
+  flex-shrink: 0;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
+    width 0.3s ease-in-out;
+  overflow: hidden;
 }
 
-.Calendar .left-content {
-  display: flex;
-  flex: 2;
-  padding: 1rem;
-  flex-direction: column;
+.Calendar .right-content.open {
+  transform: translateX(0);
+  width: 30%;
+  opacity: 1;
+  pointer-events: auto;
+  /* height: 100%; <- 추가할 필요 없음 */
 }
-.Calendar .left-content > div:first-child {
-  /* 캘린더 영역 고정 높이 */
-  height: 60%;
-  min-height: 300px; /* 필요 시 */
+
+/* 기타 React Big Calendar 관련 스타일 */
+.rbc-day-bg {
+  cursor: pointer;
 }
-.Calendar .left-content > div:last-child {
-  /* 요약창: 나머지 공간 모두 차지 */
-  flex-grow: 1;
+.rbc-header:nth-child(1) {
+  color: red; /* 일요일 (Sun) */
+}
+.rbc-header:nth-child(7) {
+  color: blue; /* 토요일 (Sat) */
+}
+.rbc-month-row .rbc-date-cell:nth-child(1) .rbc-button-link {
+  color: red !important; /* 일요일 숫자 */
+}
+.rbc-month-row .rbc-date-cell:nth-child(7) .rbc-button-link {
+  color: blue !important; /* 토요일 숫자 */
 }

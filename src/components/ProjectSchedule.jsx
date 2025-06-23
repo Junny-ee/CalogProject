@@ -1,7 +1,7 @@
 import "./ProjectSchedule.css";
-import { useState } from "react";
+import { ScheduleDispatchContext } from "../pages/Calendar";
+import { useContext } from "react";
 import Button from "./Button";
-
 // ProjectSchedule에서도 모달을 열기 위한 콜백 함수를 prop으로 받습니다.
 const ProjectSchedule = ({ data, onItemClick }) => {
   const handleItemClick = () => {
@@ -9,7 +9,10 @@ const ProjectSchedule = ({ data, onItemClick }) => {
       onItemClick(data);
     }
   };
-  const startDate = new Date(data.start).getTime();
+  const { onDelete } = useContext(ScheduleDispatchContext);
+  const onhandle = () => {
+    onDelete(data.id);
+  };
   const endDate = new Date(data.end).getTime();
   const Dday = endDate - new Date().getTime(); // 시간단위로 Dday 적용됨
   return (
@@ -20,10 +23,17 @@ const ProjectSchedule = ({ data, onItemClick }) => {
             {new Date(data.start).toLocaleDateString()} ~
             {new Date(data.end).toLocaleDateString()}
           </p>
-          <p>{`D-day ${
-            !new Date(Dday).getDate() <= 1 ? new Date(Dday).getDate() - 1 : ""
-          }`}</p>
+          <p>
+            {endDate > new Date().getTime()
+              ? `D-${
+                  !new Date(Dday).getDate() <= 1
+                    ? new Date(Dday).getDate() - 1
+                    : ""
+                }`
+              : "완료된 일정입니다."}
+          </p>
         </div>
+        <Button text={"삭제"} classtype={"Delete"} onClick={onhandle}></Button>
         <a className="ProjectSchedule_title" onClick={handleItemClick}>
           {data.title}
         </a>
