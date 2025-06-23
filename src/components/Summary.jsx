@@ -22,8 +22,18 @@ const Summary = ({ date }) => {
   return (
     <div className="Summary">
       <div className="Summary_Header">
+        {/* <h4>{new Date(date).toLocaleDateString()}</h4> */}
         <h4>
-          {date ? new Date(date).toLocaleDateString() : "날짜를 선택하세요"}
+          {(() => {
+            const d = new Date(date);
+            const dateStr = d.toLocaleDateString("ko-KR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            const weekday = d.toLocaleDateString("ko-KR", { weekday: "short" });
+            return `${dateStr} (${weekday})`;
+          })()}
         </h4>
         <Button text={"+"} classtype={"Create"} onClick={() => nav("/new")} />
       </div>
