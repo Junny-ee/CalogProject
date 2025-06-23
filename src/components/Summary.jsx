@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { CalogStateContext } from "../App";
 const Summary = ({ date }) => {
+  // calendarData = 스토리지 데이터
+  // console.log(new Date(calendarData[0].start).getFullYear());
   const [todaySummary, setTodaySummary] = useState(null);
   const BackBoardData = useContext(CalogStateContext);
   const isToday =

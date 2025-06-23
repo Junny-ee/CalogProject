@@ -18,7 +18,7 @@
   cursor: pointer;
 }
 .tag_wrapper {
-  /* position: fixed; */
+  position: fixed;
   top: 20%;
   right: 10%;
   width: 200px;

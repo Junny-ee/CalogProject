@@ -68,7 +68,7 @@ const BackPostList = ({ data, entireData }) => {
       <div className="buttons">
 
         {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>오래된 순</button>) : (<button onClick={() => setSortType("latest")}>최신순</button>)}
-       <button className="write_button" onClick={() => nav("/new")}>
+        <button className="write_button" onClick={() => nav("/new")}>
           <img src="/write_button.png" alt="" />
         </button>
         <button onClick={deleteChecked}>체크된 글 삭제하기</button>
@@ -91,16 +91,10 @@ const BackPostList = ({ data, entireData }) => {
       </div>
       <div className="tag_wrapper">
 
-{/*
-        <h3>태그 목록(미완성)</h3>
-        <div className="tags" onClick={() => setSearchingTag("")}>{`전체보기 (${entireData.length})`}</div>
-        <div>
-          {tags.map((tag) => (
-            <div className="tags" key={tag} onClick={() => setSearchingTag(tag)}>{tag}</div>*/}
+
         <h3>태그 목록</h3>
-        {/* 개별 태그 개수 표시, (선택)태그별 조회 상태에서 검색 필요*/}
         <div
-          className="total_tag"
+          className="tags"
           onClick={() => setSearchingTag("")}
         >{`전체보기 (${entireData.length})`}</div>
 

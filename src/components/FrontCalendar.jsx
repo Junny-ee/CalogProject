@@ -6,7 +6,7 @@ import "./FrontCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import CalModalWindow from "./CalModalWindow";
 import HeaderCalendar from "./HeaderCalendar";
-import { getHolidayEvents } from "../util/holidayService";
+import { getHolidayEventsByYears } from "../util/holidayService";
 
 const CalendarContext = createContext(null);
 export const CalendarProvider = ({ children }) => {
@@ -39,30 +39,29 @@ const FrontCalendar = ({ events }) => {
   //공휴일 데이터 가져오기
   useEffect(() => {
     const fetchMergedEvents = async () => {
-      try {
-        const holidays = await getHolidayEvents();
-        const holidayEvents = Array.isArray(holidays)
-          ? holidays.map((h) => ({ ...h, isHoliday: true }))
-          : [];
-
-        setMergedEvents([...events, ...holidayEvents]);
-      } catch (err) {
-        console.error("공휴일 가져오기 실패:", err);
-        setMergedEvents(events); // fallback
-      }
+      const holidays = await getHolidayEventsByYears(); // ← startYear만 넘겨도 동작!
+      setMergedEvents([...events, ...holidays]);
     };
-
     fetchMergedEvents();
   }, [events]);
 
-  //마우스 휠 이벤트
+  //마우스 휠 이벤트 핸들러 함수 정의
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
     newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달  // 휠 아래 → 다음 달
+
+    // const maxYear = new Date().getFullYear() + 2;
+    // const newYear = newDate.getFullYear();
+
+    // if (newYear > maxYear) {
+    //   alert(`⚠️ ${maxYear}년 이후의 공휴일 데이터는 아직 제공되지 않습니다.`);
+    //   return; // 날짜 업데이트 중단
+    // }
+
     setDate(newDate);
   };
-  // 컴포넌트 mount 후 캘린더 영역에 휠 이벤트 등록
+  // 컴포넌트 mount 후 캘린더 영역에 휠 이벤트 등록/해제
   useEffect(() => {
     const calBox = calendarRef.current; // 렌더링이 끝난 후 접근
     if (calBox) {
