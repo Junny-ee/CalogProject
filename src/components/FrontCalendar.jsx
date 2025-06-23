@@ -7,6 +7,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import CalModalWindow from "./CalModalWindow";
 import HeaderCalendar from "./HeaderCalendar";
 import { getHolidayEventsByYears } from "../util/holidayService";
+import ModalEdit from "./ModalEdit";
 
 const CalendarContext = createContext(null);
 export const CalendarProvider = ({ children }) => {
@@ -35,6 +36,18 @@ const FrontCalendar = ({ events }) => {
   const calendarRef = useRef(null);
   const nav = useNavigate();
   const { selectedDate, setselectedDate } = useCalendar();
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 모달 열고닫기
+  const [selectedEventForEdit, setSelectedEventForEdit] = useState(null); // 수정할 값 저장
+  const handleSelectEvent = (event) => {
+    // 공휴일이 아닌 경우에만 수정 모달을 띄웁니다.
+    if (!event.isHoliday) {
+      setSelectedEventForEdit(event); // 클릭된 이벤트 데이터를 상태에 저장
+      setIsEditModalOpen(true); // 수정 모달 열기
+    } else {
+      alert(`오늘은 ${event.title} 입니다.`);
+    }
+    setselectedDate(new Date(event.start));
+  };
   //공휴일 데이터 가져오기
   useEffect(() => {
     const fetchMergedEvents = async () => {
@@ -93,9 +106,7 @@ const FrontCalendar = ({ events }) => {
           selectable="ignoreEvents"
           longPressThreshold={1}
           popup
-          onSelectEvent={(event) => {
-            setselectedDate(event.start);
-          }} // 써둔 일정 임시데이터에서 날짜만 저장
+          onSelectEvent={handleSelectEvent} // 써둔 일정 임시데이터에서 날짜만 저장
           onSelectSlot={(slotInfo) => {
             // setselectedDate(slotInfo.start); // 일정 비어있는 날짜 클릭해도 날짜 저장
             const clicked = slotInfo.start;
@@ -196,6 +207,15 @@ const FrontCalendar = ({ events }) => {
           setmodalOpen(false);
         }}
       />
+      {isEditModalOpen &&
+        selectedEventForEdit && ( // 모달이 열려있고 수정할 이벤트 데이터가 있을 때만 렌더링
+          <ModalEdit
+            isOpen={isEditModalOpen}
+            onModal={setIsEditModalOpen} // onModal prop을 setIsEditModalOpen으로 연결
+            modalType={selectedEventForEdit.type} // 이벤트 타입에 따라 'project' 또는 'item' 전달
+            data={selectedEventForEdit} // 클릭된 이벤트 데이터 전달
+          />
+        )}
     </div>
   );
 };

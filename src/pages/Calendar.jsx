@@ -118,7 +118,9 @@ const Calendar = () => {
           value={{ onCreate, onUpdate, onDelete }}
         >
           <div className="Calendar">
-            <div className="left-content">
+            <div
+              className={`left-content ${isSummaryOpen ? "summary-open" : ""}`}
+            >
               <button className="button_schedule" onClick={toggleScheduleList}>
                 할 일 목록 펼침/닫힘 버튼
               </button>

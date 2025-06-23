@@ -4,53 +4,59 @@
   width: 100%;
   min-width: 0;
   overflow: hidden;
+  align-items: stretch;
 }
-
-/* left-content 기본 스타일 (Summary가 열려있을 때) */
 .Calendar .left-content {
   display: flex;
-  flex: 2; /* 이 값이 Summary가 열려있을 때의 비율 */
+  flex: 3;
   padding: 1rem;
   flex-direction: column;
   min-width: 0;
   overflow: hidden;
-  transition: flex 0.3s ease-in-out; /* flex 속성 변화를 위한 transition 추가 */
+  transition: flex 0.3s ease-in-out;
 }
 
-.Calendar .left-content.summary-closed {
-  flex: 3;
+.Calendar .left-content.summary-open {
+  flex: 1.5;
 }
-.Calendar .left-content > div:first-child {
-  flex-shrink: 0;
-  min-height: 300px;
+
+.FrontCalendar {
+  border: 1px solid #000000;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
+}
+.FrontCalendar_container {
+  flex-grow: 1;
+  min-height: 700px;
+  overflow: hidden;
+  transition: min-height 0.3s ease-in-out;
+}
+
+.Calendar .left-content.summary-open .FrontCalendar_container {
+  min-height: 450px;
 }
 
 .under-content {
-  position: relative;
-  flex-shrink: 0;
-  flex-grow: 0;
   max-height: 0;
-  transform: translateY(100%);
   opacity: 0;
   pointer-events: none;
   overflow: hidden;
-  transition: max-height 0.3s ease-in-out, transform 0.3s ease-in-out,
-    opacity 0.3s ease-in-out;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; /* flex-grow는 여기서 제거 */
   border: 1px solid black;
 }
 
+/* under-content가 열렸을 때 */
 .under-content.open {
-  max-height: 100%;
-  transform: translateY(0); /* <-- 원래 위치로 되돌림 */
+  max-height: 300px;
   opacity: 1;
-  pointer-events: auto; /* 클릭 이벤트 활성화 */
-  flex-grow: 1;
+  pointer-events: auto;
 }
 
 .Calendar .right-content {
   position: relative;
-  width: 0; /* 기본적으로 닫힌 상태를 위한 너비 */
+  width: 0;
   flex-shrink: 0;
   transform: translateX(100%);
   opacity: 0;
@@ -62,7 +68,25 @@
 
 .Calendar .right-content.open {
   transform: translateX(0);
-  width: 30%; /* 열렸을 때의 너비 */
+  width: 30%;
   opacity: 1;
   pointer-events: auto;
+  /* height: 100%; <- 추가할 필요 없음 */
+}
+
+/* 기타 React Big Calendar 관련 스타일 */
+.rbc-day-bg {
+  cursor: pointer;
+}
+.rbc-header:nth-child(1) {
+  color: red; /* 일요일 (Sun) */
+}
+.rbc-header:nth-child(7) {
+  color: blue; /* 토요일 (Sat) */
+}
+.rbc-month-row .rbc-date-cell:nth-child(1) .rbc-button-link {
+  color: red !important; /* 일요일 숫자 */
+}
+.rbc-month-row .rbc-date-cell:nth-child(7) .rbc-button-link {
+  color: blue !important; /* 토요일 숫자 */
 }

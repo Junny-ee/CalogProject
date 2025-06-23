@@ -3,11 +3,15 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 .FrontCalendar_container {
   flex-grow: 1;
-  min-height: 450px;
+  min-height: 0;
   overflow: hidden;
+}
+.Calendar .left-content.summary-open .FrontCalendar_container {
+  min-height: 0; /* 👈 여기도 0으로 변경합니다. */
 }
 .rbc-day-bg {
   cursor: pointer;

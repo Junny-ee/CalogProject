@@ -22,6 +22,21 @@ function ModalCreate({ isOpen, onModal, modalType }) {
   // console.log(radioButton);
   // '저장' 버튼 클릭 시 실행될 함수
   const handleSave = () => {
+    if (!title) {
+      alert("제목을 입력해주세요!");
+      return;
+    }
+    if (!start) {
+      alert("날짜를 입력해주세요!");
+      return;
+    }
+    if (!contents) {
+      alert("내용을 입력해주세요!");
+      return;
+    }
+    if (!color) {
+      setColor("blue");
+    }
     onCreate(modalType, title, color, start, end, contents);
     onModal(false);
   };

@@ -22,6 +22,21 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
   }, [isOpen, data]);
 
   const handleSave = () => {
+    if (!title) {
+      alert("제목을 입력해주세요!");
+      return;
+    }
+    if (!start) {
+      alert("날짜를 입력해주세요!");
+      return;
+    }
+    if (!contents) {
+      alert("내용을 입력해주세요!");
+      return;
+    }
+    if (!color) {
+      setColor("blue");
+    }
     if (modalType === "project") {
       onUpdate(data.type, data.id, title, color, start, end, description);
     } else {
