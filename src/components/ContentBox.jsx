@@ -1,8 +1,6 @@
 import "./ContentBox.css";
 import ReactMarkdown from "react-markdown";
-import Button from "./Button";
 import useMarkdown from "../hooks/useMarkdown";
-import { useNavigate } from "react-router-dom";
 
 const ContentBox = ({ content, setContent, onSubmitButtonClick }) => {
   const markdown = useMarkdown();
@@ -13,7 +11,7 @@ const ContentBox = ({ content, setContent, onSubmitButtonClick }) => {
         placeholder="글을 입력하세요"
         value={content}
         onChange={(e) => setContent(e.target.value)}
-      ></textarea>
+        ></textarea>
 
       <div className="markdown_preview">
         <h3>미리보기</h3>

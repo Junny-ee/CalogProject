@@ -66,19 +66,9 @@ const BackPostList = ({ data, entireData }) => {
           checked={checkedItems.length === data.length && data.length > 0}
         />
       </div>
-      <div className="contents_wrapper">
-        {sortedData.map((item) => (
-          <BackPostItem
-            key={String(item.id)}
-            {...item}
-            id={String(item.id)}
-            checkedItems={checkedItems}
-            checkedItemHandler={checkedItemHandler}
-          />
-        ))}
-      </div>
       <div className="tag_wrapper">
         <h3>태그 목록</h3>
+        <hr />
         {/* 개별 태그 개수 표시, (선택)태그별 조회 상태에서 검색 필요*/}
         <div
           className="tags"
@@ -92,6 +82,17 @@ const BackPostList = ({ data, entireData }) => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="content_wrap">
+        {sortedData.map((item) => (
+          <BackPostItem
+            key={String(item.id)}
+            {...item}
+            id={String(item.id)}
+            checkedItems={checkedItems}
+            checkedItemHandler={checkedItemHandler}
+          />
+        ))}
       </div>
     </>
   );

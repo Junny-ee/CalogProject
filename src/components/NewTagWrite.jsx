@@ -23,6 +23,11 @@ const NewTagWrite = ({ tags, setTags }) => {
         alert("태그에 '/' 기호는 사용 불가능합니다!");
         return;
       }
+      
+      if(tagInput.length > 20) {
+        alert("태그는 20자까지만 쓸 수 있어요!")
+        return
+      }
 
       // 태그입력값 공백 제거 후 소문자로 변환 처리 후 저장
       const newTag = tagInput.trim().toLowerCase();
