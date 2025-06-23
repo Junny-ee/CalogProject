@@ -2,7 +2,7 @@ import { useEffect, useState, createContext, useContext } from "react";
 import "./BackBoardMain.css";
 import BackPostList from "./BackPostList";
 import { useNavigate } from "react-router-dom";
-import { CalogStateContext, TagStateContext } from "../App";
+import { CalogStateContext } from "../App";
 
 // props: id, title, createDate, content, tag
 export const BackBoardDispatchContext = createContext();
@@ -10,8 +10,6 @@ export const BackBoardDispatchContext = createContext();
 const BackBoard = () => {
   // postContent
   const postContent = useContext(CalogStateContext);
-  const tag = useContext(TagStateContext);
-  console.log(tag);
   const [contents, setContents] = useState(postContent);
 
   const deleteContent = (id) => {
