@@ -54,7 +54,6 @@ const BackBoard = () => {
 
   const filteredContents = contents.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
-    console.log(item.tag);
     const titleIncludes = item.title
       .toLowerCase()
       .includes(lowerCaseSearchWord);
@@ -64,13 +63,11 @@ const BackBoard = () => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-
-        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-      )
-
+          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+        )
       : typeof item.tag === "string"
-        ? item.tag.includes(lowerCaseSearchWord)
-        : false;
+      ? item.tag.includes(lowerCaseSearchWord)
+      : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
@@ -79,8 +76,8 @@ const BackBoard = () => {
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
       : typeof item.tag === "string"
-        ? item.tag.includes(searchingTag.toLowerCase())
-        : false;
+      ? item.tag.includes(searchingTag.toLowerCase())
+      : false;
 
     return tagIncludes;
   });
@@ -134,9 +131,14 @@ const BackBoard = () => {
             <div>
               <span className="tag_header_wrapper">
                 <span className="tag_text">{`#${searchingTag}`}</span>
-                <button className="close_button" onClick={() => {
-                  setSearchingTag("");
-                }}>×</button>
+                <button
+                  className="close_button"
+                  onClick={() => {
+                    setSearchingTag("");
+                  }}
+                >
+                  ×
+                </button>
               </span>
               <BackPostList
                 data={filteredContentsByTag}

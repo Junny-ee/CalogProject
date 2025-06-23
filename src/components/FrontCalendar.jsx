@@ -66,12 +66,12 @@ const FrontCalendar = ({ events }) => {
   };
 
   return (
-    <div>
+    <div className="FrontCalendar">
       <HeaderCalendar date={date} onClick={() => setmodalOpen(true)} />
 
       <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button>
 
-      <div className="FrontCalendar" ref={calendarRef}>
+      <div className="FrontCalendar_container" ref={calendarRef}>
         <Calendar
           localizer={localizer}
           events={events}
