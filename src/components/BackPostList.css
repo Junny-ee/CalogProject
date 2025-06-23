@@ -1,8 +1,14 @@
 .buttons {
   position: absolute;
   top: 5%;
+  margin: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
 }
+
 .contents_wrapper {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   width: 800px;
@@ -12,11 +18,11 @@
   cursor: pointer;
 }
 .tag_wrapper {
-  position: fixed;
+  /* position: fixed; */
   top: 20%;
   right: 10%;
   width: 200px;
-  height: 60%;
+  height: 100vh;
   padding: 20px;
   box-sizing: border-box;
   border: 1px solid black;
