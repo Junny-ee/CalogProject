@@ -46,15 +46,33 @@ function reducer(state, action) {
   return nextState;
 }
 
+// 글 순회하면서 태그 카운트할 함수
+function tagCounting(data) {
+  const tagItemCount = {};
+  data.map((data) => {
+    if (Array.isArray(data.tag)) {
+      data.tag.map((tag) => {
+        tagItemCount[tag] = (tagItemCount[tag] || 0) + 1;
+      });
+    }
+  });
+  return tagItemCount;
+}
+
 // Context 사용 이유 : 모든 컴포넌트에 공유하기 위해서
 // 글 데이터 관리하는 Context 생성(상태값 변화)
 export const CalogStateContext = createContext();
 // CRUD 기능을 하는 함수 관리하는 Context 생성(변화 X 데이터 -> 리렌더링 X)
 export const CalogDispatchContext = createContext();
 
+export const TagStateContext = createContext();
+
 function App() {
   // 글 객체 저장
   const [data, dispatch] = useReducer(reducer, []);
+
+  // 태그 객체 저장
+  const [tagCount, setTagCount] = useState({});
 
   // 로컬 스토리지에서 값을 가져오기 전에 다른 페이지 컴포넌트들이 렌더링 되면 문제 발생
   // ex) 작성한 글 상세보기 페이지에서 새로고침하면 없는 작성한 글이라고 뜨는 문제 발생
@@ -70,6 +88,7 @@ function App() {
     const storedData = localStorage.getItem("calog");
     if (!storedData) {
       setIsLoading(false); // 로딩 완료
+      setTagCount({}); // 로컬 스토리지에 데이터가 없을 경우 태그 카운트도 초기화
       return;
     }
 
@@ -91,9 +110,17 @@ function App() {
       data: parsedData,
     });
 
+    // 초기 로딩 시에도 태그 카운트 계산
+    setTagCount(tagCounting(parsedData));
+
     // 디스패치 함수가 실행되어 데이터 스테이트의 초기값을 설정한 뒤 로딩 종료 처리
     setIsLoading(false);
   }, []); // 마운트 될 때만 실행되도록 deps를 빈 배열로 지정
+
+  useEffect(() => {
+    // data 변경될 때마다 태그 다시 읽어옴
+    setTagCount(tagCounting(data));
+  }, [data]);
 
   const onCreate = (title, tag, content) => {
     const currentId = idRef.current++;
@@ -135,17 +162,19 @@ function App() {
     <>
       <CalogStateContext.Provider value={data}>
         <CalogDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
-          <CalendarProvider>
-            <Routes>
-              <Route path="/" element={<Calendar />} />
-              <Route path="/" element={<FrontCalendar />} />
-              <Route path="/new" element={<New />} />
-              <Route path="/backboard" element={<BackBoardMain />} />
-              <Route path="/edit/:id" element={<Edit />} />
-              <Route path="/read/:id" element={<Read />} />
-              <Route path="/*" element={<Notfound />} />
-            </Routes>
-          </CalendarProvider>
+          <TagStateContext.Provider value={tagCount}>
+            <CalendarProvider>
+              <Routes>
+                <Route path="/" element={<Calendar />} />
+                <Route path="/" element={<FrontCalendar />} />
+                <Route path="/new" element={<New />} />
+                <Route path="/backboard" element={<BackBoardMain />} />
+                <Route path="/edit/:id" element={<Edit />} />
+                <Route path="/read/:id" element={<Read />} />
+                <Route path="/*" element={<Notfound />} />
+              </Routes>
+            </CalendarProvider>
+          </TagStateContext.Provider>
         </CalogDispatchContext.Provider>
       </CalogStateContext.Provider>
     </>
