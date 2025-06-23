@@ -4,7 +4,6 @@ import { BackBoardDispatchContext } from "./BackBoardMain";
 import { useContext, useState, useEffect } from "react";
 import { CalogDispatchContext } from "../App";
 
-// 태그 여러 개 구현 필요
 const BackPostItem = ({ id, title, createDate, content, tag, checkedItems, checkedItemHandler }) => {
   const nav = useNavigate();
   const { setSearchWord, setSearchingTag, setShowSearchBar } = useContext(

@@ -8,7 +8,6 @@ import { CalogStateContext, TagStateContext } from "../App";
 export const BackBoardDispatchContext = createContext();
 
 const BackBoard = () => {
-  // postContent
   const postContent = useContext(CalogStateContext);
   const tag = useContext(TagStateContext);
   console.log(tag);
@@ -51,6 +50,9 @@ const BackBoard = () => {
   };
 
   const onChange = (event) => {
+    if (searchingTag !== "") {
+      setSearchingTag("");
+    }
     setSearchWord(event.target.value);
   };
 
@@ -65,11 +67,11 @@ const BackBoard = () => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-        )
+        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+      )
       : typeof item.tag === "string"
-      ? item.tag.includes(lowerCaseSearchWord)
-      : false;
+        ? item.tag.includes(lowerCaseSearchWord)
+        : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
@@ -78,8 +80,8 @@ const BackBoard = () => {
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
       : typeof item.tag === "string"
-      ? item.tag.includes(searchingTag.toLowerCase())
-      : false;
+        ? item.tag.includes(searchingTag.toLowerCase())
+        : false;
 
     return tagIncludes;
   });
