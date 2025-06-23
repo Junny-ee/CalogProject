@@ -19,7 +19,7 @@
 }
 .tag_wrapper {
   position: fixed;
-  top: 12%;
+  top: 13%;
   left: 5%;
   width: 200px;
   height: 100vh;
@@ -30,6 +30,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   text-overflow: ellipsis;
+  border: none;
 }
 .tag_wrapper::-webkit-scrollbar {
   display: none;
@@ -39,6 +40,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 6px 0;
 }
 
 @media (max-width: 1400px) {
@@ -48,16 +50,16 @@
     align-items: flex-start;
   }
   .tag_wrapper {
-    position: static;     /* fixed 제거 → 일반 흐름으로 들어감 */
+    position: static; /* fixed 제거 → 일반 흐름으로 들어감 */
     border: none;
     height: auto;
     padding: 10px 25px 10px 10px;
     box-sizing: border-box;
     flex: 1;
   }
-  
+
   .content_wrap {
     width: 100%; /* 콘텐츠도 꽉 차게 */
-    flex: 6
+    flex: 6;
   }
 }
