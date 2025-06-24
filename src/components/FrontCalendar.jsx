@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef, createContext, useContext } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
@@ -34,7 +33,7 @@ const FrontCalendar = ({ events, onEvent }) => {
   const [modalOpen, setmodalOpen] = useState(false);
   const [mergedEvents, setMergedEvents] = useState([]); // 공휴일 api
   const calendarRef = useRef(null);
-  const nav = useNavigate();
+  // const nav = useNavigate();
   const { selectedDate, setselectedDate } = useCalendar();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 모달 열고닫기
   const [selectedEventForEdit, setSelectedEventForEdit] = useState(null); // 수정할 값 저장
@@ -56,13 +55,13 @@ const FrontCalendar = ({ events, onEvent }) => {
     };
     fetchMergedEvents();
   }, [events]);
+
   //마우스 휠 이벤트 핸들러 함수 정의
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
     newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달  // 휠 아래 → 다음 달
     onEvent(newDate);
-
     setDate(newDate);
   };
   // 컴포넌트 mount 후 캘린더 영역에 휠 이벤트 등록/해제
@@ -84,7 +83,7 @@ const FrontCalendar = ({ events, onEvent }) => {
   return (
     <div className="FrontCalendar">
       <HeaderCalendar date={date} onClick={() => setmodalOpen(true)} />
-      <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button>
+      {/* <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button> */}
       <div className="FrontCalendar_container" ref={calendarRef}>
         <Calendar
           localizer={localizer}
@@ -138,8 +137,9 @@ const FrontCalendar = ({ events, onEvent }) => {
             let color;
 
             if (isHoliday) {
-              backgroundColor = "#EB4444";
-              color = "#ffffff";
+              backgroundColor = "transparent";
+              color = "#EB4444";
+              // fontSize = "xx-small";
             } else if (isPast) {
               backgroundColor = "#e6e6e6";
               color = "#666";
@@ -148,27 +148,27 @@ const FrontCalendar = ({ events, onEvent }) => {
               // `event.color`는 ModalCreate에서 저장된 색상 값 ('blue', 'yellow' 등)을 가집니다.
               switch (e.color) {
                 case "blue":
-                  backgroundColor = "blue";
+                  backgroundColor = "#A7C7E7";
                   color = "white";
                   break;
                 case "yellow":
-                  backgroundColor = "yellow";
+                  backgroundColor = "#FDFD96";
                   color = "black"; // 노란색 배경에는 검은색 글씨가 잘 보입니다.
                   break;
                 case "green":
-                  backgroundColor = "green";
+                  backgroundColor = "#B2D8B2";
                   color = "white";
                   break;
                 case "black":
-                  backgroundColor = "black";
+                  backgroundColor = "#E0E0E0";
                   color = "white";
                   break;
                 case "pink":
-                  backgroundColor = "pink";
+                  backgroundColor = "#FFB6C1";
                   color = "black"; // 핑크색 배경에는 검은색 글씨가 잘 보입니다.
                   break;
                 default:
-                  backgroundColor = "#3174ad"; // 기본 이벤트 색상 (React Big Calendar 기본값)
+                  backgroundColor = "#5a9ad2"; // 기본 이벤트 색상 (React Big Calendar 기본값)
                   color = "white";
                   break;
               }

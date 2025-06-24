@@ -5,7 +5,9 @@ import "./HeaderCalendar.css";
 const HeaderCalendar = ({ date, onClick }) => {
   return (
     <div className="HeaderCalendar">
-      <button onClick={onClick}>{moment(date).format("MMMM YYYY")}</button>
+      <button className="current-month-button" onClick={onClick}>
+        {moment(date).format("MMMM YYYY")}
+      </button>
     </div>
   );
 };

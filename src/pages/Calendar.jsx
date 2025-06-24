@@ -1,4 +1,5 @@
 import { createContext, useEffect, useReducer, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BackBoardMain from "../components/BackBoardMain";
 import FrontCalendar from "../components/FrontCalendar";
 import ScheduleList from "../components/ScheduleList";
@@ -44,13 +45,18 @@ const Calendar = () => {
   const calendarRef = useRef(0);
   const [isScheduleListOpen, setIsScheduleListOpen] = useState(true);
   const [isSummaryOpen, setIsSummaryOpen] = useState(true);
+  const [isThemeChange, setIsThemeChange] = useState();
   const { selectedDate } = useCalendar(); //날짜 선택 context
+  const nav = useNavigate();
   const [wheelAction, setWheelAction] = useState(new Date());
   const toggleScheduleList = () => {
     setIsScheduleListOpen(!isScheduleListOpen);
   };
   const toggleSummary = () => {
     setIsSummaryOpen(!isSummaryOpen);
+  };
+  const toggleTheme = () => {
+    setIsThemeChange();
   };
   // 여기부터 context랑 reducer 함수
   useEffect(() => {
@@ -130,7 +136,14 @@ const Calendar = () => {
                 요약창 펼침/닫힘 버튼
               </button>
 
+              <button className="button_theme" onClick={toggleTheme}>
+                테마 설정 버튼
+              </button>
+              <button onClick={() => nav("/backboard")}>
+                백보드 이동 버튼
+              </button>
               <FrontCalendar events={calendarData} onEvent={setWheelAction} />
+
               <div className={`under-content ${isSummaryOpen ? "open" : ""}`}>
                 <Summary
                   item={

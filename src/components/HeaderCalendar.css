@@ -3,11 +3,14 @@
   margin: 10px 0;
 }
 
-.HeaderCalendar button {
-  font-size: 18px;
-  font-weight: bold;
+.HeaderCalendar button.current-month-button {
+  font-size: 24px; /* 글꼴 크기 키우기 */
+  font-weight: 700; /* 더 진하게 */
+  color: #333; /* 진한 회색으로 모던한 느낌 */
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 8px 15px;
+  border-radius: 8px; /* 살짝 둥근 모서리 */
+  transition: background-color 0.2s ease, color 0.2s ease; /* 호버 애니메이션 */
 }
