@@ -18,7 +18,7 @@ const ScheduleItem = ({ data, onItemClick }) => {
         <p>{`${new Date(data.start).getMonth() + 1}.${new Date(
           data.start
         ).getDate()}.`}</p>
-        <Button text={"삭제"} classtype={"Delete"} onClick={onhandle}></Button>
+        <Button text={"삭제"} classtype={"List"} onClick={onhandle}></Button>
       </div>
       <div className="SchduleItem_contents">
         <a className="ScheduleItem_title" onClick={handleItemClick}>
