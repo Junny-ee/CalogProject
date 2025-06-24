@@ -7,7 +7,6 @@ import { useCalendar } from "../components/FrontCalendar";
 import ModalTheme from "../components/ModalTheme";
 function reducer(state, action) {
   let nextState;
-  let nextColor;
   switch (action.name) {
     case "init":
       return action.data;
@@ -29,8 +28,6 @@ function reducer(state, action) {
     case "delete":
       nextState = state.filter((item) => String(item.id) !== String(action.id));
       break;
-    case "color":
-      return (nextColor = action.color);
     default:
       return state;
   }
@@ -50,6 +47,7 @@ const Calendar = () => {
   const { selectedDate } = useCalendar(); //날짜 선택 context
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 입력창 여는 state
   const [wheelAction, setWheelAction] = useState(new Date());
+  const [themeColor, setThemeColor] = useState();
   // 모달 열고닫는 함수
   const openModal = () => {
     setIsModalOpen(true);
@@ -74,7 +72,6 @@ const Calendar = () => {
       setIsLoading(false); // 로딩완료
       return;
     }
-    console.log(calendarData);
     const parseData = JSON.parse(storedData);
     let maxId = 0;
     parseData.forEach((item) => {
@@ -126,10 +123,7 @@ const Calendar = () => {
     });
   };
   const onColor = (color) => {
-    dispatch({
-      name: "color",
-      color,
-    });
+    setThemeColor(color);
   };
   if (isLoading) {
     return <div>로딩 중...</div>; // 데이터 로딩 중 스피너 등을 표시할 수 있습니다.
