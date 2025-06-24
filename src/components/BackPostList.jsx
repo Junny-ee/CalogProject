@@ -27,19 +27,20 @@ const BackPostList = ({ posts, entirePosts }) => {
 
   const checkedItemHandler = (id, isChecked) => {
     const stringedId = String(id);
-    setCheckedItems(prevCheckedItems => {
+    setCheckedItems((prevCheckedItems) => {
       if (isChecked) {
-        return prevCheckedItems.includes(stringedId) ? prevCheckedItems : [...prevCheckedItems, stringedId];
+        return prevCheckedItems.includes(stringedId)
+          ? prevCheckedItems
+          : [...prevCheckedItems, stringedId];
       } else {
-        return prevCheckedItems.filter(itemId => itemId !== stringedId);
+        return prevCheckedItems.filter((itemId) => itemId !== stringedId);
       }
     });
   };
 
   const allCheck = (checked) => {
-    setCheckedItems(prevCheckedItems => {
+    setCheckedItems((prevCheckedItems) => {
       if (checked) {
-
         const allItemIds = posts.map((item) => String(item.id));
         return allItemIds;
       } else {
@@ -49,7 +50,7 @@ const BackPostList = ({ posts, entirePosts }) => {
   };
 
   const deleteChecked = () => {
-    checkedItems.forEach(id => onDelete(id));
+    checkedItems.forEach((id) => onDelete(id));
     setCheckedItems([]);
   };
 
@@ -58,43 +59,53 @@ const BackPostList = ({ posts, entirePosts }) => {
   return (
     <>
       <div className="buttons">
-        {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>오래된 순</button>) : (<button onClick={() => setSortType("latest")}>최신순</button>)}
+        {(sortType === "latest") ? (<button className="sort_button" onClick={() => setSortType("oldest")}>
+          <img src="/oldest_icon.png" alt="오래된순" />
+        </button>) : (<button className="sort_button" onClick={() => setSortType("latest")}><img src="/latest_icon.png" alt="최신순" /></button>)}
         <button className="write_button" onClick={() => nav("/new")}>
-          <img src="/write_button.png" alt="" />
+          <img src="/write_button.png" alt="작성페이지 이동 버튼" />
         </button>
-        <button onClick={deleteChecked}>체크된 글 삭제하기</button>
+        <button className="check_delete_button" onClick={deleteChecked}>
+          <img src="/all_delete.png" alt="체크 삭제" />
+        </button>
         <input
           type="checkbox"
           onChange={(e) => allCheck(e.target.checked)}
           checked={posts.length > 0 && checkedItems.length === posts.length}
         />
       </div>
-      <div className="tag_wrapper">
-        <h3>태그 목록</h3>
-        <hr />
-        <div
-          className="tags"
-          onClick={() => setSearchingTag("")}
-        >{`전체보기 (${entirePosts.length})`}</div>
+      <div className="postList_wrapper">
+        <div className="tag_wrapper">
+          <h3>태그 목록</h3>
+          <hr />
+          <div
+            className="tags"
+            onClick={() => setSearchingTag("")}
+          >{`글 전체보기 (${entirePosts.length})`}</div>
 
-        <div>
-          {Object.entries(tagCount).map(([tag, count]) => (
-            <div className="tags" key={tag} onClick={() => setSearchingTag(tag, count)}>
-              {tag} ({count})
-            </div>
+          <div>
+            {Object.entries(tagCount).map(([tag, count]) => (
+              <div
+                className="tags"
+                key={tag}
+                onClick={() => setSearchingTag(tag, count)}
+              >
+                {tag} ({count})
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="content_wrap">
+          {sortedData.map((item) => (
+            <BackPostItem
+              key={String(item.id)}
+              {...item}
+              id={String(item.id)}
+              checkedItems={checkedItems}
+              checkedItemHandler={checkedItemHandler}
+            />
           ))}
         </div>
-      </div>
-      <div className="content_wrap">
-        {sortedData.map((item) => (
-          <BackPostItem
-            key={String(item.id)}
-            {...item}
-            id={String(item.id)}
-            checkedItems={checkedItems}
-            checkedItemHandler={checkedItemHandler}
-          />
-        ))}
       </div>
     </>
   );

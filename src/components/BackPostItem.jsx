@@ -4,8 +4,15 @@ import { BackBoardDispatchContext } from "./BackBoardMain";
 import { useContext, useState, useEffect } from "react";
 import { CalogDispatchContext } from "../App";
 
-const BackPostItem = ({ id, title, createDate, content, tag, checkedItems, checkedItemHandler }) => {
-
+const BackPostItem = ({
+  id,
+  title,
+  createDate,
+  content,
+  tag,
+  checkedItems,
+  checkedItemHandler,
+}) => {
   const nav = useNavigate();
   const { setSearchWord, setSearchingTag, setShowSearchBar } = useContext(
     BackBoardDispatchContext
@@ -13,7 +20,7 @@ const BackPostItem = ({ id, title, createDate, content, tag, checkedItems, check
   const markdownPreviewLines = () => {
     if (typeof content !== "string") return [];
 
-    const lines = content.split("\n").slice(0, 2); // 제목(첫 줄) 제외
+    const lines = content.split("\n");
 
     return lines
       .filter((line) => line.trim() !== "") // 빈 줄 제거
@@ -70,22 +77,24 @@ const BackPostItem = ({ id, title, createDate, content, tag, checkedItems, check
             ))}
         </div>
       </div>
-      <input
-        type="checkbox"
-        checked={isChecked}
-        value={id}
-        onChange={(e) => check(e)}
-        onClick={(e) => e.stopPropagation()}
-      />
-      <button
-        className="button_delete"
-        onClick={(e) => {
-          e.stopPropagation();
-          onDelete(id);
-        }}
-      >
-        삭제하기
-      </button>
+      <div className="box_wrap">
+        <input
+          type="checkbox"
+          checked={isChecked}
+          value={id}
+          onChange={(e) => check(e)}
+          onClick={(e) => e.stopPropagation()}
+        />
+        <button
+          className="button_delete"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(id);
+          }}
+        >
+          <img src="/delete.png" alt="" />
+        </button>
+      </div>
     </div>
   );
 };

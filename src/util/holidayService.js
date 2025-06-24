@@ -9,7 +9,7 @@ const BASE_URL =
   "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo";
 
 /**
- * 2020~2030년 전체 공휴일을 병렬로 가져옵니다.
+//  * 2020~2030년 전체 공휴일을 병렬로 가져옵니다.
  * @param {number} startYear
  * @param {number} endYear
  * @returns {Promise<Array>} 공휴일 일정 객체 배열
@@ -35,6 +35,7 @@ export async function getHolidayEventsByYears(
         axios
           .get(url, { params })
           .then((response) => {
+            // console.log("✅ 응답 구조 확인:", response.data);
             const items = response.data.response.body.items?.item;
             if (!items) return [];
 

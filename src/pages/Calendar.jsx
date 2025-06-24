@@ -46,7 +46,7 @@ const Calendar = () => {
   const calendarRef = useRef(0);
   const [isScheduleListOpen, setIsScheduleListOpen] = useState(true);
   const [isSummaryOpen, setIsSummaryOpen] = useState(true);
-  const [isThemeChange, setIsThemeChange] = useState();
+  const [isThemeChange, setIsThemeChange] = useState(false);
   const { selectedDate } = useCalendar(); //날짜 선택 context
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 입력창 여는 state
   const [wheelAction, setWheelAction] = useState(new Date());
@@ -172,6 +172,9 @@ const Calendar = () => {
             <div
               className={`right-content ${isScheduleListOpen ? "open" : ""}`}
             >
+              {/* <button onClick={() => nav("/backboard")}>
+                백보드 이동 버튼
+              </button> */}
               <ScheduleList calendarData={wheelAction} />
             </div>
             <ModalTheme

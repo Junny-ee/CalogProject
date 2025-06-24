@@ -5,8 +5,12 @@
   padding: 10px;
   box-sizing: border-box;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: auto;
   gap: 10px;
+}
+
+.New::-webkit-scrollbar {
+  width: 1px;
 }
 
 .header_content {
@@ -15,9 +19,14 @@
   width: 100%;
   height: 80px;
 }
+.gotoCal {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 .header_content img {
-  width: 125px;
-  height: 85px;
+  width: 130px;
+  height: 90px;
 }
 
 .content_wrapper {
