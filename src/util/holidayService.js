@@ -3,7 +3,7 @@
 import axios from "axios";
 
 const SERVICE_KEY = import.meta.env.VITE_HOLIDAY_API_KEY;
-// console.log("서비스 키:", SERVICE_KEY);
+console.log("서비스 키:", SERVICE_KEY);
 
 const BASE_URL =
   "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo";
