@@ -33,7 +33,7 @@ const ProjectSchedule = ({ data, onItemClick }) => {
               : "완료된 일정입니다."}
           </p>
         </div>
-        <Button text={"삭제"} classtype={"Delete"} onClick={onhandle}></Button>
+        <Button text={"삭제"} classtype={"List"} onClick={onhandle}></Button>
       </div>
       <div className="ProjectSchedule_contents">
         <a className="ProjectSchedule_title" onClick={handleItemClick}>

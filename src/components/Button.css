@@ -29,8 +29,9 @@
 .Button .ScreenChange {
   color: black;
 }
-.Button .Back {
-  color: black;
+.Button .List {
+  background-color: var(--button-default-bg);
+  color: var(--highlight-color);
 }
 
 .Button .Cancel {
