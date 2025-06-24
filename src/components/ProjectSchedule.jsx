@@ -34,12 +34,14 @@ const ProjectSchedule = ({ data, onItemClick }) => {
           </p>
         </div>
         <Button text={"삭제"} classtype={"Delete"} onClick={onhandle}></Button>
+      </div>
+      <div className="ProjectSchedule_contents">
         <a className="ProjectSchedule_title" onClick={handleItemClick}>
           {data.title}
         </a>
-      </div>
-      <div className="ProjectSchedule_contents">
-        <p>{data.contents}</p>
+        <div>
+          <p>{data.contents}</p>
+        </div>
       </div>
     </div>
   );

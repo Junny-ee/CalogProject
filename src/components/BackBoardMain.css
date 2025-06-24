@@ -4,24 +4,10 @@
   margin: 0 auto;
   /* overflow: hidden; */
 }
-
-.button_wrapper {
-  width: 100%;
+.header_wrapper {
   display: flex;
-  justify-content: space-between;
+  margin-bottom: 20px;
 }
-.gotoCalendar {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 5px;
-}
-
-.gotoCalendar > img {
-  width: 40px;
-  height: 40px;
-}
-
 #moveToTopButton {
   position: fixed;
   bottom: 5%;
@@ -44,8 +30,8 @@ img {
 }
 
 .button_home > img {
-  width: 125px;
-  height: 85px;
+  width: 130px;
+  height: 90px;
 }
 
 .list_wrapper {
@@ -59,7 +45,7 @@ img {
   width: 100%;
   max-width: 300px;
   height: 30px;
-  margin: 40px 20px 20px auto;
+  margin: 20px 12px 20px auto;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -68,7 +54,7 @@ img {
 }
 
 .search:focus-within {
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
 .search_input {
@@ -87,8 +73,9 @@ img {
 .tag_header_wrapper {
   font-size: xx-large;
   font-weight: bolder;
-  background-color: antiquewhite;
-  border-radius: 20px;
+  background-color: #fcf7ce;
+  color: #333;
+  border-radius: 25px;
   padding: 10px 15px;
   margin-right: 10px;
   margin-bottom: 5%;

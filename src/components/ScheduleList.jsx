@@ -67,7 +67,7 @@ const ScheduleList = ({ calendarData }) => {
   };
 
   return (
-    <div className="ScheduleList">
+    <div className={"ScheduleList"}>
       <div className="ScheduleList_Wirte">
         <h4>할일목록</h4>
       </div>
