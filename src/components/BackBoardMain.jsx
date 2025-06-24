@@ -4,29 +4,23 @@ import BackPostList from "./BackPostList";
 import { useNavigate } from "react-router-dom";
 import { CalogStateContext } from "../App";
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import { useInView } from 'react-intersection-observer';
+import { useInView } from "react-intersection-observer";
 
 export const BackBoardDispatchContext = createContext();
 
 const BackBoard = ({ fetchPosts }) => {
   const postContent = useContext(CalogStateContext);
   const queryClient = useQueryClient();
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isLoadingNextPage,
-    refetch
-  } = useInfiniteQuery({
-    queryKey: ['posts'],
-    queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam),
-    getNextPageParam: (lastPage) => lastPage.nextCursor,
-    staleTime: 5 * 60 * 1000,
-    cacheTime: 10 * 60 * 1000,
-  });
+  const { data, fetchNextPage, hasNextPage, isLoadingNextPage, refetch } =
+    useInfiniteQuery({
+      queryKey: ["posts"],
+      queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam),
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+      staleTime: 5 * 60 * 1000,
+      cacheTime: 10 * 60 * 1000,
+    });
 
   const entirePosts = data?.pages.flatMap((page) => page.data) || [];
-
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -38,11 +32,8 @@ const BackBoard = ({ fetchPosts }) => {
     }
   }, [inView, hasNextPage, isLoadingNextPage, fetchNextPage]);
 
-
-
   useEffect(() => {
-
-    queryClient.invalidateQueries(['posts']);
+    queryClient.invalidateQueries(["posts"]);
   }, [postContent, queryClient]);
 
   const [searchWord, setSearchWord] = useState("");
@@ -76,7 +67,6 @@ const BackBoard = ({ fetchPosts }) => {
     setSearchWord(event.target.value);
   };
 
-
   const filteredPosts = entirePosts.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
     const titleIncludes = item.title
@@ -88,11 +78,11 @@ const BackBoard = ({ fetchPosts }) => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-      )
+          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+        )
       : typeof item.tag === "string"
-        ? item.tag.includes(lowerCaseSearchWord)
-        : false;
+      ? item.tag.includes(lowerCaseSearchWord)
+      : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
@@ -101,31 +91,18 @@ const BackBoard = ({ fetchPosts }) => {
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
       : typeof item.tag === "string"
-        ? item.tag.includes(searchingTag.toLowerCase())
-        : false;
+      ? item.tag.includes(searchingTag.toLowerCase())
+      : false;
 
     return tagIncludes;
   });
 
   return (
     <div className="BackBoardMain">
-      <div className="button_wrapper">
-        <button
-          className="button_home"
-          onClick={() => (nav(0), setSearchingTag(""))}
-        >
-          <img src="/logo_image_width.png" alt="로고(새로고침)" />
-        </button>
-        <button className="gotoCalendar" onClick={() => nav("/")}>
-          <img src="/calendar.png" alt="캘린더 이동 아이콘" />
-        </button>
-      </div>
-
-      {scrolled ? (
-        <button id="moveToTopButton" onClick={moveToTop}>
-          <img src="/gotoup.png" />
-        </button>
-      ) : null}
+      <div className="header_wrapper">
+      <button className="button_home" onClick={() => nav("/")}>
+        <img src="/logo_image_width.png" alt="로고(새로고침)" />
+      </button>
       <div className="search">
         <input
           type="text"
@@ -135,6 +112,13 @@ const BackBoard = ({ fetchPosts }) => {
           onChange={onChange}
         />
       </div>
+      </div>
+      {scrolled ? (
+        <button id="moveToTopButton" onClick={moveToTop}>
+          <img src="/gotoup.png" />
+        </button>
+      ) : null}
+
       <div className="list_wrapper">
         <BackBoardDispatchContext.Provider
           value={{
@@ -158,7 +142,8 @@ const BackBoard = ({ fetchPosts }) => {
               <BackPostList
                 posts={filteredPostsByTag}
                 entirePosts={entirePosts}
-                searchingTag={searchingTag} s
+                searchingTag={searchingTag}
+                s
                 setSearchingTag={setSearchingTag}
               />
             </div>

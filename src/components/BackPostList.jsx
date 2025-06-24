@@ -16,7 +16,6 @@ const BackPostList = ({ posts, entirePosts }) => {
   const tagCount = useContext(TagStateContext);
 
   const getSortedData = () => {
-
     return posts.toSorted((prev, next) => {
       if (sortType === "oldest") {
         return Number(prev.createDate) - Number(next.createDate);
@@ -42,7 +41,6 @@ const BackPostList = ({ posts, entirePosts }) => {
   const allCheck = (checked) => {
     setCheckedItems((prevCheckedItems) => {
       if (checked) {
-
         const allItemIds = posts.map((item) => String(item.id));
         return allItemIds;
       } else {
@@ -61,7 +59,9 @@ const BackPostList = ({ posts, entirePosts }) => {
   return (
     <>
       <div className="buttons">
-        {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>오래된 순</button>) : (<button onClick={() => setSortType("latest")}>최신순</button>)}
+        {(sortType === "latest") ? (<button className="sort_button" onClick={() => setSortType("oldest")}>
+          <img src="/oldest_icon.png" alt="오래된순" />
+        </button>) : (<button className="sort_button" onClick={() => setSortType("latest")}><img src="/latest_icon.png" alt="최신순" /></button>)}
         <button className="write_button" onClick={() => nav("/new")}>
           <img src="/write_button.png" alt="작성페이지 이동 버튼" />
         </button>
@@ -74,18 +74,14 @@ const BackPostList = ({ posts, entirePosts }) => {
           checked={posts.length > 0 && checkedItems.length === posts.length}
         />
       </div>
-
       <div className="postList_wrapper">
         <div className="tag_wrapper">
           <h3>태그 목록</h3>
           <hr />
-          {/* 개별 태그 개수 표시, (선택)태그별 조회 상태에서 검색 필요*/}
-
           <div
             className="tags"
             onClick={() => setSearchingTag("")}
-          >{`전체보기 (${entirePosts.length})`}</div>
-
+          >{`글 전체보기 (${entirePosts.length})`}</div>
 
           <div>
             {Object.entries(tagCount).map(([tag, count]) => (

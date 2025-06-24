@@ -1,22 +1,24 @@
 .buttons {
   width: 100vw;
   position: absolute;
-  top: 5%;
-  right: 22%;
+  top: 8%;
+  right: 20.9%;
   margin: 20px;
   display: flex;
   flex-direction: row-reverse;
-  gap: 7px;
+  gap: 4px;
   max-width: 100%;
 }
 .write_button {
   background: none;
   border: none;
-  padding: 6px 0 0 6px;
+  padding: 6px 0 0 0;
   width: 40px;
   height: 35px;
   line-height: 35px;
   cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: 10px;
 }
 .write_button > img {
   width: 25px;
@@ -30,6 +32,8 @@
   height: 35px;
   line-height: 35px;
   cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: 10px;
 }
 .sort_button > img {
   width: 30px;
@@ -43,6 +47,8 @@
   height: 35px;
   line-height: 35px;
   cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: 10px;
 }
 .check_delete_button > img {
   width: 25px;
@@ -56,7 +62,7 @@
 }
 
 .content_wrap {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -90,6 +96,9 @@
   text-overflow: ellipsis;
   margin: 6px 0;
 }
+.postList_wrapper {
+  width: 100%;
+}
 
 @media (max-width: 1400px) {
   .list_wrapper {
@@ -98,7 +107,7 @@
     align-items: flex-start;
   }
   .tag_wrapper {
-    position: static; 
+    position: static;
     border: none;
     height: auto;
     padding: 10px 25px 10px 10px;
@@ -107,11 +116,10 @@
   }
 
   .content_wrap {
-    width: 100%; 
+    width: 100%;
     flex: 6;
   }
   .buttons {
-    top: 8%;
-    right: 10.5%;
+    right: 9.5%;
   }
 }

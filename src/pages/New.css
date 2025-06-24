@@ -8,6 +8,7 @@
   overflow: auto;
   gap: 10px;
 }
+
 .New::-webkit-scrollbar {
   width: 1px;
 }
@@ -18,9 +19,14 @@
   width: 100%;
   height: 80px;
 }
+.gotoCal {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 .header_content img {
-  width: 125px;
-  height: 85px;
+  width: 130px;
+  height: 90px;
 }
 
 .content_wrapper {
@@ -59,8 +65,6 @@
   font-size: medium;
   min-height: 0; /* flex-item overflow 방지 */
 }
-
-
 
 /* 버튼 */
 .New > .button_content {
