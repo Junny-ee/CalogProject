@@ -30,9 +30,16 @@ function ModalCreate({ isOpen, onModal, modalType }) {
       alert("날짜를 입력해주세요!");
       return;
     }
+    if (start > end) {
+      alert("시작날짜가 끝나는 날짜보다 클 수 없습니다.");
+      return;
+    }
     if (!contents) {
       alert("내용을 입력해주세요!");
       return;
+    }
+    if (!color) {
+      setColor("blue");
     }
 
     onCreate(modalType, title, color, start, end, contents);
@@ -90,7 +97,6 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 id="blue"
                 value={"blue"}
                 onChange={(e) => setColor(e.target.value)}
-                checked
               />
               <input
                 className="radio radio_yellow"

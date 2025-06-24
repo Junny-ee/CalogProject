@@ -57,6 +57,7 @@
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
     width 0.3s ease-in-out;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 요약창 그림자 */
 }
 
 .Calendar .right-content.open {

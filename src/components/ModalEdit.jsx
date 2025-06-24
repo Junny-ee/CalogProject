@@ -30,6 +30,10 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
       alert("날짜를 입력해주세요!");
       return;
     }
+    if (start > end) {
+      alert("시작날짜가 끝나는 날짜보다 클 수 없습니다.");
+      return;
+    }
     if (!description) {
       alert("내용을 입력해주세요!");
       return;
