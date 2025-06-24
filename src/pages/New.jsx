@@ -26,18 +26,24 @@ const New = () => {
       return alert("제목이나 내용이 비어있습니다!");
     }
     if (title.length > 100) {
-      return alert("제목에는 100자 이상 쓸 수 없습니다!")
+      return alert("제목에는 100자 이상 쓸 수 없습니다!");
     }
     const currentId = onCreate(title, tags, content);
     nav(`/read/${currentId}`, { replace: true });
   };
 
-
-
   return (
     <div className="New">
       <div className="header_content">
-        <img src="/logo_image_width.png" alt="가로 버전 로고" />
+        <button
+          className="gotoCal"
+          onClick={() => {
+            nav("/");
+            alert("글 작성을 멈추고 캘린더로 이동합니다");
+          }}
+        >
+          <img src="/logo_image_width.png" alt="가로 버전 로고" />
+        </button>
         <Button
           text={"✕"}
           onClick={() => {
