@@ -45,7 +45,7 @@ const Calendar = () => {
   const calendarRef = useRef(0);
   const [isScheduleListOpen, setIsScheduleListOpen] = useState(true);
   const [isSummaryOpen, setIsSummaryOpen] = useState(true);
-  const [isThemeChange, setIsThemeChange] = useState();
+  const [isThemeChange, setIsThemeChange] = useState(false);
   const { selectedDate } = useCalendar(); //날짜 선택 context
   const nav = useNavigate();
   const [wheelAction, setWheelAction] = useState(new Date());
@@ -135,7 +135,6 @@ const Calendar = () => {
               <button className="button_summary" onClick={toggleSummary}>
                 요약창 펼침/닫힘 버튼
               </button>
-
               <button className="button_theme" onClick={toggleTheme}>
                 테마 설정 버튼
               </button>
@@ -163,6 +162,9 @@ const Calendar = () => {
             <div
               className={`right-content ${isScheduleListOpen ? "open" : ""}`}
             >
+              {/* <button onClick={() => nav("/backboard")}>
+                백보드 이동 버튼
+              </button> */}
               <ScheduleList calendarData={wheelAction} />
             </div>
           </div>

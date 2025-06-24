@@ -35,6 +35,7 @@ export async function getHolidayEventsByYears(
         axios
           .get(url, { params })
           .then((response) => {
+            // console.log("✅ 응답 구조 확인:", response.data);
             const items = response.data.response.body.items?.item;
             if (!items) return [];
 
