@@ -7,6 +7,9 @@
   overflow-y: auto;
   max-height: 100px;
 }
+.tag_write_container::-webkit-scrollbar {
+  width: 1px;
+}
 
 .tag_input_field {
   width: 100%;

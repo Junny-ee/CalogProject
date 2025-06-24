@@ -2,16 +2,13 @@ import { useEffect, useState, createContext, useContext } from "react";
 import "./BackBoardMain.css";
 import BackPostList from "./BackPostList";
 import { useNavigate } from "react-router-dom";
-import { CalogStateContext, TagStateContext } from "../App";
+import { CalogStateContext } from "../App";
 
 // props: id, title, createDate, content, tag
 export const BackBoardDispatchContext = createContext();
 
 const BackBoard = () => {
-  // postContent
   const postContent = useContext(CalogStateContext);
-  const tag = useContext(TagStateContext);
-  console.log(tag);
   const [contents, setContents] = useState(postContent);
 
   const deleteContent = (id) => {
@@ -51,6 +48,9 @@ const BackBoard = () => {
   };
 
   const onChange = (event) => {
+    if (searchingTag !== "") {
+      setSearchingTag("");
+    }
     setSearchWord(event.target.value);
   };
 
@@ -65,11 +65,11 @@ const BackBoard = () => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-        )
+        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+      )
       : typeof item.tag === "string"
-      ? item.tag.includes(lowerCaseSearchWord)
-      : false;
+        ? item.tag.includes(lowerCaseSearchWord)
+        : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
@@ -78,8 +78,8 @@ const BackBoard = () => {
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
       : typeof item.tag === "string"
-      ? item.tag.includes(searchingTag.toLowerCase())
-      : false;
+        ? item.tag.includes(searchingTag.toLowerCase())
+        : false;
 
     return tagIncludes;
   });
@@ -123,7 +123,6 @@ const BackBoard = () => {
           onChange={onChange}
         />
       </div>
-      {/* 태그별 조회 시에도 검색창 유지할거면 검색 태그별 조회 상태에서 검색 작동하게 수정하기 */}
       <div className="list_wrapper">
         <BackBoardDispatchContext.Provider
           value={{

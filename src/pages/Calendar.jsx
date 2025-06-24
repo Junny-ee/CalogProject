@@ -78,26 +78,28 @@ const Calendar = () => {
     });
     setIsLoading(false);
   }, []);
-  const onCreate = (type, title, start, end, contents) => {
+  const onCreate = (type, title, color, start, end, contents) => {
     dispatch({
       name: "create",
       data: {
         type,
         id: calendarRef.current++,
         title, // key와 value 가 같을경우 하나만 써도 됨
+        color,
         start,
         end,
         contents,
       },
     });
   };
-  const onUpdate = (type, id, title, start, end, contents) => {
+  const onUpdate = (type, id, title, color, start, end, contents) => {
     dispatch({
       name: "update",
       data: {
         type,
         id,
         title,
+        color,
         start,
         end,
         contents,
@@ -120,7 +122,9 @@ const Calendar = () => {
           value={{ onCreate, onUpdate, onDelete }}
         >
           <div className="Calendar">
-            <div className="left-content">
+            <div
+              className={`left-content ${isSummaryOpen ? "summary-open" : ""}`}
+            >
               <button className="button_schedule" onClick={toggleScheduleList}>
                 할 일 목록 펼침/닫힘 버튼
               </button>

@@ -1,17 +1,24 @@
-import { useContext } from "react";
 import "./ScheduleItem.css";
 import { ScheduleDispatchContext } from "../pages/Calendar";
+import { useContext } from "react";
+import Button from "./Button";
 const ScheduleItem = ({ data, onItemClick }) => {
   const handleItemClick = () => {
     if (onItemClick) {
       onItemClick(data);
     }
   };
-
+  const { onDelete } = useContext(ScheduleDispatchContext);
+  const onhandle = () => {
+    onDelete(data.id);
+  };
   return (
     <div className="ScheduleItem">
       <div className="ScheduleItem_header">
-        <p>{data.startDate}</p>
+        <p>{`${new Date(data.start).getMonth() + 1}.${new Date(
+          data.start
+        ).getDate()}.`}</p>
+        <Button text={"삭제"} classtype={"Delete"} onClick={onhandle}></Button>
         <a className="ScheduleItem_title" onClick={handleItemClick}>
           {data.title}
         </a>

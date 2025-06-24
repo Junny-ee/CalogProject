@@ -80,6 +80,7 @@ const ScheduleList = () => {
         <div className={`Todo-content ${isOpenItem ? "open" : ""}`}>
           {schedule_data
             .filter((item) => item.type === "item")
+            .sort((a, b) => new Date(a.start) - new Date(b.start))
             .map((item) => (
               <ScheduleItem
                 key={item.id}

@@ -8,11 +8,13 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
   const [start, setStartDate] = useState("");
   const [end, setEndDate] = useState("");
   const [description, setDescription] = useState("");
+  const [color, setColor] = useState("");
   const { onUpdate, onDelete } = useContext(ScheduleDispatchContext);
 
   useEffect(() => {
     if (isOpen && data) {
       setTitle(data.title);
+      setColor(data.color);
       setStartDate(data.start);
       setEndDate(data.end);
       setDescription(data.contents);
@@ -20,10 +22,25 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
   }, [isOpen, data]);
 
   const handleSave = () => {
+    if (!title) {
+      alert("제목을 입력해주세요!");
+      return;
+    }
+    if (!start) {
+      alert("날짜를 입력해주세요!");
+      return;
+    }
+    if (!contents) {
+      alert("내용을 입력해주세요!");
+      return;
+    }
+    if (!color) {
+      setColor("blue");
+    }
     if (modalType === "project") {
-      onUpdate(data.type, data.id, title, start, end, description);
+      onUpdate(data.type, data.id, title, color, start, end, description);
     } else {
-      onUpdate(data.type, data.id, title, start, end, description);
+      onUpdate(data.type, data.id, title, color, start, end, description);
     }
     onModal(false); // 모달 닫기
   };
@@ -76,6 +93,49 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 onChange={(e) => setEndDate(e.target.value)}
               />
             </div>
+            <div className="radio_container">
+              <label>색상 선택</label>
+              <input
+                className="radio radio_blue"
+                type="radio"
+                name="colorSelect"
+                id="blue"
+                value={"blue"}
+                onChange={(e) => setColor(e.target.value)}
+              />
+              <input
+                className="radio radio_yellow"
+                type="radio"
+                name="colorSelect"
+                id="yellow"
+                value={"yellow"}
+                onChange={(e) => setColor(e.target.value)}
+              />
+              <input
+                className="radio radio_green"
+                type="radio"
+                name="colorSelect"
+                id="green"
+                value={"green"}
+                onChange={(e) => setColor(e.target.value)}
+              />
+              <input
+                className="radio radio_black"
+                type="radio"
+                name="colorSelect"
+                id="black"
+                value={"black"}
+                onChange={(e) => setColor(e.target.value)}
+              />
+              <input
+                className="radio radio_pink"
+                type="radio"
+                name="colorSelect"
+                id="pink"
+                value={"pink"}
+                onChange={(e) => setColor(e.target.value)}
+              />
+            </div>
             <textarea
               className="modal_description"
               placeholder="설명 추가"
@@ -112,6 +172,49 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="datetime-local"
                 value={start}
                 onChange={(e) => setStartDate(e.target.value)}
+              />
+            </div>
+            <div className="radio_container">
+              <label>색상 선택</label>
+              <input
+                className="radio radio_blue"
+                type="radio"
+                name="colorSelect"
+                id="blue"
+                value={"blue"}
+                onChange={(e) => setColor(e.target.value)}
+              />
+              <input
+                className="radio radio_yellow"
+                type="radio"
+                name="colorSelect"
+                id="yellow"
+                value={"yellow"}
+                onChange={(e) => setColor(e.target.value)}
+              />
+              <input
+                className="radio radio_green"
+                type="radio"
+                name="colorSelect"
+                id="green"
+                value={"green"}
+                onChange={(e) => setColor(e.target.value)}
+              />
+              <input
+                className="radio radio_black"
+                type="radio"
+                name="colorSelect"
+                id="black"
+                value={"black"}
+                onChange={(e) => setColor(e.target.value)}
+              />
+              <input
+                className="radio radio_pink"
+                type="radio"
+                name="colorSelect"
+                id="pink"
+                value={"pink"}
+                onChange={(e) => setColor(e.target.value)}
               />
             </div>
             <textarea
