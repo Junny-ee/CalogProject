@@ -17,24 +17,29 @@ const BackPostList = ({ data, entireData }) => {
 
   const getSortedData = () => {
     return data.toSorted((prev, next) => {
-      return Number(sortType === "oldest" ? prev.createDate : next.createDate) -
-        Number(sortType === "oldest" ? next.createDate : prev.createDate);
+      if (sortType === "oldest") {
+        return Number(prev.createDate) - Number(next.createDate);
+      } else {
+        return Number(next.createDate) - Number(prev.createDate);
+      }
     });
   };
 
   const checkedItemHandler = (id, isChecked) => {
     const stringedId = String(id);
-    setCheckedItems(prevCheckedItems => {
+    setCheckedItems((prevCheckedItems) => {
       if (isChecked) {
-        return prevCheckedItems.includes(stringedId) ? prevCheckedItems : [...prevCheckedItems, stringedId];
+        return prevCheckedItems.includes(stringedId)
+          ? prevCheckedItems
+          : [...prevCheckedItems, stringedId];
       } else {
-        return prevCheckedItems.filter(itemId => itemId !== stringedId);
+        return prevCheckedItems.filter((itemId) => itemId !== stringedId);
       }
     });
   };
 
   const allCheck = (checked) => {
-    setCheckedItems(prevCheckedItems => {
+    setCheckedItems((prevCheckedItems) => {
       if (checked) {
         const allItemIds = data.map((item) => String(item.id));
         return allItemIds;
@@ -45,7 +50,7 @@ const BackPostList = ({ data, entireData }) => {
   };
 
   const deleteChecked = () => {
-    checkedItems.forEach(id => onDelete(id));
+    checkedItems.forEach((id) => onDelete(id));
     setCheckedItems([]);
   };
 
@@ -54,8 +59,15 @@ const BackPostList = ({ data, entireData }) => {
   return (
     <>
       <div className="buttons">
-
-        {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>오래된 순</button>) : (<button onClick={() => setSortType("latest")}>최신순</button>)}
+        {sortType === "latest" ? (
+          <button className="sort_button" onClick={() => setSortType("oldest")}>
+            <img src="/oldest_icon.png" alt="오래된 순" />
+          </button>
+        ) : (
+          <button className="sort_button" onClick={() => setSortType("latest")}>
+            <img src="/latest_icon.png" alt="최신순" />
+          </button>
+        )}
         <button className="write_button" onClick={() => nav("/new")}>
           <img src="/write_button.png" alt="" />
         </button>
@@ -66,37 +78,42 @@ const BackPostList = ({ data, entireData }) => {
           checked={checkedItems.length === data.length && data.length > 0}
         />
       </div>
-      <div className="tag_wrapper">
-        <h3>태그 목록</h3>
-        <hr />
-        {/* 개별 태그 개수 표시, (선택)태그별 조회 상태에서 검색 필요*/}
+      <div className="postList_wrapper">
+        <div className="tag_wrapper">
+          <h3>태그 목록</h3>
+          <hr />
+          {/* 개별 태그 개수 표시, (선택)태그별 조회 상태에서 검색 필요*/}
 
-        <div
-          className="tags"
-          onClick={() => setSearchingTag("")}
-        >{`전체보기 (${entireData.length})`}</div>
+          <div
+            className="tags"
+            onClick={() => setSearchingTag("")}
+          >{`전체보기 (${entireData.length})`}</div>
 
-        <div>
-          {Object.entries(tagCount).map(([tag, count]) => (
-            <div className="tags" key={tag} onClick={() => setSearchingTag(tag, count)}>
-              {tag} ({count})
-            </div>
+          <div>
+            {Object.entries(tagCount).map(([tag, count]) => (
+              <div
+                className="tags"
+                key={tag}
+                onClick={() => setSearchingTag(tag, count)}
+              >
+                {tag} ({count})
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="content_wrap">
+          {sortedData.map((item) => (
+            <BackPostItem
+              key={String(item.id)}
+              {...item}
+              id={String(item.id)}
+              checkedItems={checkedItems}
+              checkedItemHandler={checkedItemHandler}
+            />
           ))}
         </div>
       </div>
-      <div className="content_wrap">
-        {sortedData.map((item) => (
-          <BackPostItem
-            key={String(item.id)}
-            {...item}
-            id={String(item.id)}
-            checkedItems={checkedItems}
-            checkedItemHandler={checkedItemHandler}
-          />
-        ))}
-      </div>
     </>
   );
-
 };
 export default BackPostList;

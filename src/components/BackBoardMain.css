@@ -2,7 +2,7 @@
   padding: 9px 8px;
   box-sizing: border-box;
   margin: 0 auto;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .button_wrapper {
@@ -59,7 +59,7 @@ img {
   width: 100%;
   max-width: 300px;
   height: 30px;
-  margin: 20px 20px 20px auto;
+  margin: 40px 20px 20px auto;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;

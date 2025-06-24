@@ -20,7 +20,6 @@ const BackBoard = () => {
 
   const [searchWord, setSearchWord] = useState("");
   const [searchingTag, setSearchingTag] = useState("");
-  const [showSearchBar, setShowSearchBar] = useState(true);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -103,17 +102,7 @@ const BackBoard = () => {
           <img src="/gotoup.png" />
         </button>
       ) : null}
-      {/* {showSearchBar ? (
-        <div className="search">
-          <input
-            type="text"
-            value={searchWord}
-            className="search_input"
-            placeholder="검색어를 입력하세요"
-            onChange={onChange}
-          />
-        </div>
-      ) : null} */}
+  
       <div className="search">
         <input
           type="text"
@@ -129,7 +118,6 @@ const BackBoard = () => {
             deleteContent,
             setSearchWord,
             setSearchingTag,
-            setShowSearchBar,
           }}
         >
           {searchingTag ? (
