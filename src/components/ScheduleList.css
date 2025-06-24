@@ -5,24 +5,31 @@
 }
 .ScheduleList_Wirte {
   display: flex;
-  border: 1px solid #000;
   flex-shrink: 0;
+  justify-content: center;
+  background-color: rgb(255, 190, 201);
+  border-radius: 5px 5px 0px 0px;
 }
 .ScheduleList_Contents {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
   overflow-y: auto;
-  border: 1px solid #000;
   /* overflow: hidden; */
 }
+.Todo-content.open::-webkit-scrollbar {
+  width: 1px;
+}
 .ScheduleList_Todo {
-  border: 1px solid #000;
+  background-color: rgb(248, 218, 223);
   display: flex;
-  align-items: stretch;
+  justify-content: space-around;
+  align-items: center;
   flex-shrink: 0;
 }
-
+.Button_wrapper {
+  display: flex;
+}
 .Todo-content {
   flex-grow: 0;
   height: 0;
