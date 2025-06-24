@@ -19,12 +19,11 @@ const ScheduleItem = ({ data, onItemClick }) => {
           data.start
         ).getDate()}.`}</p>
         <Button text={"삭제"} classtype={"Delete"} onClick={onhandle}></Button>
+      </div>
+      <div className="SchduleItem_contents">
         <a className="ScheduleItem_title" onClick={handleItemClick}>
           {data.title}
         </a>
-        {/* ScheduleItem 에서는 ModalWindow 를 직접 렌더링 하지 않습니다. */}
-      </div>
-      <div className="SchduleItem_contents">
         <p>{data.contents}</p>
       </div>
     </div>

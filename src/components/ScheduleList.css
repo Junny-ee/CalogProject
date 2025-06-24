@@ -1,13 +1,16 @@
 .ScheduleList {
-  height: 770px;
+  width: 100%;
+  height: 100%; /* 770px 였음*/
   display: flex;
   flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 요약창 그림자 */
+  border-radius: 10px;
 }
 .ScheduleList_Wirte {
   display: flex;
   flex-shrink: 0;
   justify-content: center;
-  background-color: rgb(255, 190, 201);
+  background-color: rgba(255, 208, 216, 0.719);
   border-radius: 5px 5px 0px 0px;
 }
 .ScheduleList_Contents {
@@ -21,7 +24,7 @@
   width: 1px;
 }
 .ScheduleList_Todo {
-  background-color: rgb(248, 218, 223);
+  background-color: rgb(255, 244, 246);
   display: flex;
   justify-content: space-around;
   align-items: center;
