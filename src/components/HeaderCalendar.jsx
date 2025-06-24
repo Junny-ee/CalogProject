@@ -1,5 +1,4 @@
 import moment from "moment";
-import "moment/locale/ko";
 import "./HeaderCalendar.css";
 
 import { useContext } from "react";
@@ -14,7 +13,7 @@ const HeaderCalendar = ({ date, onClick }) => {
   return (
     <div className="HeaderCalendar">
       <button className="current-month-button" onClick={onClick}>
-        {moment(date).format("MMMM YYYY")}
+        {moment(date).format("YYYY년 M월")}
       </button>
       <div className="Calendar_Button">
         <button className="button_schedule" onClick={toggleScheduleList}>
