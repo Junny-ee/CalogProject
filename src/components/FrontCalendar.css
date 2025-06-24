@@ -1,9 +1,11 @@
 .FrontCalendar {
-  border: 1px solid #000000;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 244, 246);
 }
 
 .FrontCalendar_container {
@@ -11,9 +13,6 @@
   min-height: 0;
   overflow: hidden;
   transition: flex-grow 0.3s ease-in-out;
-}
-.Calendar .left-content.summary-open .FrontCalendar_container {
-  min-height: 0;
 }
 
 .rbc-calendar {
@@ -42,7 +41,7 @@
 
 /* 각 날짜 셀 (숫자 부분) 스타일 */
 .rbc-date-cell {
-  padding: 10px; /* 날짜 숫자 주변 패딩 */
+  padding: 5px; /* 날짜 숫자 주변 패딩 */
   font-weight: 500;
   font-size: 1.1em;
 }

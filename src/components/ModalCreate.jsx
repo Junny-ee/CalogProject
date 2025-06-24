@@ -90,7 +90,6 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 id="blue"
                 value={"blue"}
                 onChange={(e) => setColor(e.target.value)}
-                checked
               />
               <input
                 className="radio radio_yellow"
