@@ -68,7 +68,7 @@ img {
 }
 
 .search:focus-within {
-  border: 1px solid black;
+  border: 2px solid black;
 }
 
 .search_input {

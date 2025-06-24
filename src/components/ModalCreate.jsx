@@ -34,9 +34,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
       alert("내용을 입력해주세요!");
       return;
     }
-    if (!color) {
-      setColor("blue");
-    }
+
     onCreate(modalType, title, color, start, end, contents);
     onModal(false);
   };
@@ -92,6 +90,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 id="blue"
                 value={"blue"}
                 onChange={(e) => setColor(e.target.value)}
+                checked
               />
               <input
                 className="radio radio_yellow"
@@ -176,7 +175,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 type="radio"
                 name="colorSelect"
                 id="yellow"
-                value={"yellow"}
+                value={"green"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input

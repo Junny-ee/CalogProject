@@ -207,19 +207,19 @@
   border: 2px solid #ccc; /* 기본 테두리 색상 */
 }
 .radio_container .radio_blue {
-  background-color: blue;
+  background-color: #a7c7e7;
 }
 .radio_container .radio_yellow {
-  background-color: yellow;
+  background-color: #fdfd96;
 }
 .radio_container .radio_green {
-  background-color: green;
+  background-color: #b2d8b2;
 }
 .radio_container .radio_black {
-  background-color: black;
+  background-color: #e0e0e0;
 }
 .radio_container .radio_pink {
-  background-color: pink;
+  background-color: #ffb6c1;
 }
 .radio_container input[type="radio"]:checked {
   box-shadow: 0 0 0 1px white, 0 0 0 2px #333; /* 선택 효과 */

@@ -30,13 +30,11 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
       alert("날짜를 입력해주세요!");
       return;
     }
-    if (!contents) {
+    if (!description) {
       alert("내용을 입력해주세요!");
       return;
     }
-    if (!color) {
-      setColor("blue");
-    }
+
     if (modalType === "project") {
       onUpdate(data.type, data.id, title, color, start, end, description);
     } else {

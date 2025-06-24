@@ -20,20 +20,6 @@
   flex: 1.5;
 }
 
-.FrontCalendar {
-  border: 1px solid #000000;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-.FrontCalendar_container {
-  flex-grow: 1;
-  min-height: 700px;
-  overflow: hidden;
-  transition: min-height 0.3s ease-in-out;
-}
-
 .Calendar .left-content.summary-open .FrontCalendar_container {
   min-height: 450px;
 }
@@ -55,6 +41,7 @@
 }
 
 .Calendar .right-content {
+  padding: 1rem;
   position: relative;
   width: 0;
   flex-shrink: 0;
@@ -67,6 +54,7 @@
 }
 
 .Calendar .right-content.open {
+  display: flex;
   transform: translateX(0);
   width: 30%;
   opacity: 1;
@@ -79,14 +67,14 @@
   cursor: pointer;
 }
 .rbc-header:nth-child(1) {
-  color: red; /* 일요일 (Sun) */
+  color: #f56868; /* 일요일 (Sun) */
 }
 .rbc-header:nth-child(7) {
-  color: blue; /* 토요일 (Sat) */
+  color: #6868fc; /* 토요일 (Sat) */
 }
 .rbc-month-row .rbc-date-cell:nth-child(1) .rbc-button-link {
-  color: red !important; /* 일요일 숫자 */
+  color: #f56868 !important; /* 일요일 숫자 */
 }
 .rbc-month-row .rbc-date-cell:nth-child(7) .rbc-button-link {
-  color: blue !important; /* 토요일 숫자 */
+  color: #6868fc !important; /* 토요일 숫자 */
 }

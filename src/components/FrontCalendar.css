@@ -5,31 +5,84 @@
   flex-direction: column;
   flex-grow: 1;
 }
+
 .FrontCalendar_container {
   flex-grow: 1;
   min-height: 0;
   overflow: hidden;
+  transition: flex-grow 0.3s ease-in-out;
 }
 .Calendar .left-content.summary-open .FrontCalendar_container {
-  min-height: 0; /* 👈 여기도 0으로 변경합니다. */
+  min-height: 0;
 }
+
+.rbc-calendar {
+  border: none; /* 캘린더 전체 border 제거 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 은은한 그림자 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  overflow: hidden; /* 그림자가 잘리거나 하는 문제 방지 */
+}
+
+.rbc-month-view .rbc-header {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee; /* 요일 아래 얇은 구분선 */
+  font-weight: 500; /* 깔끔한 두께 */
+  color: #777; /* 부드러운 회색 */
+  background-color: #f8f8f8; /* 요일 헤더 배경색 */
+}
+
 .rbc-day-bg {
   cursor: pointer;
-  /* background-color: blue; */
+  background-color: transparent; /* 기본 배경색 투명하게 */
 }
 
-.rbc-header:nth-child(1) {
-  color: red; /*일요일 (Sun)*/
+.rbc-day-bg + .rbc-day-bg {
+  border-left: none; /* 날짜 셀 사이의 세로 구분선 제거 */
 }
 
-.rbc-header:nth-child(7) {
-  color: blue; /*토요일 (Sat)*/
+/* 각 날짜 셀 (숫자 부분) 스타일 */
+.rbc-date-cell {
+  padding: 10px; /* 날짜 숫자 주변 패딩 */
+  font-weight: 500;
+  font-size: 1.1em;
 }
 
-.rbc-month-row .rbc-date-cell:nth-child(1) .rbc-button-link {
-  color: red !important; /* 일요일 숫자 */
+/* 현재 달에 속하지 않는 날짜 (이전/다음 달 날짜) */
+.rbc-off-range-bg {
+  background-color: #fdfdfd; /* 현재 달이 아닌 날짜 배경색을 더 밝게 */
+  border-bottom: 1px solid #eee; /* 가로 구분선 유지 */
 }
 
-.rbc-month-row .rbc-date-cell:nth-child(7) .rbc-button-link {
-  color: blue !important; /* 토요일 숫자 */
+.rbc-off-range-bg .rbc-button-link {
+  color: #ccc !important; /* 이전/다음 달 날짜 숫자 색상을 연하게 */
+}
+
+/* 이벤트 막대바 스타일 */
+.rbc-event {
+  border: none !important; /* 이벤트 막대바 border 제거 */
+  border-radius: 4px; /* 둥근 모서리 */
+  padding: 2px 6px; /* 패딩 조정 */
+  font-size: 0.85em; /* 글꼴 크기 */
+  line-height: 1.3;
+  margin-bottom: 2px; /* 이벤트 바 사이 간격 */
+  /* background-color 및 color는 eventPropGetter에서 설정되므로 여기서 직접 지정하지 않음 */
+  opacity: 0.9; /* 약간 투명하게 하여 파스텔 느낌 강조 */
+  transition: opacity 0.2s ease-in-out; /* 호버 시 부드러운 전환 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+}
+
+.rbc-event:hover {
+  opacity: 1; /* 호버 시 선명하게 */
+}
+
+/* 지난 이벤트 스타일 */
+.rbc-event[style*="background-color: rgb(230, 230, 230)"] {
+  /* #e6e6e6 */
+  background-color: #efefef !important; /* 더 부드러운 회색 */
+  color: #999 !important;
+}
+
+/* 그리드 라인 제거 */
+.rbc-month-row {
+  border: none; /* 월별 행 사이의 border 제거 */
 }
