@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef, createContext, useContext } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
@@ -34,7 +33,7 @@ const FrontCalendar = ({ events }) => {
   const [modalOpen, setmodalOpen] = useState(false);
   const [mergedEvents, setMergedEvents] = useState([]); // 공휴일 api
   const calendarRef = useRef(null);
-  const nav = useNavigate();
+  // const nav = useNavigate();
   const { selectedDate, setselectedDate } = useCalendar();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 모달 열고닫기
   const [selectedEventForEdit, setSelectedEventForEdit] = useState(null); // 수정할 값 저장
@@ -101,7 +100,7 @@ const FrontCalendar = ({ events }) => {
   return (
     <div className="FrontCalendar">
       <HeaderCalendar date={date} onClick={() => setmodalOpen(true)} />
-      <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button>
+      {/* <button onClick={() => nav("/backboard")}>백보드 이동 버튼</button> */}
       <div className="FrontCalendar_container" ref={calendarRef}>
         <Calendar
           localizer={localizer}
@@ -166,27 +165,27 @@ const FrontCalendar = ({ events }) => {
               // `event.color`는 ModalCreate에서 저장된 색상 값 ('blue', 'yellow' 등)을 가집니다.
               switch (e.color) {
                 case "blue":
-                  backgroundColor = "blue";
+                  backgroundColor = "#A7C7E7";
                   color = "white";
                   break;
                 case "yellow":
-                  backgroundColor = "yellow";
+                  backgroundColor = "#FDFD96";
                   color = "black"; // 노란색 배경에는 검은색 글씨가 잘 보입니다.
                   break;
                 case "green":
-                  backgroundColor = "green";
+                  backgroundColor = "#B2D8B2";
                   color = "white";
                   break;
                 case "black":
-                  backgroundColor = "black";
+                  backgroundColor = "#E0E0E0";
                   color = "white";
                   break;
                 case "pink":
-                  backgroundColor = "pink";
+                  backgroundColor = "#FFB6C1";
                   color = "black"; // 핑크색 배경에는 검은색 글씨가 잘 보입니다.
                   break;
                 default:
-                  backgroundColor = "#3174ad"; // 기본 이벤트 색상 (React Big Calendar 기본값)
+                  backgroundColor = "#5a9ad2"; // 기본 이벤트 색상 (React Big Calendar 기본값)
                   color = "white";
                   break;
               }

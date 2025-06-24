@@ -30,13 +30,11 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
       alert("날짜를 입력해주세요!");
       return;
     }
-    if (!contents) {
+    if (!description) {
       alert("내용을 입력해주세요!");
       return;
     }
-    if (!color) {
-      setColor("blue");
-    }
+
     if (modalType === "project") {
       onUpdate(data.type, data.id, title, color, start, end, description);
     } else {
@@ -100,7 +98,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="blue"
-                value={"blue"}
+                value={"#A7C7E7"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -108,7 +106,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="yellow"
-                value={"yellow"}
+                value={"#FDFD96"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -116,7 +114,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="green"
-                value={"green"}
+                value={"#B2D8B2"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -124,7 +122,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="black"
-                value={"black"}
+                value={"#E0E0E0"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -132,7 +130,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="pink"
-                value={"pink"}
+                value={"#FFB6C1"}
                 onChange={(e) => setColor(e.target.value)}
               />
             </div>
@@ -181,7 +179,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="blue"
-                value={"blue"}
+                value={"#A7C7E7"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -189,7 +187,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="yellow"
-                value={"yellow"}
+                value={"#FDFD96"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -197,7 +195,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="green"
-                value={"green"}
+                value={"#B2D8B2"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -205,7 +203,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="black"
-                value={"black"}
+                value={"#E0E0E0"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -213,7 +211,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
                 type="radio"
                 name="colorSelect"
                 id="pink"
-                value={"pink"}
+                value={"#FFB6C1"}
                 onChange={(e) => setColor(e.target.value)}
               />
             </div>
