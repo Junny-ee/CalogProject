@@ -75,7 +75,7 @@ const BackPostList = ({ posts, entirePosts }) => {
         <div
           className="tags"
           onClick={() => setSearchingTag("")}
-        >{`전체보기 (${entirePosts.length})`}</div>
+        >{`글 전체보기 (${entirePosts.length})`}</div>
 
         <div>
           {Object.entries(tagCount).map(([tag, count]) => (
