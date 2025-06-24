@@ -9,7 +9,7 @@ const HeaderCalendar = ({ date, onClick }) => {
   return (
     <div className="HeaderCalendar">
       <button className="current-month-button" onClick={onClick}>
-        {moment(date).format("MMMM YYYY")}
+        {moment(date).locale("ko").format("YYYY년 M월")}
       </button>
     </div>
   );
