@@ -69,9 +69,11 @@ const BackPostList = ({ data, entireData }) => {
           </button>
         )}
         <button className="write_button" onClick={() => nav("/new")}>
-          <img src="/write_button.png" alt="" />
+          <img src="/write_button.png" alt="작성페이지 이동 버튼" />
         </button>
-        <button onClick={deleteChecked}>체크된 글 삭제하기</button>
+        <button className="check_delete_button" onClick={deleteChecked}>
+          <img src="/all_delete.png" alt="체크 삭제" />
+        </button>
         <input
           type="checkbox"
           onChange={(e) => allCheck(e.target.checked)}
