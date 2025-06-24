@@ -5,8 +5,11 @@
   padding: 10px;
   box-sizing: border-box;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: auto;
   gap: 10px;
+}
+.New::-webkit-scrollbar {
+  width: 1px;
 }
 
 .header_content {
@@ -56,6 +59,8 @@
   font-size: medium;
   min-height: 0; /* flex-item overflow 방지 */
 }
+
+
 
 /* 버튼 */
 .New > .button_content {

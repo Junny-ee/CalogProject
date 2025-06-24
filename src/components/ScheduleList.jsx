@@ -74,12 +74,14 @@ const ScheduleList = ({ calendarData }) => {
       <div className="ScheduleList_Contents">
         <div className="ScheduleList_Todo">
           <p>프로젝트 일정</p>
-          <Button
-            text={"+"}
-            classtype={"Create"}
-            onClick={() => openModal("project")}
-          />
-          <Button text={"👇"} onClick={toggleProject} />
+          <div className="Button_wrapper">
+            <Button
+              text={"+"}
+              classtype={"Create"}
+              onClick={() => openModal("project")}
+            />
+            <Button text={"👇"} onClick={toggleProject} />
+          </div>
         </div>
         <div className={`Todo-content ${isOpenList ? "open" : ""}`}>
           {schedule_data
@@ -102,12 +104,14 @@ const ScheduleList = ({ calendarData }) => {
         </div>
         <div className="ScheduleList_Todo">
           <p>일일 일정</p>
-          <Button
-            text={"+"}
-            classtype={"Create"}
-            onClick={() => openModal("item")}
-          />
-          <Button text={"👇"} onClick={toggleItem} />
+          <div className="Button_wrapper">
+            <Button
+              text={"+"}
+              classtype={"Create"}
+              onClick={() => openModal("item")}
+            />
+            <Button text={"👇"} onClick={toggleItem} />
+          </div>
         </div>
         <div className={`Todo-content ${isOpenItem ? "open" : ""}`}>
           {schedule_data

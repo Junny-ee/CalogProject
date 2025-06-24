@@ -12,6 +12,10 @@
   margin-bottom: 20px;
 }
 
+.write_content_textarea::-webkit-scrollbar {
+  width: 1px;
+}
+
 .button_content {
   display: flex;
   justify-content: flex-end;
@@ -30,4 +34,8 @@
   overflow-wrap: break-word;
   line-height: 1.5;
   flex: 1;
+}
+
+.markdown_preview::-webkit-scrollbar {
+  width: 1px;
 }

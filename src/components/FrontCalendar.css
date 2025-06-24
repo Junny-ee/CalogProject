@@ -1,21 +1,25 @@
 .FrontCalendar {
-  border: 1px solid #000000;
+  border: none;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }
+
 .FrontCalendar_container {
   flex-grow: 1;
   min-height: 0;
   overflow: hidden;
-  padding: 10px; /* 캘린더 주변 여백 추가 */
+  transition: flex-grow 0.3s ease-in-out;
 }
 .Calendar .left-content.summary-open .FrontCalendar_container {
-  min-height: 0; /* 👈 여기도 0으로 변경합니다. */
+  min-height: 0;
 }
 
-/* 캘린더 전체 border 제거 및 그림자 추가 (선택 사항) */
 .rbc-calendar {
   border: none; /* 캘린더 전체 border 제거 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 은은한 그림자 */
@@ -23,7 +27,6 @@
   overflow: hidden; /* 그림자가 잘리거나 하는 문제 방지 */
 }
 
-/* 헤더 (요일) 스타일 */
 .rbc-month-view .rbc-header {
   padding: 12px 0;
   border-bottom: 1px solid #eee; /* 요일 아래 얇은 구분선 */
@@ -32,7 +35,6 @@
   background-color: #f8f8f8; /* 요일 헤더 배경색 */
 }
 
-/* 날짜 셀 (요일 아래 날짜 칸) */
 .rbc-day-bg {
   cursor: pointer;
   background-color: transparent; /* 기본 배경색 투명하게 */
