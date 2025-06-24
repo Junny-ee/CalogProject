@@ -20,7 +20,7 @@
   flex: 1.5;
 }
 
-/* FrontCalendar 컨테이너 (캘린더 본문) */
+lendar 컨테이너 (캘린더 본문) */
 .FrontCalendar {
   border: none; /* 이전 CSS의 border 제거 */
   margin-bottom: 20px;
@@ -67,6 +67,7 @@
 }
 
 .Calendar .right-content {
+  padding: 1rem;
   position: relative;
   width: 0;
   flex-shrink: 0;
@@ -79,6 +80,7 @@
 }
 
 .Calendar .right-content.open {
+  display: flex;
   transform: translateX(0);
   width: 30%;
   opacity: 1;

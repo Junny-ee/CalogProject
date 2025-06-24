@@ -88,7 +88,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 type="radio"
                 name="colorSelect"
                 id="blue"
-                value={"#A7C7E7"}
+                value={"blue"}
                 onChange={(e) => setColor(e.target.value)}
                 checked
               />
@@ -97,7 +97,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 type="radio"
                 name="colorSelect"
                 id="yellow"
-                value={"#FDFD96"}
+                value={"yellow"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -105,7 +105,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 type="radio"
                 name="colorSelect"
                 id="green"
-                value={"#B2D8B2"}
+                value={"green"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -113,7 +113,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 type="radio"
                 name="colorSelect"
                 id="black"
-                value={"#E0E0E0"}
+                value={"black"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
@@ -121,7 +121,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 type="radio"
                 name="colorSelect"
                 id="pink"
-                value={"#FFB6C1"}
+                value={"pink"}
                 onChange={(e) => setColor(e.target.value)}
               />
             </div>
@@ -175,7 +175,7 @@ function ModalCreate({ isOpen, onModal, modalType }) {
                 type="radio"
                 name="colorSelect"
                 id="yellow"
-                value={"yellow"}
+                value={"green"}
                 onChange={(e) => setColor(e.target.value)}
               />
               <input
