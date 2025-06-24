@@ -7,7 +7,7 @@ import { BackBoardDispatchContext } from "./BackBoardMain";
 import { CalogDispatchContext } from "../App";
 import { TagStateContext } from "../App";
 
-const BackPostList = ({ data, entireData }) => {
+const BackPostList = ({ posts, entirePosts }) => {
   const nav = useNavigate();
   const [sortType, setSortType] = useState("latest");
   const [checkedItems, setCheckedItems] = useState([]);
@@ -16,7 +16,7 @@ const BackPostList = ({ data, entireData }) => {
   const tagCount = useContext(TagStateContext);
 
   const getSortedData = () => {
-    return data.toSorted((prev, next) => {
+    return posts.toSorted((prev, next) => {
       if (sortType === "oldest") {
         return Number(prev.createDate) - Number(next.createDate);
       } else {
@@ -41,7 +41,8 @@ const BackPostList = ({ data, entireData }) => {
   const allCheck = (checked) => {
     setCheckedItems((prevCheckedItems) => {
       if (checked) {
-        const allItemIds = data.map((item) => String(item.id));
+
+        const allItemIds = posts.map((item) => String(item.id));
         return allItemIds;
       } else {
         return [];
@@ -59,15 +60,7 @@ const BackPostList = ({ data, entireData }) => {
   return (
     <>
       <div className="buttons">
-        {sortType === "latest" ? (
-          <button className="sort_button" onClick={() => setSortType("oldest")}>
-            <img src="/oldest_icon.png" alt="오래된 순" />
-          </button>
-        ) : (
-          <button className="sort_button" onClick={() => setSortType("latest")}>
-            <img src="/latest_icon.png" alt="최신순" />
-          </button>
-        )}
+        {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>오래된 순</button>) : (<button onClick={() => setSortType("latest")}>최신순</button>)}
         <button className="write_button" onClick={() => nav("/new")}>
           <img src="/write_button.png" alt="작성페이지 이동 버튼" />
         </button>
@@ -77,19 +70,16 @@ const BackPostList = ({ data, entireData }) => {
         <input
           type="checkbox"
           onChange={(e) => allCheck(e.target.checked)}
-          checked={checkedItems.length === data.length && data.length > 0}
+          checked={posts.length > 0 && checkedItems.length === posts.length}
         />
       </div>
-      <div className="postList_wrapper">
-        <div className="tag_wrapper">
-          <h3>태그 목록</h3>
-          <hr />
-          {/* 개별 태그 개수 표시, (선택)태그별 조회 상태에서 검색 필요*/}
-
-          <div
-            className="tags"
-            onClick={() => setSearchingTag("")}
-          >{`전체보기 (${entireData.length})`}</div>
+      <div className="tag_wrapper">
+        <h3>태그 목록</h3>
+        <hr />
+        <div
+          className="tags"
+          onClick={() => setSearchingTag("")}
+        >{`글 전체보기 (${entirePosts.length})`}</div>
 
           <div>
             {Object.entries(tagCount).map(([tag, count]) => (

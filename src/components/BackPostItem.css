@@ -3,6 +3,8 @@
   height: 300px;
   padding: 10px;
   margin-bottom: 20px;
+  box-sizing: border-box;
+  align-items: center;
   border: none;
   border-bottom: 1px solid lightgray;
 }

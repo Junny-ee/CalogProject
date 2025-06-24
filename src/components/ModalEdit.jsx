@@ -30,7 +30,7 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
       alert("날짜를 입력해주세요!");
       return;
     }
-    if (!contents) {
+    if (!description) {
       alert("내용을 입력해주세요!");
       return;
     }
