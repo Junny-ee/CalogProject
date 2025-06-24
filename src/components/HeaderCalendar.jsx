@@ -1,11 +1,16 @@
 import React from "react";
 import moment from "moment";
+import "moment/locale/ko";
 import "./HeaderCalendar.css";
+
+moment.locale("ko"); // 한국어 적용
 
 const HeaderCalendar = ({ date, onClick }) => {
   return (
     <div className="HeaderCalendar">
-      <button onClick={onClick}>{moment(date).format("MMMM YYYY")}</button>
+      <button className="current-month-button" onClick={onClick}>
+        {moment(date).format("MMMM YYYY")}
+      </button>
     </div>
   );
 };

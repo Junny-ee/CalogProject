@@ -59,11 +59,7 @@ const BackPostList = ({ posts, entirePosts }) => {
   return (
     <>
       <div className="buttons">
-        {sortType === "latest" ? (
-          <button onClick={() => setSortType("oldest")}>오래된 순</button>
-        ) : (
-          <button onClick={() => setSortType("latest")}>최신순</button>
-        )}
+        {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>오래된 순</button>) : (<button onClick={() => setSortType("latest")}>최신순</button>)}
         <button className="write_button" onClick={() => nav("/new")}>
           <img src="/write_button.png" alt="작성페이지 이동 버튼" />
         </button>

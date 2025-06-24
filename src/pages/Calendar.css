@@ -20,20 +20,6 @@
   flex: 1.5;
 }
 
-.FrontCalendar {
-  border: 1px solid #000000;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-.FrontCalendar_container {
-  flex-grow: 1;
-  min-height: 700px;
-  overflow: hidden;
-  transition: min-height 0.3s ease-in-out;
-}
-
 .Calendar .left-content.summary-open .FrontCalendar_container {
   min-height: 450px;
 }
@@ -43,8 +29,12 @@
   opacity: 0;
   pointer-events: none;
   overflow: hidden;
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; /* flex-grow는 여기서 제거 */
-  border: 1px solid black;
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  border: none; /* 이전 CSS의 border 제거 */
+  border-radius: 10px; /* 둥근 모서리 */
+  background-color: #fcfcfc; /* 요약창 배경색 */
+  padding: 0 20px; /* 패딩은 열렸을 때 적용 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 요약창 그림자 */
 }
 
 /* under-content가 열렸을 때 */
@@ -52,9 +42,12 @@
   max-height: 300px;
   opacity: 1;
   pointer-events: auto;
+  padding: 10px 20px; /* 열렸을 때 패딩 */
+  margin-top: 10px; /* 캘린더와의 간격 */
 }
 
 .Calendar .right-content {
+  padding: 1rem;
   position: relative;
   width: 0;
   flex-shrink: 0;
@@ -67,6 +60,7 @@
 }
 
 .Calendar .right-content.open {
+  display: flex;
   transform: translateX(0);
   width: 30%;
   opacity: 1;
@@ -79,14 +73,14 @@
   cursor: pointer;
 }
 .rbc-header:nth-child(1) {
-  color: red; /* 일요일 (Sun) */
+  color: #f56868; /* 일요일 (Sun) */
 }
 .rbc-header:nth-child(7) {
-  color: blue; /* 토요일 (Sat) */
+  color: #6868fc; /* 토요일 (Sat) */
 }
 .rbc-month-row .rbc-date-cell:nth-child(1) .rbc-button-link {
-  color: red !important; /* 일요일 숫자 */
+  color: #f56868 !important; /* 일요일 숫자 */
 }
 .rbc-month-row .rbc-date-cell:nth-child(7) .rbc-button-link {
-  color: blue !important; /* 토요일 숫자 */
+  color: #6868fc !important; /* 토요일 숫자 */
 }
