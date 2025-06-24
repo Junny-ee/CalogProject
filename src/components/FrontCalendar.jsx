@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, createContext, useContext } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import "moment/locale/ko";
+// import "moment/locale/ko";
 import "./FrontCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import CalModalWindow from "./CalModalWindow";
@@ -27,12 +27,12 @@ export const useCalendar = () => {
   return context;
 };
 
-moment.locale("ko"); // 한국어 설정
-moment.updateLocale("ko", {
-  week: {
-    dow: 0, // 일요일 시작
-  },
-});
+// moment.locale("ko"); // 한국어 설정
+// moment.updateLocale("ko", {
+//   week: {
+//     dow: 0, // 일요일 시작
+//   },
+// });
 const localizer = momentLocalizer(moment);
 
 const FrontCalendar = ({ events, onEvent }) => {
@@ -94,44 +94,9 @@ const FrontCalendar = ({ events, onEvent }) => {
       <div className="FrontCalendar_container" ref={calendarRef}>
         <Calendar
           localizer={localizer}
-          formats={{
-            monthHeaderFormat: (date, culture, localizer) =>
-              moment(date).format("YYYY년 M월"),
-
-            dayFormat: (date, culture, localizer) => moment(date).format("D일"),
-
-            weekdayFormat: (date, culture, localizer) =>
-              moment(date).format("dd"), // 일, 월, 화...
-
-            agendaDateFormat: (date, culture, localizer) =>
-              moment(date).format("YYYY년 M월 D일 dddd"),
-
-            agendaTimeFormat: (date, culture, localizer) =>
-              moment(date).format("A h:mm"), // 오전/오후
-          }}
           messages={{
-            date: "날짜",
-            time: "시간",
-            event: "일정",
-            allDay: "종일",
-            week: "주",
-            work_week: "근무 주",
-            day: "일",
-            month: "월",
-            previous: "이전",
-            next: "다음",
-            yesterday: "어제",
-            tomorrow: "내일",
-            today: "오늘",
-            agenda: "일정표",
-            noEventsInRange: "해당 기간에 일정이 없습니다.",
-            showMore: (total) => `+${total}`, // <-- 이게 '+1 more' 부분 바꾸는 핵심!
+            showMore: (total) => `+${total} `, // <-- 이게 '+1 more' 부분 바꾸는 핵심!
           }}
-          tooltipAccessor={(event) =>
-            `${moment(event.start)
-              .locale("ko")
-              .format("YYYY년 M월 D일 dddd")} - ${event.title}`
-          }
           events={mergedEvents}
           date={date} // 달력의 날짜 상태를 내가 제어할지 라이브러리에 맡길지 결정됨
           defaultView="month" //{defaultView || "month"}
