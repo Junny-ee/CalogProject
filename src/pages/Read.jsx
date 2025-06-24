@@ -56,7 +56,6 @@ const Read = () => {
       <div className="read_createDate">
         {new Date(rightNum.createDate).toLocaleDateString()}
       </div>
-      {/* 글 상세보기 창에서 태그 클릭시 태그별 검색 작동 필요*/}
       <div>
         {rightNum.tag.map((tag, idx) => (
           <span

@@ -52,7 +52,7 @@
     align-items: flex-start;
   }
   .tag_wrapper {
-    position: static; /* fixed 제거 → 일반 흐름으로 들어감 */
+    position: static; 
     border: none;
     height: auto;
     padding: 10px 25px 10px 10px;
@@ -61,7 +61,7 @@
   }
 
   .content_wrap {
-    width: 100%; /* 콘텐츠도 꽉 차게 */
+    width: 100%; 
     flex: 6;
   }
 }
