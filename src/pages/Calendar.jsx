@@ -44,12 +44,16 @@ const Calendar = () => {
   const calendarRef = useRef(0);
   const [isScheduleListOpen, setIsScheduleListOpen] = useState(true);
   const [isSummaryOpen, setIsSummaryOpen] = useState(true);
+  const [isThemeChange, setIsThemeChange] = useState();
   const { selectedDate } = useCalendar(); //날짜 선택 context
   const toggleScheduleList = () => {
     setIsScheduleListOpen(!isScheduleListOpen);
   };
   const toggleSummary = () => {
     setIsSummaryOpen(!isSummaryOpen);
+  };
+  const toggleTheme = () => {
+    setIsThemeChange();
   };
   // 여기부터 context랑 reducer 함수
   useEffect(() => {
@@ -122,6 +126,9 @@ const Calendar = () => {
               </button>
               <button className="button_summary" onClick={toggleSummary}>
                 요약창 펼침/닫힘 버튼
+              </button>
+              <button className="button_theme" onClick={toggleTheme}>
+                테마 설정 버튼
               </button>
 
               <FrontCalendar events={calendarData} />

@@ -45,19 +45,28 @@ const FrontCalendar = ({ events }) => {
     fetchMergedEvents();
   }, [events]);
 
+  // useEffect(() => {
+  //   const fetchMergedEvents = async () => {
+  //     const holidays = await getHolidayEventsByYears();
+
+  //     // 공휴일 먼저 정렬되도록 mergedEvents 만들기
+  //     const sortedEvents = [...events, ...holidays].sort((a, b) => {
+  //       // 공휴일이면 우선순위 높음 → 앞에 위치
+  //       if (a.isHoliday && !b.isHoliday) return -1;
+  //       if (!a.isHoliday && b.isHoliday) return 1;
+  //       return 0; // 둘 다 공휴일이거나 둘 다 일반 일정 → 순서 유지
+  //     });
+
+  //     setMergedEvents(sortedEvents);
+  //   };
+  //   fetchMergedEvents();
+  // }, [events]);
+
   //마우스 휠 이벤트 핸들러 함수 정의
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
     newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달  // 휠 아래 → 다음 달
-
-    // const maxYear = new Date().getFullYear() + 2;
-    // const newYear = newDate.getFullYear();
-
-    // if (newYear > maxYear) {
-    //   alert(`⚠️ ${maxYear}년 이후의 공휴일 데이터는 아직 제공되지 않습니다.`);
-    //   return; // 날짜 업데이트 중단
-    // }
 
     setDate(newDate);
   };
@@ -136,10 +145,12 @@ const FrontCalendar = ({ events }) => {
 
             let backgroundColor = "#3174ad";
             let color = "white";
+            let fontSize = "1rem";
 
             if (isHoliday) {
-              backgroundColor = "#EB4444";
-              color = "#ffffff";
+              backgroundColor = "transparent";
+              color = "#EB4444";
+              // fontSize = "xx-small";
             } else if (isPast) {
               backgroundColor = "#e6e6e6";
               color = "#666";
