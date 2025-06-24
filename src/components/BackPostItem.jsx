@@ -77,22 +77,24 @@ const BackPostItem = ({
             ))}
         </div>
       </div>
-      <input
-        type="checkbox"
-        checked={isChecked}
-        value={id}
-        onChange={(e) => check(e)}
-        onClick={(e) => e.stopPropagation()}
-      />
-      <button
-        className="button_delete"
-        onClick={(e) => {
-          e.stopPropagation();
-          onDelete(id);
-        }}
-      >
-        <img src="/delete.png" alt="" />
-      </button>
+      <div className="box_wrap">
+        <input
+          type="checkbox"
+          checked={isChecked}
+          value={id}
+          onChange={(e) => check(e)}
+          onClick={(e) => e.stopPropagation()}
+        />
+        <button
+          className="button_delete"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(id);
+          }}
+        >
+          <img src="/delete.png" alt="" />
+        </button>
+      </div>
     </div>
   );
 };

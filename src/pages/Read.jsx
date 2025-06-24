@@ -37,40 +37,58 @@ const Read = () => {
   };
   return (
     <>
-      <button onClick={() => nav(-1)}>뒤로가는 버튼</button>
-      <button onClick={() => nav(`/edit/${params.id}`)}>수정하기</button>
-      <button
-        onClick={() => {
-          onDelete(params.id);
-          nav("/backboard");
-        }}
-      >
-        삭제하기
-      </button>
-      {scrolled ? (
-        <button id="moveToTopButton" onClick={moveToTop}>
-          <img src="/gotoup.png" />
-        </button>
-      ) : null}
-      <h1>{rightNum.title}</h1>
-      <div className="read_createDate">
-        {new Date(rightNum.createDate).toLocaleDateString()}
-      </div>
-      <div>
-        {rightNum.tag.map((tag, idx) => (
-          <span
-            key={idx}
-            className="read_tag"
-            onClick={() => {
-              nav(-1);
-            }}
-          >
-            #{tag}
-          </span>
-        ))}
-      </div>
-      <div className="read_content">
-        <ReactMarkdown components={markdown}>{rightNum.content}</ReactMarkdown>
+        <div className="btn_wrap">
+          <button className="back_button" onClick={() => nav(-1)}>
+            <img src="/back.png" alt="뒤로가기 버튼" />
+          </button>
+          <div className="btn_wrapp">
+            <button
+              className="edit_btn"
+              onClick={() => nav(`/edit/${params.id}`)}
+            >
+              <img src="/edit_button.png" alt="수정하기 버튼" />
+            </button>
+            <button
+              className="delete_button"
+              onClick={() => {
+                onDelete(params.id);
+                nav("/backboard");
+              }}
+            >
+              <img src="/delete.png" alt="삭제하기" />
+            </button>
+          </div>
+        </div>
+      <div className="Read">
+        {scrolled ? (
+          <button id="moveToTopButton" onClick={moveToTop}>
+            <img src="/gotoup.png" />
+          </button>
+        ) : null}
+
+        <h1>{rightNum.title}</h1>
+        <div className="read_createDate">
+          {new Date(rightNum.createDate).toLocaleDateString()}
+        </div>
+
+        <div className="read_content">
+          <ReactMarkdown components={markdown}>
+            {rightNum.content}
+          </ReactMarkdown>
+        </div>
+        <div>
+          {rightNum.tag.map((tag, idx) => (
+            <span
+              key={idx}
+              className="read_tag"
+              onClick={() => {
+                nav(-1);
+              }}
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
       </div>
     </>
   );

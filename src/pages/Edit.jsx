@@ -51,7 +51,15 @@ const Edit = () => {
   return (
     <div className="Edit">
       <div className="header_content">
-        <img src="/logo_image_width.png" alt="가로 버전 로고" />
+        <button
+          className="gotoCal"
+          onClick={() => {
+            nav("/");
+            alert("글 수정을 멈추고 캘린더로 이동합니다");
+          }}
+        >
+          <img src="/logo_image_width.png" alt="가로 버전 로고" />
+        </button>
         <Button text={"✕"} onClick={() => nav(-1)} classtype={"Cancel"} />
       </div>
       <div className="content_wrapper">
