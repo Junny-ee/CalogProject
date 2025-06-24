@@ -7,7 +7,7 @@ import { BackBoardDispatchContext } from "./BackBoardMain";
 import { CalogDispatchContext } from "../App";
 import { TagStateContext } from "../App";
 
-const BackPostList = ({ data, entireData }) => {
+const BackPostList = ({ posts, entirePosts }) => {
   const nav = useNavigate();
   const [sortType, setSortType] = useState("latest");
   const [checkedItems, setCheckedItems] = useState([]);
@@ -16,9 +16,12 @@ const BackPostList = ({ data, entireData }) => {
   const tagCount = useContext(TagStateContext);
 
   const getSortedData = () => {
-    return data.toSorted((prev, next) => {
-      return Number(sortType === "oldest" ? prev.createDate : next.createDate) -
-        Number(sortType === "oldest" ? next.createDate : prev.createDate);
+    return posts.toSorted((prev, next) => {
+      if (sortType === "oldest") {
+        return Number(prev.createDate) - Number(next.createDate);
+      } else {
+        return Number(next.createDate) - Number(prev.createDate);
+      }
     });
   };
 
@@ -36,7 +39,8 @@ const BackPostList = ({ data, entireData }) => {
   const allCheck = (checked) => {
     setCheckedItems(prevCheckedItems => {
       if (checked) {
-        const allItemIds = data.map((item) => String(item.id));
+
+        const allItemIds = posts.map((item) => String(item.id));
         return allItemIds;
       } else {
         return [];
@@ -54,7 +58,6 @@ const BackPostList = ({ data, entireData }) => {
   return (
     <>
       <div className="buttons">
-
         {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>오래된 순</button>) : (<button onClick={() => setSortType("latest")}>최신순</button>)}
         <button className="write_button" onClick={() => nav("/new")}>
           <img src="/write_button.png" alt="" />
@@ -63,18 +66,16 @@ const BackPostList = ({ data, entireData }) => {
         <input
           type="checkbox"
           onChange={(e) => allCheck(e.target.checked)}
-          checked={checkedItems.length === data.length && data.length > 0}
+          checked={posts.length > 0 && checkedItems.length === posts.length}
         />
       </div>
       <div className="tag_wrapper">
         <h3>태그 목록</h3>
         <hr />
-        {/* 개별 태그 개수 표시, (선택)태그별 조회 상태에서 검색 필요*/}
-
         <div
           className="tags"
           onClick={() => setSearchingTag("")}
-        >{`전체보기 (${entireData.length})`}</div>
+        >{`전체보기 (${entirePosts.length})`}</div>
 
         <div>
           {Object.entries(tagCount).map(([tag, count]) => (
@@ -97,6 +98,5 @@ const BackPostList = ({ data, entireData }) => {
       </div>
     </>
   );
-
 };
 export default BackPostList;

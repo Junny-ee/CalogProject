@@ -28,7 +28,7 @@ export const useCalendar = () => {
 
 const localizer = momentLocalizer(moment);
 
-const FrontCalendar = ({ events }) => {
+const FrontCalendar = ({ events, onEvent }) => {
   const [date, setDate] = useState(new Date());
   const [modalOpen, setmodalOpen] = useState(false);
   const [mergedEvents, setMergedEvents] = useState([]); // 공휴일 api
@@ -56,29 +56,12 @@ const FrontCalendar = ({ events }) => {
     fetchMergedEvents();
   }, [events]);
 
-  // useEffect(() => {
-  //   const fetchMergedEvents = async () => {
-  //     const holidays = await getHolidayEventsByYears();
-
-  //     // 공휴일 먼저 정렬되도록 mergedEvents 만들기
-  //     const sortedEvents = [...events, ...holidays].sort((a, b) => {
-  //       // 공휴일이면 우선순위 높음 → 앞에 위치
-  //       if (a.isHoliday && !b.isHoliday) return -1;
-  //       if (!a.isHoliday && b.isHoliday) return 1;
-  //       return 0; // 둘 다 공휴일이거나 둘 다 일반 일정 → 순서 유지
-  //     });
-
-  //     setMergedEvents(sortedEvents);
-  //   };
-  //   fetchMergedEvents();
-  // }, [events]);
-
   //마우스 휠 이벤트 핸들러 함수 정의
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
     newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달  // 휠 아래 → 다음 달
-
+    onEvent(newDate);
     setDate(newDate);
   };
   // 컴포넌트 mount 후 캘린더 영역에 휠 이벤트 등록/해제

@@ -3,29 +3,51 @@ import "./BackBoardMain.css";
 import BackPostList from "./BackPostList";
 import { useNavigate } from "react-router-dom";
 import { CalogStateContext } from "../App";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { useInView } from 'react-intersection-observer';
 
-// props: id, title, createDate, content, tag
 export const BackBoardDispatchContext = createContext();
 
-const BackBoard = () => {
+const BackBoard = ({ fetchPosts }) => {
   const postContent = useContext(CalogStateContext);
-  const [contents, setContents] = useState(postContent);
+  const queryClient = useQueryClient();
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isLoadingNextPage,
+    refetch
+  } = useInfiniteQuery({
+    queryKey: ['posts'],
+    queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam),
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
+  });
 
-  const deleteContent = (id) => {
-    const deletedContents = [...contents].filter(
-      (content) => content.id !== id
-    );
-    setContents(deletedContents);
-  };
+  const entirePosts = data?.pages.flatMap((page) => page.data) || [];
+
+
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isLoadingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isLoadingNextPage, fetchNextPage]);
+
+
+
+  useEffect(() => {
+
+    queryClient.invalidateQueries(['posts']);
+  }, [postContent, queryClient]);
 
   const [searchWord, setSearchWord] = useState("");
   const [searchingTag, setSearchingTag] = useState("");
-  const [showSearchBar, setShowSearchBar] = useState(true);
   const nav = useNavigate();
-
-  useEffect(() => {
-    setContents(postContent);
-  }, [postContent]);
 
   const [scrolled, setScrolled] = useState(false);
 
@@ -54,7 +76,8 @@ const BackBoard = () => {
     setSearchWord(event.target.value);
   };
 
-  const filteredContents = contents.filter((item) => {
+
+  const filteredPosts = entirePosts.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
     const titleIncludes = item.title
       .toLowerCase()
@@ -74,7 +97,7 @@ const BackBoard = () => {
     return titleIncludes || contentIncludes || tagIncludes;
   });
 
-  const filteredContentsByTag = contents.filter((item) => {
+  const filteredPostsByTag = entirePosts.filter((item) => {
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
       : typeof item.tag === "string"
@@ -103,17 +126,6 @@ const BackBoard = () => {
           <img src="/gotoup.png" />
         </button>
       ) : null}
-      {/* {showSearchBar ? (
-        <div className="search">
-          <input
-            type="text"
-            value={searchWord}
-            className="search_input"
-            placeholder="검색어를 입력하세요"
-            onChange={onChange}
-          />
-        </div>
-      ) : null} */}
       <div className="search">
         <input
           type="text"
@@ -126,10 +138,8 @@ const BackBoard = () => {
       <div className="list_wrapper">
         <BackBoardDispatchContext.Provider
           value={{
-            deleteContent,
             setSearchWord,
             setSearchingTag,
-            setShowSearchBar,
           }}
         >
           {searchingTag ? (
@@ -146,15 +156,16 @@ const BackBoard = () => {
                 </button>
               </span>
               <BackPostList
-                data={filteredContentsByTag}
-                entireData={contents}
-                searchingTag={searchingTag}
+                posts={filteredPostsByTag}
+                entirePosts={entirePosts}
+                searchingTag={searchingTag} s
                 setSearchingTag={setSearchingTag}
               />
             </div>
           ) : (
-            <BackPostList data={filteredContents} entireData={contents} />
+            <BackPostList posts={filteredPosts} entirePosts={entirePosts} />
           )}
+          <div ref={ref}></div>
         </BackBoardDispatchContext.Provider>
       </div>
     </div>
