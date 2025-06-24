@@ -44,7 +44,7 @@ const Summary = ({ date }) => {
           ""
         )}
       </div>
-      <div className="Summary_Contests">
+      <div className="Summary_Contents">
         <SummaryItem data={todaySummary} />
       </div>
     </div>

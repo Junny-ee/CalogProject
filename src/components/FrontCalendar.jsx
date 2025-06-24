@@ -29,7 +29,7 @@ export const useCalendar = () => {
 
 const localizer = momentLocalizer(moment);
 
-const FrontCalendar = ({ events }) => {
+const FrontCalendar = ({ events, onEvent }) => {
   const [date, setDate] = useState(new Date());
   const [modalOpen, setmodalOpen] = useState(false);
   const [mergedEvents, setMergedEvents] = useState([]); // 공휴일 api
@@ -56,20 +56,12 @@ const FrontCalendar = ({ events }) => {
     };
     fetchMergedEvents();
   }, [events]);
-
   //마우스 휠 이벤트 핸들러 함수 정의
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
     newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달  // 휠 아래 → 다음 달
-
-    // const maxYear = new Date().getFullYear() + 2;
-    // const newYear = newDate.getFullYear();
-
-    // if (newYear > maxYear) {
-    //   alert(`⚠️ ${maxYear}년 이후의 공휴일 데이터는 아직 제공되지 않습니다.`);
-    //   return; // 날짜 업데이트 중단
-    // }
+    onEvent(newDate);
 
     setDate(newDate);
   };

@@ -45,6 +45,7 @@ const Calendar = () => {
   const [isScheduleListOpen, setIsScheduleListOpen] = useState(true);
   const [isSummaryOpen, setIsSummaryOpen] = useState(true);
   const { selectedDate } = useCalendar(); //날짜 선택 context
+  const [wheelAction, setWheelAction] = useState(new Date());
   const toggleScheduleList = () => {
     setIsScheduleListOpen(!isScheduleListOpen);
   };
@@ -58,6 +59,7 @@ const Calendar = () => {
       setIsLoading(false); // 로딩완료
       return;
     }
+
     const parseData = JSON.parse(storedData);
     let maxId = 0;
     parseData.forEach((item) => {
@@ -128,7 +130,7 @@ const Calendar = () => {
                 요약창 펼침/닫힘 버튼
               </button>
 
-              <FrontCalendar events={calendarData} />
+              <FrontCalendar events={calendarData} onEvent={setWheelAction} />
               <div className={`under-content ${isSummaryOpen ? "open" : ""}`}>
                 <Summary
                   item={
@@ -148,7 +150,7 @@ const Calendar = () => {
             <div
               className={`right-content ${isScheduleListOpen ? "open" : ""}`}
             >
-              <ScheduleList />
+              <ScheduleList calendarData={wheelAction} />
             </div>
           </div>
         </ScheduleDispatchContext.Provider>
