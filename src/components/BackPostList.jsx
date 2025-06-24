@@ -41,7 +41,6 @@ const BackPostList = ({ posts, entirePosts }) => {
   const allCheck = (checked) => {
     setCheckedItems((prevCheckedItems) => {
       if (checked) {
-
         const allItemIds = posts.map((item) => String(item.id));
         return allItemIds;
       } else {
@@ -60,7 +59,11 @@ const BackPostList = ({ posts, entirePosts }) => {
   return (
     <>
       <div className="buttons">
-        {(sortType === "latest") ? (<button onClick={() => setSortType("oldest")}>오래된 순</button>) : (<button onClick={() => setSortType("latest")}>최신순</button>)}
+        {sortType === "latest" ? (
+          <button onClick={() => setSortType("oldest")}>오래된 순</button>
+        ) : (
+          <button onClick={() => setSortType("latest")}>최신순</button>
+        )}
         <button className="write_button" onClick={() => nav("/new")}>
           <img src="/write_button.png" alt="작성페이지 이동 버튼" />
         </button>
@@ -73,13 +76,14 @@ const BackPostList = ({ posts, entirePosts }) => {
           checked={posts.length > 0 && checkedItems.length === posts.length}
         />
       </div>
-      <div className="tag_wrapper">
-        <h3>태그 목록</h3>
-        <hr />
-        <div
-          className="tags"
-          onClick={() => setSearchingTag("")}
-        >{`글 전체보기 (${entirePosts.length})`}</div>
+      <div className="postList_wrapper">
+        <div className="tag_wrapper">
+          <h3>태그 목록</h3>
+          <hr />
+          <div
+            className="tags"
+            onClick={() => setSearchingTag("")}
+          >{`글 전체보기 (${entirePosts.length})`}</div>
 
           <div>
             {Object.entries(tagCount).map(([tag, count]) => (
