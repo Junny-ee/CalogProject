@@ -27,6 +27,7 @@
   display: flex;
   flex: 3;
   padding: 1rem;
+
   flex-direction: column;
   min-width: 0;
   overflow: hidden;
@@ -95,7 +96,7 @@
   overflow: hidden;
   background-color: var(--main-bg-color); /* 테마 보조 배경색 적용 */
   border-radius: 10px;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .Calendar .right-content.open {
