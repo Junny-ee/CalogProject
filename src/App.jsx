@@ -43,7 +43,7 @@ function reducer(state, action) {
 function tagCounting(data) {
   const tagItemCount = {};
   if (!data) {
-    return;
+    return {};
   }
   data.map((data) => {
     if (Array.isArray(data.tag)) {
@@ -78,6 +78,7 @@ const fetchDatas = async (startIndex = 0) => {
     }, 100); // 빠른 테스트를 위해 100으로 임시 설정함
   });
 };
+const entireDatas = localStorage.getItem("calog");
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
   const [tagCount, setTagCount] = useState({});
@@ -86,30 +87,26 @@ function App() {
 
   useEffect(() => {
     const storedData = localStorage.getItem("calog");
+    let initialData;
     if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      let maxId = 0;
-      parsedData.forEach((item) => {
-        if (Number(item.id) > maxId) {
-          maxId = item.id;
-        }
-      });
-      idRef.current = maxId + 1;
-      dispatch({
-        type: "INIT",
-        data: parsedData,
-      });
+      initialData = JSON.parse(storedData);
     } else {
-      const parsedData = localStorage.setItem(
-        "calog",
-        JSON.stringify(postContent)
-      );
-      dispatch({
-        type: "INIT",
-        data: parsedData,
-      });
+      initialData = postContent;
+      localStorage.setItem("calog", JSON.stringify(postContent));
     }
-    setTagCount(tagCounting(JSON.parse(localStorage.getItem("calog") || "[]")));
+
+    let maxId = 0;
+    initialData.forEach((item) => {
+      if (Number(item.id) > maxId) {
+        maxId = item.id;
+      }
+    });
+    idRef.current = maxId + 1;
+    dispatch({
+      type: "INIT",
+      data: initialData,
+    });
+    setTagCount(tagCounting(initialData));
     setIsLoading(false);
   }, []);
 
@@ -152,7 +149,6 @@ function App() {
   if (isLoading) {
     return <div>데이터 로딩중...</div>;
   }
-
   return (
     <>
       <CalogStateContext.Provider value={data}>
