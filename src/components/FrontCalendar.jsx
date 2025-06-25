@@ -46,7 +46,6 @@ const FrontCalendar = ({ events, onEvent }) => {
         calogData.map((item) => moment(item.createDate).format("YYYY-MM-DD"))
       );
       setCalogDatesSet(dates);
-      console.log(dates);
     } else {
       setCalogDatesSet(new Set());
     }
@@ -197,7 +196,7 @@ const FrontCalendar = ({ events, onEvent }) => {
                   color = "white";
                   break;
                 case "black":
-                  backgroundColor = "#E0E0E0";
+                  backgroundColor = "rgb(248, 209, 137)";
                   color = "white";
                   break;
                 case "pink":

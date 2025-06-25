@@ -7,9 +7,9 @@ import Notfound from "./pages/Notfound";
 import BackBoardMain from "./components/BackBoardMain";
 import FrontCalendar from "./components/FrontCalendar";
 import { CalendarProvider } from "./components/FrontCalendar";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createContext, useEffect, useReducer, useRef, useState } from "react";
-
+import { postContent } from "./util/postContent";
 const queryClient = new QueryClient();
 
 function reducer(state, action) {
@@ -42,6 +42,9 @@ function reducer(state, action) {
 
 function tagCounting(data) {
   const tagItemCount = {};
+  if (!data) {
+    return;
+  }
   data.map((data) => {
     if (Array.isArray(data.tag)) {
       data.tag.map((tag) => {
@@ -72,7 +75,7 @@ const fetchDatas = async (startIndex = 0) => {
       const paginatedData = sortedData.slice(startIndex, endIndex);
       const nextCursor = endIndex < sortedData.length ? endIndex : undefined;
       resolve({ data: paginatedData, nextCursor });
-    }, 100);  // 빠른 테스트를 위해 100으로 임시 설정함
+    }, 100); // 빠른 테스트를 위해 100으로 임시 설정함
   });
 };
 function App() {
@@ -92,6 +95,15 @@ function App() {
         }
       });
       idRef.current = maxId + 1;
+      dispatch({
+        type: "INIT",
+        data: parsedData,
+      });
+    } else {
+      const parsedData = localStorage.setItem(
+        "calog",
+        JSON.stringify(postContent)
+      );
       dispatch({
         type: "INIT",
         data: parsedData,
@@ -152,7 +164,10 @@ function App() {
                   <Route path="/" element={<Calendar />} />
                   <Route path="/" element={<FrontCalendar />} />
                   <Route path="/new" element={<New />} />
-                  <Route path="/backboard" element={<BackBoardMain fetchPosts={fetchDatas} />} />
+                  <Route
+                    path="/backboard"
+                    element={<BackBoardMain fetchPosts={fetchDatas} />}
+                  />
                   <Route path="/edit/:id" element={<Edit />} />
                   <Route path="/read/:id" element={<Read />} />
                   <Route path="/*" element={<Notfound />} />
