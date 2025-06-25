@@ -33,7 +33,9 @@ const ProjectSchedule = ({ data, onItemClick }) => {
               : "완료된 일정입니다."}
           </p>
         </div>
-        <Button text={"삭제"} classtype={"List"} onClick={onhandle}></Button>
+        <button className="list_delete_btn" onClick={onhandle}>
+          <img src="/delete.png" alt="삭제 버튼" />
+        </button>
       </div>
       <div className="ProjectSchedule_contents">
         <a className="ProjectSchedule_title" onClick={handleItemClick}>

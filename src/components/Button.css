@@ -29,10 +29,7 @@
 .Button .ScreenChange {
   color: black;
 }
-.Button .List {
-  background-color: var(--button-default-bg);
-  color: var(--highlight-color);
-}
+
 
 .Button .Cancel {
   background: none;

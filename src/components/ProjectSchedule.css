@@ -1,8 +1,9 @@
 .ProjectSchedule {
-  border-bottom: 1px solid #a7a7a7;
+  border-bottom: 1px solid var(--border-bg-color);
   display: flex;
   flex-direction: column;
-  background-color: var(--secondary-bg-color);
+  background-color: var(--sechdule-default-bg);
+  padding: 7px;
 }
 .ProjectSchedule_title {
   cursor: pointer;
@@ -11,6 +12,7 @@
 .ProjectSchedule_header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .ProjectSchedule_contents {
   display: flex;
