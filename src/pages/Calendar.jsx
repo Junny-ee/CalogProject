@@ -41,8 +41,8 @@ const Calendar = () => {
   const [calendarData, dispatch] = useReducer(reducer, []);
   const [isLoading, setIsLoading] = useState(true);
   const calendarRef = useRef(0);
-  const [isScheduleListOpen, setIsScheduleListOpen] = useState(true);
-  const [isSummaryOpen, setIsSummaryOpen] = useState(true);
+  const [isScheduleListOpen, setIsScheduleListOpen] = useState(false);
+  const [isSummaryOpen, setIsSummaryOpen] = useState(false);
   const [isThemeChange, setIsThemeChange] = useState(false);
   const { selectedDate } = useCalendar(); //날짜 선택 context
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 입력창 여는 state
