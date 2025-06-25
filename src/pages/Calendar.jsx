@@ -130,6 +130,18 @@ const Calendar = () => {
         root.style.setProperty("--accent-blue-color", "#6b6be0");
         root.style.setProperty("--border-bg-color", "#9BA4B4"); // 테두리색
         break;
+      default:
+        root.style.setProperty("--main-bg-color", "#f5f5f5"); // 캘린더 맨뒷배경 색
+        root.style.setProperty("--secondary-bg-color", "#FFFFFF"); //캘린더, 글요약, 할일목록 배경색
+        root.style.setProperty("--sechdule-default-bg", "#FFFFFF"); // //할일 목록 배경색
+        root.style.setProperty("--sub-bg-color", "#f5f5f5"); // 캘린더 요일, 일정 배경색
+        root.style.setProperty("--button-default-bg", "#FFFFFF"); // 버튼 배경색
+        root.style.setProperty("--highlight-color", "#000"); // 버튼 글자색
+        root.style.setProperty("--primary-text-color", "#000"); // 헤더 날짜 제외 모든 글씨색 적용
+        root.style.setProperty("--accent-red-color", "#f08080"); // 일요일 글자색
+        root.style.setProperty("--accent-blue-color", "#8080f0"); // 토요일 글자색
+        root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
+        break;
     }
   }, [themeColor]);
 
