@@ -34,12 +34,6 @@ img {
   height: 90px;
 }
 
-.list_wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .search {
   display: flex;
   width: 100%;

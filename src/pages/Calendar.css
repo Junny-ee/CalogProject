@@ -2,10 +2,13 @@
   display: flex;
   height: 90vh;
   width: 100%;
-  min-width: 0;
   overflow: hidden;
   align-items: stretch;
+  background-color: var(--main-bg-color); /* 테마 배경색 적용 */
+  color: var(--primary-text-color); /* 기본 텍스트 색상 적용 */
+  transition: background-color 0.3s ease, color 0.3s ease; /* 테마 변경 시 부드러운 전환 */
 }
+
 .Calendar .left-content {
   display: flex;
   flex: 3;
@@ -13,7 +16,8 @@
   flex-direction: column;
   min-width: 0;
   overflow: hidden;
-  transition: flex 0.3s ease-in-out;
+  transition: flex 0.3s ease-in-out, background-color 0.3s ease; /* 배경색 전환 추가 */
+  background-color: var(--main-bg-color); /* main-bg-color 유지 */
 }
 
 .Calendar .left-content.summary-open {
@@ -23,27 +27,35 @@
 .Calendar .left-content.summary-open .FrontCalendar_container {
   min-height: 450px;
 }
+
 .Calendar_Button {
   display: flex;
-  /* justify-content: end; */
 }
 .Calendar_Button > button {
   border: none;
-  background-color: rgb(255, 244, 246);
+  background-color: var(--button-default-bg); /* 변수 사용 */
   border-radius: 10px;
   cursor: pointer;
+  color: var(--primary-text-color); /* 텍스트 색상도 테마에 맞게 */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+.Calendar_Button > button:hover {
+  opacity: 0.9;
+}
+
+/* --- under-content (Summary) --- */
 .under-content {
   max-height: 0;
   opacity: 0;
   pointer-events: none;
   overflow: hidden;
-  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
-  border: none; /* 이전 CSS의 border 제거 */
-  border-radius: 10px; /* 둥근 모서리 */
-  background-color: rgb(255, 244, 246);
-  padding: 0 20px; /* 패딩은 열렸을 때 적용 */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 요약창 그림자 */
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out,
+    background-color 0.3s ease, box-shadow 0.3s ease; /* 전환 효과 추가 */
+  border: none;
+  border-radius: 10px;
+  background-color: var(--secondary-bg-color); /* 테마 보조 배경색 적용 */
+  padding: 0 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 그림자 색상은 고정하거나, 변수로 조절 */
 }
 
 /* under-content가 열렸을 때 */
@@ -51,12 +63,13 @@
   max-height: 30vh;
   opacity: 1;
   pointer-events: auto;
-  padding: 10px 20px; /* 열렸을 때 패딩 */
-  margin-top: 10px; /* 캘린더와의 간격 */
+  padding: 10px 20px;
+  margin-top: 10px;
 }
 
+/* --- right-content (ScheduleList) --- */
 .Calendar .right-content {
-  padding: 1rem;
+  padding: 1rem 0;
   position: relative;
   width: 0;
   flex-shrink: 0;
@@ -64,8 +77,9 @@
   opacity: 0;
   pointer-events: none;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
-    width 0.3s ease-in-out;
+    width 0.3s ease-in-out, background-color 0.3s ease; /* 배경색 전환 추가 */
   overflow: hidden;
+  background-color: var(--main-bg-color); /* 테마 보조 배경색 적용 */
 }
 
 .Calendar .right-content.open {
@@ -74,22 +88,61 @@
   width: 30%;
   opacity: 1;
   pointer-events: auto;
-  /* height: 100%; <- 추가할 필요 없음 */
 }
 
-/* 기타 React Big Calendar 관련 스타일 */
+/* --- React Big Calendar 관련 스타일 --- */
+/* (FrontCalendar 컴포넌트 내부에서 사용될 스타일) */
+
 .rbc-day-bg {
   cursor: pointer;
 }
+
+/* 요일 텍스트 */
 .rbc-header:nth-child(1) {
-  color: #f56868; /* 일요일 (Sun) */
+  color: var(--accent-red-color); /* 일요일 */
 }
 .rbc-header:nth-child(7) {
-  color: #6868fc; /* 토요일 (Sat) */
+  color: var(--accent-blue-color); /* 토요일 */
 }
+
+/* 날짜 숫자 */
 .rbc-month-row .rbc-date-cell:nth-child(1) .rbc-button-link {
-  color: #f56868 !important; /* 일요일 숫자 */
+  color: var(--accent-red-color) !important; /* 일요일 숫자 */
 }
 .rbc-month-row .rbc-date-cell:nth-child(7) .rbc-button-link {
-  color: #6868fc !important; /* 토요일 숫자 */
+  color: var(--accent-blue-color) !important; /* 토요일 숫자 */
+}
+
+/* 추가적으로 React Big Calendar의 다른 요소들도 테마를 적용할 수 있습니다. */
+/* 예를 들어, 달력 배경, 날짜 셀 배경, 선택된 날짜 배경 등 */
+.rbc-calendar {
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.rbc-date-cell {
+  color: var(--primary-text-color); /* 날짜 숫자 기본 색상 */
+}
+
+.rbc-off-range-bg {
+  /* 현재 월이 아닌 날짜의 배경 */
+  background-color: rgba(var(--secondary-bg-color), 0.5); /* 약간 투명하게 */
+}
+
+.rbc-selected-cell,
+.rbc-active {
+  /* 선택된 날짜나 활성화된 셀 */
+  background-color: var(--highlight-color) !important;
+  color: white !important;
+}
+
+.rbc-today {
+  /* 오늘 날짜 */
+  background-color: rgba(
+    var(--highlight-color),
+    0.1
+  ) !important; /* 강조색의 연한 버전 */
 }

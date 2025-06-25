@@ -77,10 +77,10 @@ const ScheduleList = ({ calendarData }) => {
           <div className="Button_wrapper">
             <Button
               text={"+"}
-              classtype={"Create"}
+              classtype={"List"}
               onClick={() => openModal("project")}
             />
-            <Button text={"👇"} onClick={toggleProject} />
+            <Button text={"👇"} classtype={"List"} onClick={toggleProject} />
           </div>
         </div>
         <div className={`Todo-content ${isOpenList ? "open" : ""}`}>
@@ -107,10 +107,10 @@ const ScheduleList = ({ calendarData }) => {
           <div className="Button_wrapper">
             <Button
               text={"+"}
-              classtype={"Create"}
+              classtype={"List"}
               onClick={() => openModal("item")}
             />
-            <Button text={"👇"} onClick={toggleItem} />
+            <Button text={"👇"} classtype={"List"} onClick={toggleItem} />
           </div>
         </div>
         <div className={`Todo-content ${isOpenItem ? "open" : ""}`}>

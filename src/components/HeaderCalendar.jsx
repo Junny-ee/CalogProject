@@ -17,16 +17,16 @@ const HeaderCalendar = ({ date, onClick }) => {
       </button>
       <div className="Calendar_Button">
         <button className="button_schedule" onClick={toggleScheduleList}>
-          <img src="/calendar_new.png" alt="할일목록 펼침/닫힘버튼" />
+          <img src="/schedule.png" alt="할일목록 펼침/닫힘버튼" />
         </button>
         <button className="button_summary" onClick={toggleSummary}>
-          요약창 펼침/닫힘 버튼
+          <img src="/summary.png" alt="요약창 펼침/닫힘 버튼" />
         </button>
         <button className="button_theme" onClick={toggleTheme}>
-          테마 설정 버튼
+          <img src="/color-palette.png" alt="테마 변경 버튼" />
         </button>
-        <button onClick={() => nav("/backboard")}>
-          <img src="/calendar.png" alt="캘린더 이동 아이콘" />
+        <button className="button_back" onClick={() => nav("/backboard")}>
+          <img src="/gotoBackboard.png" alt="백보드 이동 버튼" />
         </button>
       </div>
     </div>

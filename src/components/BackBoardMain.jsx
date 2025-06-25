@@ -100,18 +100,18 @@ const BackBoard = ({ fetchPosts }) => {
   return (
     <div className="BackBoardMain">
       <div className="header_wrapper">
-      <button className="button_home" onClick={() => nav("/")}>
-        <img src="/logo_image_width.png" alt="로고(새로고침)" />
-      </button>
-      <div className="search">
-        <input
-          type="text"
-          value={searchWord}
-          className="search_input"
-          placeholder="검색어를 입력하세요"
-          onChange={onChange}
-        />
-      </div>
+        <button className="button_home" onClick={() => nav("/")}>
+          <img src="/logo_image_width.png" alt="로고(새로고침)" />
+        </button>
+        <div className="search">
+          <input
+            type="text"
+            value={searchWord}
+            className="search_input"
+            placeholder="검색어를 입력하세요"
+            onChange={onChange}
+          />
+        </div>
       </div>
       {scrolled ? (
         <button id="moveToTopButton" onClick={moveToTop}>
@@ -119,7 +119,7 @@ const BackBoard = ({ fetchPosts }) => {
         </button>
       ) : null}
 
-      <div className="list_wrapper">
+      <div>
         <BackBoardDispatchContext.Provider
           value={{
             setSearchWord,

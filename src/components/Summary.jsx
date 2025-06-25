@@ -37,12 +37,14 @@ const Summary = ({ date }) => {
             const weekday = d.toLocaleDateString("ko-KR", { weekday: "short" });
             return `${dateStr} (${weekday})`;
           })()}
-        </h4>
         {isToday ? (
-          <Button text={"+"} classtype={"Create"} onClick={() => nav("/new")} />
+          <button className="add_btn" onClick={() => nav("/new")}>
+            +
+          </button>
         ) : (
           ""
         )}
+        </h4>
       </div>
       <div className="Summary_Contents">
         <SummaryItem data={todaySummary} />

@@ -48,14 +48,21 @@ const Edit = () => {
 
   if (!curContentItem) return null;
 
+  const isStop = () => {
+    if (!window.confirm("글 수정을 멈추고 캘린더로 이동할까요?")) {
+      return;
+    } else {
+      nav("/");
+    }
+  };
+
   return (
     <div className="Edit">
       <div className="header_content">
         <button
           className="gotoCal"
           onClick={() => {
-            nav("/");
-            alert("글 수정을 멈추고 캘린더로 이동합니다");
+            isStop();
           }}
         >
           <img src="/logo_image_width.png" alt="가로 버전 로고" />

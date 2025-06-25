@@ -6,9 +6,8 @@
   flex-grow: 1;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: rgb(255, 244, 246);
+  background-color: var(--secondary-bg-color);
   overflow: hidden;
-
 }
 
 .FrontCalendar_container {
@@ -30,7 +29,7 @@
   border-bottom: 1px solid #eee; /* 요일 아래 얇은 구분선 */
   font-weight: 500; /* 깔끔한 두께 */
   color: #777; /* 부드러운 회색 */
-  background-color: #f8f8f8; /* 요일 헤더 배경색 */
+  background-color: var(--sub-bg-color); /* 요일 헤더 배경색 */
 }
 
 .rbc-day-bg {
