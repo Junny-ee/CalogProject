@@ -99,7 +99,6 @@ const FrontCalendar = ({ events, onEvent }) => {
 
   return (
     <div className="FrontCalendar">
-
       <HeaderCalendar date={date} onClick={() => setmodalOpen(true)} />
       <div className="FrontCalendar_container" ref={calendarRef}>
         <Calendar
@@ -134,10 +133,10 @@ const FrontCalendar = ({ events, onEvent }) => {
             if (isSelected && hasCalogEntry) {
               return {
                 style: {
-                  borderTop: "5px solid #cfffe2",
-                  borderLeft: "1px solid #ff99cc",
-                  borderBottom: "1px solid #ff99cc",
-                  borderRight: "1px solid #ff99cc",
+                  borderTop: "5px solid rgb(221,221,221)",
+                  borderLeft: "2px solid rgb(221,221,221)",
+                  borderBottom: "2px solid rgb(221,221,221)",
+                  borderRight: "2px solid rgb(221,221,221)",
                 },
               };
             }
@@ -145,14 +144,14 @@ const FrontCalendar = ({ events, onEvent }) => {
               return {
                 style: {
                   // backgroundColor: "#ffe2f0",
-                  border: "1px solid #ff99cc",
+                  border: "2px solid rgb(221,221,221)",
                 },
               };
             }
             if (hasCalogEntry) {
               return {
                 style: {
-                  borderTop: "5px solid #cfffe2", // 데이터 있는 날짜 글표시
+                  borderTop: "5px solid rgb(221,221,221)", // 데이터 있는 날짜 글표시
                 },
               };
             }
