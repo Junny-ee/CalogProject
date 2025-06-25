@@ -78,40 +78,41 @@ const BackBoard = ({ fetchPosts }) => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-        )
+        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+      )
       : typeof item.tag === "string"
-      ? item.tag.includes(lowerCaseSearchWord)
-      : false;
+        ? item.tag.includes(lowerCaseSearchWord)
+        : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
 
   const filteredPostsByTag = entirePosts.filter((item) => {
-    const tagIncludes = Array.isArray(item.tag)
-      ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
+    const lowerCaseSearchingTag = searchingTag.toLowerCase();
+    const tagMatches = Array.isArray(item.tag)
+      ? item.tag.some((t) => t.toLowerCase() === lowerCaseSearchingTag)
       : typeof item.tag === "string"
-      ? item.tag.includes(searchingTag.toLowerCase())
-      : false;
+        ? item.tag.toLowerCase() === lowerCaseSearchingTag
+        : false;
 
-    return tagIncludes;
+    return tagMatches;
   });
 
   return (
     <div className="BackBoardMain">
       <div className="header_wrapper">
-      <button className="button_home" onClick={() => nav("/")}>
-        <img src="/logo_image_width.png" alt="로고(새로고침)" />
-      </button>
-      <div className="search">
-        <input
-          type="text"
-          value={searchWord}
-          className="search_input"
-          placeholder="검색어를 입력하세요"
-          onChange={onChange}
-        />
-      </div>
+        <button className="button_home" onClick={() => nav("/")}>
+          <img src="/logo_image_width.png" alt="로고(새로고침)" />
+        </button>
+        <div className="search">
+          <input
+            type="text"
+            value={searchWord}
+            className="search_input"
+            placeholder="검색어를 입력하세요"
+            onChange={onChange}
+          />
+        </div>
       </div>
       {scrolled ? (
         <button id="moveToTopButton" onClick={moveToTop}>
