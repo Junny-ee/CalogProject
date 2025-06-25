@@ -30,6 +30,8 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  border-top: 1px solid var(--border-bg-color);
+  border-bottom: 1px solid var(--border-bg-color);
 }
 .Button_wrapper {
   display: flex;

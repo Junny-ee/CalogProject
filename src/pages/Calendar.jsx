@@ -88,47 +88,47 @@ const Calendar = () => {
         root.style.setProperty("--sechdule-default-bg", "#1e1e1e");
         root.style.setProperty("--sub-bg-color", "#262626");
         root.style.setProperty("--button-default-bg", "darkgray");
-        root.style.setProperty("--highlight-color", "#f5f5f5");
-        root.style.setProperty("--primary-text-color", "#f5f5f5");
+        root.style.setProperty("--highlight-color", "#B8B7C2");
+        root.style.setProperty("--primary-text-color", "#B8B7C2");
         root.style.setProperty("--accent-red-color", "#bd2130");
         root.style.setProperty("--accent-blue-color", "#b0b0ff");
         root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
         break;
       case "three":
-        root.style.setProperty("--main-bg-color", "#FAF8DC");
-        root.style.setProperty("--secondary-bg-color", "#FFFEE3");
-        root.style.setProperty("--sechdule-default-bg", "#FFFEE3");
-        root.style.setProperty("--sub-bg-color", "#FFFFEB");
-        root.style.setProperty("--button-default-bg", "#e2f0e6");
-        root.style.setProperty("--highlight-color", "#28a745");
-        root.style.setProperty("--primary-text-color", "#28a745");
+        root.style.setProperty("--main-bg-color", "#f5f5f5");
+        root.style.setProperty("--secondary-bg-color", "#fcfbf6b6");
+        root.style.setProperty("--sechdule-default-bg", "#fcfbf6b6");
+        root.style.setProperty("--sub-bg-color", "#FEF9D9");
+        root.style.setProperty("--button-default-bg", "#DEE5D4");
+        root.style.setProperty("--highlight-color", "#333");
+        root.style.setProperty("--primary-text-color", "#333");
         root.style.setProperty("--accent-red-color", "#e07b7b");
         root.style.setProperty("--accent-blue-color", "#7b7be0");
-        root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
+        root.style.setProperty("--border-bg-color", "#DEE5D4"); // 테두리색
         break;
       case "four":
-        root.style.setProperty("--main-bg-color", "#fff3cd");
-        root.style.setProperty("--secondary-bg-color", "#ffeeba");
-        root.style.setProperty("--sechdule-default-bg", "#123456");
-        root.style.setProperty("--sub-bg-color", "#11fff7");
-        root.style.setProperty("--button-default-bg", "#fff8e0");
-        root.style.setProperty("--highlight-color", "#ffc107");
-        root.style.setProperty("--primary-text-color", "#ffc107");
+        root.style.setProperty("--main-bg-color", "#F6F5F2");
+        root.style.setProperty("--secondary-bg-color", "#FFEFEF");
+        root.style.setProperty("--sechdule-default-bg", "#FFEFEF");
+        root.style.setProperty("--sub-bg-color", "#FFDCDC");
+        root.style.setProperty("--button-default-bg", "#F3D0D7");
+        root.style.setProperty("--highlight-color", "#333");
+        root.style.setProperty("--primary-text-color", "#333");
         root.style.setProperty("--accent-red-color", "#ff6b6b");
         root.style.setProperty("--accent-blue-color", "#6b6bff");
-        root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
+        root.style.setProperty("--border-bg-color", "#F3D0D7"); // 테두리색
         break;
       case "five":
         root.style.setProperty("--main-bg-color", "#222f3e");
         root.style.setProperty("--secondary-bg-color", "#34475e");
         root.style.setProperty("--sechdule-default-bg", "#34475e");
-        root.style.setProperty("--sub-bg-color", "#013a63");
+        root.style.setProperty("--sub-bg-color", "#0A2240");
         root.style.setProperty("--button-default-bg", "#9BA4B4");
-        root.style.setProperty("--highlight-color", "#f3f3f3");
-        root.style.setProperty("--primary-text-color", "#f3f3f3");
+        root.style.setProperty("--highlight-color", "#c7cbd1");
+        root.style.setProperty("--primary-text-color", "#c7cbd1");
         root.style.setProperty("--accent-red-color", "#e06b6b");
         root.style.setProperty("--accent-blue-color", "#6b6be0");
-        root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
+        root.style.setProperty("--border-bg-color", "#9BA4B4"); // 테두리색
         break;
     }
   }, [themeColor]);

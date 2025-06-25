@@ -29,6 +29,7 @@
 .rbc-month-view {
   border-radius: 10px;
   overflow: hidden;
+  border: 1px solid var(--border-bg-color) !important;
 }
 
 .rbc-month-view .rbc-header {
