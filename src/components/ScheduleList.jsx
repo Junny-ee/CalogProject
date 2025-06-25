@@ -2,7 +2,6 @@ import "./ScheduleList.css";
 import ScheduleItem from "./ScheduleItem";
 import ModalCreate from "./ModalCreate";
 import ProjectSchedule from "./ProjectSchedule";
-import Button from "./Button";
 import { useContext, useState } from "react";
 import { ScheduleStateContext } from "../pages/Calendar";
 import ModalEdit from "./ModalEdit";

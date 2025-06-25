@@ -3,7 +3,6 @@ import "./BackPostList.css";
 import BackPostItem from "./BackPostItem";
 import { useNavigate } from "react-router-dom";
 import { BackBoardDispatchContext } from "./BackBoardMain";
-
 import { CalogDispatchContext } from "../App";
 import { TagStateContext } from "../App";
 
