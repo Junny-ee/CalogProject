@@ -16,7 +16,6 @@
   overflow: hidden;
   transition: flex-grow 0.3s ease-in-out;
 }
-
 .rbc-calendar {
   border: none; /* 캘린더 전체 border 제거 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 은은한 그림자 */

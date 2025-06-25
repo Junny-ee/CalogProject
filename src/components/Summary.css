@@ -20,7 +20,9 @@
   overflow-y: auto;
   min-width: 0;
 }
-
+.Summary_Contents::-webkit-scrollbar {
+  width: 1px;
+}
 .add_btn {
   width: 24px;
   height: 20px;
