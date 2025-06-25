@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./BackPostList.css";
 import BackPostItem from "./BackPostItem";
 import { useNavigate } from "react-router-dom";
 import { BackBoardDispatchContext } from "./BackBoardMain";
-
 import { CalogDispatchContext } from "../App";
 import { TagStateContext } from "../App";
 
@@ -59,9 +58,15 @@ const BackPostList = ({ posts, entirePosts }) => {
   return (
     <>
       <div className="buttons">
-        {(sortType === "latest") ? (<button className="sort_button" onClick={() => setSortType("oldest")}>
-          <img src="/oldest_icon.png" alt="오래된순" />
-        </button>) : (<button className="sort_button" onClick={() => setSortType("latest")}><img src="/latest_icon.png" alt="최신순" /></button>)}
+        {sortType === "latest" ? (
+          <button className="sort_button" onClick={() => setSortType("oldest")}>
+            <img src="/oldest_icon.png" alt="오래된순" />
+          </button>
+        ) : (
+          <button className="sort_button" onClick={() => setSortType("latest")}>
+            <img src="/latest_icon.png" alt="최신순" />
+          </button>
+        )}
         <button className="write_button" onClick={() => nav("/new")}>
           <img src="/write_button.png" alt="작성페이지 이동 버튼" />
         </button>

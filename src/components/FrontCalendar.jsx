@@ -213,23 +213,15 @@ const FrontCalendar = ({ events, onEvent }) => {
               style: {
                 backgroundColor,
                 color,
-                // borderRadius: "4px",
-                // padding: "2px 4px",
               },
             };
           }}
         />
-        {/*defaultView 처음 렌더링될 때 보여줄 기본 뷰 모드 :월간 보기
-        events : 일정목록
-        startAccessor : event.start 값을 시작 시간으로 사용함.
-        endAccessor : event.end 값을 끝 시간으로 사용함.
-        */}
       </div>
 
       <CalModalWindow
         isOpen={modalOpen}
         onClose={onClose}
-        // selectedDate={date}
         onDateChange={(selectedDate) => {
           setDate(selectedDate);
           setmodalOpen(false);

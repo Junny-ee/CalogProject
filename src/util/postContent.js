@@ -27,7 +27,7 @@ export const postContent = [
     id: 4,
     title: "CSS Grid 완벽 가이드",
     createDate: new Date("2025-03-05").getTime(),
-    tag: ["CSS"],
+    tag: ["css"],
     content:
       "복잡한 레이아웃을 만들 때 CSS Grid는 강력한 도구입니다. Grid 컨테이너와 아이템의 속성들을 깊이 있게 다루고, 실제 예제를 통해 활용법을 익혀보세요.",
   },
@@ -75,7 +75,7 @@ export const postContent = [
     id: 10,
     title: "Git으로 협업하기",
     createDate: new Date("2025-05-25").getTime(),
-    tag: ["Git"],
+    tag: ["git"],
     content:
       "Git은 협업을 위한 필수 도구입니다. 브랜치 전략, Pull Request, 충돌 해결 등 Git을 활용한 효율적인 협업 워크플로우를 익혀보세요.",
   },
@@ -91,7 +91,7 @@ export const postContent = [
     id: 12,
     title: "MobX를 이용한 상태 관리",
     createDate: new Date("2025-06-10").getTime(),
-    tag: ["MobX"],
+    tag: ["mobx"],
     content:
       "Redux와는 다른 관점에서 상태 관리를 제공하는 MobX의 핵심 개념과 사용법을 소개합니다. 옵저버블, 액션, 리액션 등의 개념을 이해하고 적용해보세요.",
   },
@@ -99,7 +99,7 @@ export const postContent = [
     id: 13,
     title: "GraphQL 첫걸음",
     createDate: new Date("2025-06-25").getTime(),
-    tag: ["GraphQL"],
+    tag: ["graphql"],
     content:
       "API 설계의 새로운 패러다임을 제시하는 GraphQL의 기본 개념과 REST API와의 차이점을 알아봅니다. 쿼리, 뮤테이션, 스키마 등 GraphQL의 핵심 요소를 다룹니다.",
   },

@@ -1,7 +1,6 @@
 import "./ScheduleItem.css";
 import { ScheduleDispatchContext } from "../pages/Calendar";
 import { useContext } from "react";
-import Button from "./Button";
 const ScheduleItem = ({ data, onItemClick }) => {
   const handleItemClick = () => {
     if (onItemClick) {
