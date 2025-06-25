@@ -121,12 +121,12 @@
 
 /* 모달 저장 버튼 스타일 */
 .create_modal_button {
-  background-color: #fdade9d3;
+  background-color: #aeb4ffd3;
   color: white;
 }
 
 .create_modal_button:hover {
-  background-color: #ca63c2d3;
+  background-color: #8089fed3;
 }
 
 .delete_modal_button {

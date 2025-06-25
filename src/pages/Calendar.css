@@ -26,7 +26,7 @@
 .Calendar .left-content {
   display: flex;
   flex: 3;
-  padding: 1rem;
+  padding: 1rem 0 0 1rem;
 
   flex-direction: column;
   min-width: 0;
@@ -37,6 +37,7 @@
 
 .Calendar .left-content.summary-open {
   flex: 1.5;
+  padding: 1rem 0 1.2rem 1rem;
 }
 
 .Calendar .left-content.summary-open .FrontCalendar_container {
@@ -79,12 +80,11 @@
   opacity: 1;
   pointer-events: auto;
   padding: 10px 20px;
-  margin-top: 10px;
 }
 
 /* --- right-content (ScheduleList) --- */
 .Calendar .right-content {
-  padding: 1rem 0;
+  padding: 1rem 1rem 1.2rem 0;
   position: relative;
   width: 0;
   flex-shrink: 0;
@@ -96,7 +96,7 @@
   overflow: hidden;
   background-color: var(--main-bg-color); /* 테마 보조 배경색 적용 */
   border-radius: 10px;
-  margin-right: 10px;
+
 }
 
 .Calendar .right-content.open {
@@ -105,6 +105,7 @@
   width: 30%;
   opacity: 1;
   pointer-events: auto;
+  margin-left: 10px;
 }
 
 /* --- React Big Calendar 관련 스타일 --- */
