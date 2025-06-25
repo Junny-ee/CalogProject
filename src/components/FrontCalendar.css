@@ -16,20 +16,27 @@
   overflow: hidden;
   transition: flex-grow 0.3s ease-in-out;
 }
-
+.rbc-show-more {
+  color: var(--primary-text-color) !important;
+  background: none !important;
+}
 .rbc-calendar {
   border: none; /* 캘린더 전체 border 제거 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 은은한 그림자 */
   border-radius: 8px; /* 모서리 둥글게 */
   overflow: hidden; /* 그림자가 잘리거나 하는 문제 방지 */
 }
+.rbc-month-view {
+  border-radius: 10px;
+  overflow: hidden;
+}
 
 .rbc-month-view .rbc-header {
   padding: 12px 0;
-  border-bottom: 1px solid #eee; /* 요일 아래 얇은 구분선 */
+  border-bottom: 1px solid var(--border-bg-color); /* 요일 아래 얇은 구분선 */
   font-weight: 500; /* 깔끔한 두께 */
-  color: #777; /* 부드러운 회색 */
-  background-color: var(--sub-bg-color); /* 요일 헤더 배경색 */
+  color: var(--primary-text-color);
+  background-color: var(--sub-bg-color);
 }
 
 .rbc-day-bg {
@@ -51,7 +58,7 @@
 /* 현재 달에 속하지 않는 날짜 (이전/다음 달 날짜) */
 .rbc-off-range-bg {
   background-color: #fdfdfd; /* 현재 달이 아닌 날짜 배경색을 더 밝게 */
-  border-bottom: 1px solid #eee; /* 가로 구분선 유지 */
+  border-bottom: 1px solid var(--border-bg-color); /* 가로 구분선 유지 */
 }
 
 .rbc-off-range-bg .rbc-button-link {

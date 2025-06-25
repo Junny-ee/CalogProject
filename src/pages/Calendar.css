@@ -4,9 +4,23 @@
   width: 100%;
   overflow: hidden;
   align-items: stretch;
+  border-radius: 10px;
   background-color: var(--main-bg-color); /* 테마 배경색 적용 */
   color: var(--primary-text-color); /* 기본 텍스트 색상 적용 */
   transition: background-color 0.3s ease, color 0.3s ease; /* 테마 변경 시 부드러운 전환 */
+}
+
+.main_logo {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+}
+
+.main_logo img {
+  width: 90px;
+  height: 90px;
+  padding: 4px;
 }
 
 .Calendar .left-content {
@@ -80,6 +94,8 @@
     width 0.3s ease-in-out, background-color 0.3s ease; /* 배경색 전환 추가 */
   overflow: hidden;
   background-color: var(--main-bg-color); /* 테마 보조 배경색 적용 */
+  border-radius: 10px;
+  margin-right: 15px;
 }
 
 .Calendar .right-content.open {

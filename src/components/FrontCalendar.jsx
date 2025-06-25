@@ -89,6 +89,7 @@ const FrontCalendar = ({ events, onEvent }) => {
   };
   return (
     <div className="FrontCalendar">
+
       <HeaderCalendar date={date} onClick={() => setmodalOpen(true)} />
       <div className="FrontCalendar_container" ref={calendarRef}>
         <Calendar

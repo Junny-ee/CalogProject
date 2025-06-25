@@ -71,37 +71,40 @@ const Calendar = () => {
     const root = document.documentElement; // <html> 태그
     switch (themeColor) {
       case "one":
-        root.style.setProperty("--main-bg-color", "#FFF2EB"); // 캘린더 맨뒷배경 색
-        root.style.setProperty("--secondary-bg-color", "#FFDCDC"); //캘린더, 글요약, 할일목록 배경색
-        root.style.setProperty("--sechdule-default-bg", "#FFD6BA"); // //할일 목록 배경색
-        root.style.setProperty("--sub-bg-color", "#FFE8CD"); // 캘린더 요일, 일정 배경색
-        root.style.setProperty("--button-default-bg", "#F49BAB"); // //버튼 배경색
+        root.style.setProperty("--main-bg-color", "#f5f5f5"); // 캘린더 맨뒷배경 색
+        root.style.setProperty("--secondary-bg-color", "#FFFFFF"); //캘린더, 글요약, 할일목록 배경색
+        root.style.setProperty("--sechdule-default-bg", "#FFFFFF"); // //할일 목록 배경색
+        root.style.setProperty("--sub-bg-color", "#f5f5f5"); // 캘린더 요일, 일정 배경색
+        root.style.setProperty("--button-default-bg", "#FFFFFF"); // 버튼 배경색
         root.style.setProperty("--highlight-color", "#000"); // 버튼 글자색
         root.style.setProperty("--primary-text-color", "#000"); // 헤더 날짜 제외 모든 글씨색 적용
         root.style.setProperty("--accent-red-color", "#f08080"); // 일요일 글자색
         root.style.setProperty("--accent-blue-color", "#8080f0"); // 토요일 글자색
+        root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
         break;
       case "two":
-        root.style.setProperty("--main-bg-color", "#f8d7da");
-        root.style.setProperty("--secondary-bg-color", "#f5c6cb");
-        root.style.setProperty("--sechdule-default-bg", "#123456");
-        root.style.setProperty("--sub-bg-color", "#11fff7");
-        root.style.setProperty("--button-default-bg", "#fce9ea");
-        root.style.setProperty("--highlight-color", "#dc3545");
-        root.style.setProperty("--primary-text-color", "#dc3545");
+        root.style.setProperty("--main-bg-color", "#333");
+        root.style.setProperty("--secondary-bg-color", "#262626");
+        root.style.setProperty("--sechdule-default-bg", "#1e1e1e");
+        root.style.setProperty("--sub-bg-color", "#262626");
+        root.style.setProperty("--button-default-bg", "darkgray");
+        root.style.setProperty("--highlight-color", "#f5f5f5");
+        root.style.setProperty("--primary-text-color", "#f5f5f5");
         root.style.setProperty("--accent-red-color", "#bd2130");
         root.style.setProperty("--accent-blue-color", "#b0b0ff");
+        root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
         break;
       case "three":
-        root.style.setProperty("--main-bg-color", "#d4edda");
-        root.style.setProperty("--secondary-bg-color", "#c3e6cb");
-        root.style.setProperty("--sechdule-default-bg", "#123456");
-        root.style.setProperty("--sub-bg-color", "#11fff7");
+        root.style.setProperty("--main-bg-color", "#FAF8DC");
+        root.style.setProperty("--secondary-bg-color", "#FFFEE3");
+        root.style.setProperty("--sechdule-default-bg", "#FFFEE3");
+        root.style.setProperty("--sub-bg-color", "#FFFFEB");
         root.style.setProperty("--button-default-bg", "#e2f0e6");
         root.style.setProperty("--highlight-color", "#28a745");
         root.style.setProperty("--primary-text-color", "#28a745");
         root.style.setProperty("--accent-red-color", "#e07b7b");
         root.style.setProperty("--accent-blue-color", "#7b7be0");
+        root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
         break;
       case "four":
         root.style.setProperty("--main-bg-color", "#fff3cd");
@@ -113,29 +116,19 @@ const Calendar = () => {
         root.style.setProperty("--primary-text-color", "#ffc107");
         root.style.setProperty("--accent-red-color", "#ff6b6b");
         root.style.setProperty("--accent-blue-color", "#6b6bff");
+        root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
         break;
       case "five":
-        root.style.setProperty("--main-bg-color", "#e2d9eb");
-        root.style.setProperty("--secondary-bg-color", "#d6cddf");
-        root.style.setProperty("--sechdule-default-bg", "#123456");
-        root.style.setProperty("--sub-bg-color", "#11fff7");
-        root.style.setProperty("--button-default-bg", "#f0e6f5");
-        root.style.setProperty("--highlight-color", "#6f42c0");
-        root.style.setProperty("--primary-text-color", "#6f42c0");
+        root.style.setProperty("--main-bg-color", "#222f3e");
+        root.style.setProperty("--secondary-bg-color", "#34475e");
+        root.style.setProperty("--sechdule-default-bg", "#34475e");
+        root.style.setProperty("--sub-bg-color", "#013a63");
+        root.style.setProperty("--button-default-bg", "#9BA4B4");
+        root.style.setProperty("--highlight-color", "#f3f3f3");
+        root.style.setProperty("--primary-text-color", "#f3f3f3");
         root.style.setProperty("--accent-red-color", "#e06b6b");
         root.style.setProperty("--accent-blue-color", "#6b6be0");
-        break;
-      default:
-        // 기본 테마 (themeColor가 없거나 정의되지 않은 값일 경우)
-        root.style.setProperty("--main-bg-color", "#f0f0f0");
-        root.style.setProperty("--secondary-bg-color", "#ffffff");
-        root.style.setProperty("--sechdule-default-bg", "#dfdfdf");
-        root.style.setProperty("--sub-bg-color", "#f0f0f0");
-        root.style.setProperty("--button-default-bg", "rgb(255, 244, 246)");
-        root.style.setProperty("--highlight-color", "#000");
-        root.style.setProperty("--primary-text-color", "#000");
-        root.style.setProperty("--accent-red-color", "#f56868");
-        root.style.setProperty("--accent-blue-color", "#6868fc");
+        root.style.setProperty("--border-bg-color", "#a7a7a7"); // 테두리색
         break;
     }
   }, [themeColor]);
@@ -206,6 +199,9 @@ const Calendar = () => {
   }
   return (
     <>
+      <div className="main_logo">
+        <img src="/logo_image_main.png" alt="로고" />
+      </div>
       <ScheduleStateContext.Provider value={calendarData}>
         <ScheduleDispatchContext.Provider
           value={{

@@ -38,8 +38,8 @@ const Summary = ({ date }) => {
             return `${dateStr} (${weekday})`;
           })()}
         {isToday ? (
-          <button className="add_btn" onClick={() => nav("/new")}>
-            +
+          <button className="list_btn" onClick={() => nav("/new")}>
+            <img src="/plus.png" alt="글 추가 버튼" />
           </button>
         ) : (
           ""
