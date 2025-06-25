@@ -8,9 +8,10 @@ import { useInView } from "react-intersection-observer";
 
 export const BackBoardDispatchContext = createContext();
 
-const BackBoard = ({ fetchPosts }) => {
-  const postContent = useContext(CalogStateContext);
+const BackBoardMain = ({ fetchPosts }) => {
+  const allPostsFromContext = useContext(CalogStateContext);
   const queryClient = useQueryClient();
+
   const { data, fetchNextPage, hasNextPage, isLoadingNextPage, refetch } =
     useInfiniteQuery({
       queryKey: ["posts"],
@@ -19,8 +20,8 @@ const BackBoard = ({ fetchPosts }) => {
       staleTime: 5 * 60 * 1000,
       cacheTime: 10 * 60 * 1000,
     });
+  const paginatedPosts = data?.pages.flatMap((page) => page.data) || [];
 
-  const entirePosts = data?.pages.flatMap((page) => page.data) || [];
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -34,7 +35,7 @@ const BackBoard = ({ fetchPosts }) => {
 
   useEffect(() => {
     queryClient.invalidateQueries(["posts"]);
-  }, [postContent, queryClient]);
+  }, [allPostsFromContext, queryClient]);
 
   const [searchWord, setSearchWord] = useState("");
   const [searchingTag, setSearchingTag] = useState("");
@@ -67,7 +68,7 @@ const BackBoard = ({ fetchPosts }) => {
     setSearchWord(event.target.value);
   };
 
-  const filteredPosts = entirePosts.filter((item) => {
+  const filteredPosts = allPostsFromContext.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
     const titleIncludes = item.title
       .toLowerCase()
@@ -87,7 +88,7 @@ const BackBoard = ({ fetchPosts }) => {
     return titleIncludes || contentIncludes || tagIncludes;
   });
 
-  const filteredPostsByTag = entirePosts.filter((item) => {
+  const filteredPostsByTag = allPostsFromContext.filter((item) => {
     const lowerCaseSearchingTag = searchingTag.toLowerCase();
     const tagMatches = Array.isArray(item.tag)
       ? item.tag.some((t) => t.toLowerCase() === lowerCaseSearchingTag)
@@ -142,20 +143,19 @@ const BackBoard = ({ fetchPosts }) => {
               </span>
               <BackPostList
                 posts={filteredPostsByTag}
-                entirePosts={entirePosts}
-                searchingTag={searchingTag}
-                s
-                setSearchingTag={setSearchingTag}
+                entirePosts={allPostsFromContext}
               />
             </div>
           ) : (
-            <BackPostList posts={filteredPosts} entirePosts={entirePosts} />
+            <BackPostList posts={filteredPosts} entirePosts={allPostsFromContext} />
           )}
-          <div ref={ref}></div>
+          {searchWord === "" && searchingTag === "" && (
+            <div ref={ref}></div>
+          )}
         </BackBoardDispatchContext.Provider>
       </div>
     </div>
   );
 };
 
-export default BackBoard;
+export default BackBoardMain;
