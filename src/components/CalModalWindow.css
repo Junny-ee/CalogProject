@@ -45,7 +45,7 @@
   width: calc(100% - 20px); /* 패딩 고려한 너비 */
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-bg-color); 
   border-radius: 4px;
   font-size: 16px;
 }

@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef, createContext, useContext } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-// import "moment/locale/ko";
 import "./FrontCalendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import CalModalWindow from "./CalModalWindow";
 import HeaderCalendar from "./HeaderCalendar";
 import { getHolidayEventsByYears } from "../util/holidayService";
 import ModalEdit from "./ModalEdit";
+import { CalogStateContext } from "../App";
 
 const CalendarContext = createContext(null);
 export const CalendarProvider = ({ children }) => {
@@ -27,12 +27,6 @@ export const useCalendar = () => {
   return context;
 };
 
-// moment.locale("ko"); // 한국어 설정
-// moment.updateLocale("ko", {
-//   week: {
-//     dow: 0, // 일요일 시작
-//   },
-// });
 const localizer = momentLocalizer(moment);
 
 const FrontCalendar = ({ events, onEvent }) => {
@@ -40,20 +34,33 @@ const FrontCalendar = ({ events, onEvent }) => {
   const [modalOpen, setmodalOpen] = useState(false);
   const [mergedEvents, setMergedEvents] = useState([]); // 공휴일 api
   const calendarRef = useRef(null);
-  // const nav = useNavigate();
   const { selectedDate, setselectedDate } = useCalendar();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 모달 열고닫기
   const [selectedEventForEdit, setSelectedEventForEdit] = useState(null); // 수정할 값 저장
+  const calogData = useContext(CalogStateContext);
+  const [calogDatesSet, setCalogDatesSet] = useState(new Set());
+
+  useEffect(() => {
+    if (calogData && calogData.length > 0) {
+      const dates = new Set(
+        calogData.map((item) => moment(item.createDate).format("YYYY-MM-DD"))
+      );
+      setCalogDatesSet(dates);
+    } else {
+      setCalogDatesSet(new Set());
+    }
+  }, [calogData]);
+
   const handleSelectEvent = (event) => {
-    // 공휴일이 아닌 경우에만 수정 모달을 띄웁니다.
     if (!event.isHoliday) {
-      setSelectedEventForEdit(event); // 클릭된 이벤트 데이터를 상태에 저장
-      setIsEditModalOpen(true); // 수정 모달 열기
+      setSelectedEventForEdit(event);
+      setIsEditModalOpen(true);
     } else {
       alert(`오늘은 ${event.title} 입니다.`);
     }
     setselectedDate(new Date(event.start));
   };
+
   //공휴일 데이터 가져오기
   useEffect(() => {
     const fetchMergedEvents = async () => {
@@ -67,10 +74,11 @@ const FrontCalendar = ({ events, onEvent }) => {
   const handleWheel = (e) => {
     e.preventDefault();
     const newDate = new Date(date);
-    newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달  // 휠 아래 → 다음 달
+    newDate.setMonth(date.getMonth() + (e.deltaY < 0 ? -1 : 1)); // 휠 위 → 이전 달 // 휠 아래 → 다음 달
     onEvent(newDate);
     setDate(newDate);
   };
+
   // 컴포넌트 mount 후 캘린더 영역에 휠 이벤트 등록/해제
   useEffect(() => {
     const calBox = calendarRef.current; // 렌더링이 끝난 후 접근
@@ -87,6 +95,7 @@ const FrontCalendar = ({ events, onEvent }) => {
   const onClose = () => {
     setmodalOpen(false);
   };
+
   return (
     <div className="FrontCalendar">
       <HeaderCalendar date={date} onClick={() => setmodalOpen(true)} />
@@ -108,7 +117,6 @@ const FrontCalendar = ({ events, onEvent }) => {
           popup
           onSelectEvent={handleSelectEvent} // 써둔 일정 임시데이터에서 날짜만 저장
           onSelectSlot={(slotInfo) => {
-            // setselectedDate(slotInfo.start); // 일정 비어있는 날짜 클릭해도 날짜 저장
             const clicked = slotInfo.start;
             setselectedDate(() => new Date(clicked));
           }}
@@ -117,18 +125,38 @@ const FrontCalendar = ({ events, onEvent }) => {
             const isToday = moment(date).isSame(moment(), "day");
             const isSelected =
               selectedDate && moment(date).isSame(moment(selectedDate), "day");
-            if (isToday && isSelected) {
-              return { style: { backgroundColor: "#ffe2f0" } };
-            }
-            if (isToday && !isSelected) {
-              return {};
+            // calogData에 해당 날짜가 있는지 확인합니다.
+            const dateString = moment(date).format("YYYY-MM-DD");
+            const hasCalogEntry = calogDatesSet.has(dateString);
+
+            if (isSelected && hasCalogEntry) {
+              return {
+                style: {
+                  borderTop: "5px solid rgb(221,221,221)",
+                  borderLeft: "2px solid rgb(221,221,221)",
+                  borderBottom: "2px solid rgb(221,221,221)",
+                  borderRight: "2px solid rgb(221,221,221)",
+                },
+              };
             }
             if (isSelected) {
               return {
                 style: {
-                  backgroundColor: "#ffe2f0",
+                  // backgroundColor: "#ffe2f0",
+                  border: "2px solid rgb(221,221,221)",
                 },
               };
+            }
+            if (hasCalogEntry) {
+              return {
+                style: {
+                  borderTop: "5px solid rgb(221,221,221)", // 데이터 있는 날짜 글표시
+                },
+              };
+            }
+            // 오늘 날짜이면서 선택되지 않은 경우 (기존 로직 유지)
+            if (isToday && !isSelected) {
+              return {};
             }
             return {}; // 날짜 선택 전에 기본값
           }}
@@ -144,7 +172,6 @@ const FrontCalendar = ({ events, onEvent }) => {
             const isHoliday = e.isHoliday;
             let backgroundColor;
             let color;
-
             if (isHoliday) {
               backgroundColor = "transparent";
               color = "#EB4444";
@@ -169,7 +196,7 @@ const FrontCalendar = ({ events, onEvent }) => {
                   color = "white";
                   break;
                 case "black":
-                  backgroundColor = "#E0E0E0";
+                  backgroundColor = "rgb(248, 209, 137)";
                   color = "white";
                   break;
                 case "pink":
@@ -192,7 +219,7 @@ const FrontCalendar = ({ events, onEvent }) => {
             };
           }}
         />
-        {/*defaultView  처음 렌더링될 때 보여줄 기본 뷰 모드 :월간 보기
+        {/*defaultView 처음 렌더링될 때 보여줄 기본 뷰 모드 :월간 보기
         events : 일정목록
         startAccessor : event.start 값을 시작 시간으로 사용함.
         endAccessor : event.end 값을 끝 시간으로 사용함.

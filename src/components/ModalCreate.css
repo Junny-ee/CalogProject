@@ -1,50 +1,46 @@
-/* 모달 오버레이 스타일 (배경) */
 .modal_overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3); /* 투명도 있는 검은색 배경 */
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
-  z-index: 1000; /* 다른 요소들 위에 오도록 설정 */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-/* 모달 내용 스타일 */
 .modal_content {
   background: white;
   padding: 30px;
   border-radius: 8px;
   max-width: 500px;
-  width: 90%; /* 화면 너비에 따라 조절 */
+  width: 90%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  outline: none; /* 포커스 시 생기는 외곽선 제거 */
+  outline: none;
   position: relative;
-  display: flex; /* 내부 요소들을 세로로 정렬하기 위해 flexbox 사용 */
-  flex-direction: column; /* 세로 방향으로 아이템 정렬 */
-  gap: 15px; /* 요소들 사이의 간격 */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* 입력 필드 (input[type="text"], input[type="datetime-local"], textarea) 공통 스타일 */
 .modal_content input[type="text"],
 .modal_content input[type="datetime-local"],
 .modal_content textarea {
-  width: calc(100% - 20px); /* 패딩 고려 */
+  width: calc(100% - 20px);
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-bg-color);
   border-radius: 4px;
   font-size: 1em;
-  box-sizing: border-box; /* 패딩과 보더가 너비에 포함되도록 */
+  box-sizing: border-box;
 }
 
 .modal_content textarea {
-  min-height: 100px; /* 최소 높이 */
-  resize: vertical; /* 세로로만 크기 조절 가능 */
+  min-height: 100px;
+  resize: vertical;
 }
 
-/* 포커스 시 입력 필드 스타일 */
 .modal_content input:focus,
 .modal_content textarea:focus {
   border-color: #007bff;
@@ -52,39 +48,34 @@
   outline: none;
 }
 
-/* 라디오 버튼 래퍼 */
 .Option_wrapper {
   display: flex;
-  gap: 10px; /* 라디오 버튼들 사이 간격 */
-  margin-bottom: 10px; /* 아래 요소와의 간격 */
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-/* 라디오 버튼 숨기기 */
 .btn_check {
   position: absolute;
-  clip: rect(0, 0, 0, 0); /* 요소를 시각적으로 숨김 */
-  pointer-events: none; /* 클릭 이벤트를 받지 않음 */
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
 }
 
-/* 라디오 버튼과 연결된 라벨 (버튼처럼 보이게) */
 .btn {
   display: inline-block;
-  padding: 0.375rem 0.75rem; /* 버튼 내부 여백 */
-  font-size: 1rem; /* 폰트 크기 */
-  font-weight: 400; /* 폰트 굵기 */
-  line-height: 1.5; /* 줄 간격 */
-  color: #212529; /* 기본 텍스트 색상 */
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
   background-color: #f8f9fa; /* 기본 배경 색상 (밝은 회색) */
-  border: 1px solid #ced4da; /* 테두리 */
-  border-radius: 0.375rem; /* 모서리 둥글게 */
-  cursor: pointer; /* 마우스 오버 시 포인터 변경 */
+  border: 1px solid var(--border-bg-color); /* 테두리 */
+  border-radius: 0.375rem;
+  cursor: pointer;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* 부드러운 전환 효과 */
-  user-select: none; /* 텍스트 드래그 방지 */
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  user-select: none;
 }
 
-/* 라디오 버튼이 선택되었을 때 라벨 스타일 변경 */
-/* input[type="radio"]#ID:checked + label.클래스명 */
 .btn_check:checked + .btn {
   color: #fff; /* 선택 시 텍스트 색상 (흰색) */
   background-color: #0d6efd; /* 선택 시 배경 색상 (파란색) */
@@ -110,10 +101,10 @@
 /* 모달 내 버튼 컨테이너 */
 .modal_button-box {
   display: flex;
-  justify-content: flex-end; /* 버튼들을 오른쪽으로 정렬 */
-  gap: 10px; /* 버튼 사이 간격 */
-  width: 100%; /* 부모 너비에 꽉 차도록 */
-  margin-top: 20px; /* 위에 있는 요소들과 간격 */
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
 }
 
 /* 모달 저장/닫기 버튼 공통 스타일 */
@@ -130,21 +121,21 @@
 
 /* 모달 저장 버튼 스타일 */
 .create_modal_button {
-  background-color: #0ee031d3; /* 녹색 계열 */
+  background-color: #aeb4ffd3;
   color: white;
 }
 
 .create_modal_button:hover {
-  background-color: #089720d3;
+  background-color: #8089fed3;
 }
-/* 모달 삭제 버튼 스타일 */
+
 .delete_modal_button {
-  background-color: #e01717d3; /* 적색 계열 */
+  background-color: #eb6969d3; /* 적색 계열 */
   color: white;
 }
 
 .delete_modal_button:hover {
-  background-color: #a31010d3;
+  background-color: #a74d4dd3;
 }
 
 /* 모달 닫기 버튼 스타일 */
@@ -188,7 +179,6 @@
   margin: 20px 0;
 }
 
-/* 실제 input[type="radio"] 숨기기 */
 .radio_container input[type="radio"] {
   appearance: none; /* 브라우저 기본 스타일 제거 */
   -webkit-appearance: none;
@@ -204,7 +194,7 @@
   border-radius: 15px; /* 원형으로 만듦 */
   box-sizing: border-box; /* 패딩, 보더 포함 크기 계산 */
   transition: all 0.2s ease-in-out; /* 부드러운 전환 효과 */
-  border: 2px solid #ccc; /* 기본 테두리 색상 */
+  border: 1px solid var(--border-bg-color); /* 기본 테두리 색상 */
 }
 .radio_container .radio_blue {
   background-color: #a7c7e7;
@@ -216,7 +206,7 @@
   background-color: #b2d8b2;
 }
 .radio_container .radio_black {
-  background-color: #e0e0e0;
+  background-color: rgb(248, 209, 137);
 }
 .radio_container .radio_pink {
   background-color: #ffb6c1;
@@ -232,4 +222,19 @@
 .radio_container input[type="radio"]:focus-visible {
   outline: 2px solid royalblue; /* 포커스 아웃라인 */
   outline-offset: 2px;
+}
+.theme_one {
+  background-color: #f5f5f5;
+}
+.theme_two {
+  background-color: #1e1e1e;
+}
+.theme_three {
+  background-color: #fbeaba;
+}
+.theme_four {
+  background-color: #ffdcdc;
+}
+.theme_five {
+  background-color: #013a63;
 }

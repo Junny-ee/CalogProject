@@ -10,6 +10,7 @@ const Button = ({ text, onClick, classtype }) => {
   Editer : 수정버튼
   Delete : 삭제버튼
   Back : 뒤로가기 버튼
+  List : 할일목록 버튼
 
   */
   return (

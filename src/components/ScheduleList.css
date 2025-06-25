@@ -5,12 +5,13 @@
   flex-direction: column;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 요약창 그림자 */
   border-radius: 10px;
+  background-color: var(--secondary-bg-color);
 }
-.ScheduleList_Wirte {
+.ScheduleList_Write {
   display: flex;
   flex-shrink: 0;
   justify-content: center;
-  background-color: rgba(255, 208, 216, 0.719);
+  background-color: var(--sechdule-default-bg);
   border-radius: 5px 5px 0px 0px;
 }
 .ScheduleList_Contents {
@@ -24,14 +25,18 @@
   width: 1px;
 }
 .ScheduleList_Todo {
-  background-color: rgb(255, 244, 246);
+  background-color: var(--sub-bg-color);
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  border-top: 1px solid var(--border-bg-color);
+  border-bottom: 1px solid var(--border-bg-color);
 }
 .Button_wrapper {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .Todo-content {
   flex-grow: 0;
@@ -45,4 +50,21 @@
 .Todo-content.open {
   flex-grow: 1;
   overflow-y: auto;
+}
+
+.list_btn {
+  background-color: var(--button-default-bg);
+  color: var(--highlight-color);
+  width: 30px;
+  height: 25px;
+  margin-left: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}
+
+.list_btn img {
+  width: 10px;
+  height: 10px;
+  padding: 3px 0 1px 0;
 }

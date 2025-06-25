@@ -96,23 +96,15 @@
   text-overflow: ellipsis;
   margin: 6px 0;
 }
-.postList_wrapper {
-  width: 100%;
-}
 
 @media (max-width: 1400px) {
-  .list_wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-  }
   .tag_wrapper {
     position: static;
     border: none;
     height: auto;
     padding: 10px 25px 10px 10px;
     box-sizing: border-box;
-    flex: 1;
+    flex: 2;
   }
 
   .content_wrap {

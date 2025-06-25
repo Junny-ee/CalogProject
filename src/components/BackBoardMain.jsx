@@ -8,9 +8,10 @@ import { useInView } from "react-intersection-observer";
 
 export const BackBoardDispatchContext = createContext();
 
-const BackBoard = ({ fetchPosts }) => {
-  const postContent = useContext(CalogStateContext);
+const BackBoardMain = ({ fetchPosts }) => {
+  const allPostsFromContext = useContext(CalogStateContext);
   const queryClient = useQueryClient();
+
   const { data, fetchNextPage, hasNextPage, isLoadingNextPage, refetch } =
     useInfiniteQuery({
       queryKey: ["posts"],
@@ -19,8 +20,8 @@ const BackBoard = ({ fetchPosts }) => {
       staleTime: 5 * 60 * 1000,
       cacheTime: 10 * 60 * 1000,
     });
+  const paginatedPosts = data?.pages.flatMap((page) => page.data) || [];
 
-  const entirePosts = data?.pages.flatMap((page) => page.data) || [];
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -34,7 +35,7 @@ const BackBoard = ({ fetchPosts }) => {
 
   useEffect(() => {
     queryClient.invalidateQueries(["posts"]);
-  }, [postContent, queryClient]);
+  }, [allPostsFromContext, queryClient]);
 
   const [searchWord, setSearchWord] = useState("");
   const [searchingTag, setSearchingTag] = useState("");
@@ -67,7 +68,7 @@ const BackBoard = ({ fetchPosts }) => {
     setSearchWord(event.target.value);
   };
 
-  const filteredPosts = entirePosts.filter((item) => {
+  const filteredPosts = allPostsFromContext.filter((item) => {
     const lowerCaseSearchWord = searchWord.toLowerCase();
     const titleIncludes = item.title
       .toLowerCase()
@@ -78,40 +79,41 @@ const BackBoard = ({ fetchPosts }) => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-        )
+        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+      )
       : typeof item.tag === "string"
-      ? item.tag.includes(lowerCaseSearchWord)
-      : false;
+        ? item.tag.includes(lowerCaseSearchWord)
+        : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
 
-  const filteredPostsByTag = entirePosts.filter((item) => {
-    const tagIncludes = Array.isArray(item.tag)
-      ? item.tag.some((t) => t.includes(searchingTag.toLowerCase()))
+  const filteredPostsByTag = allPostsFromContext.filter((item) => {
+    const lowerCaseSearchingTag = searchingTag.toLowerCase();
+    const tagMatches = Array.isArray(item.tag)
+      ? item.tag.some((t) => t.toLowerCase() === lowerCaseSearchingTag)
       : typeof item.tag === "string"
-      ? item.tag.includes(searchingTag.toLowerCase())
-      : false;
+        ? item.tag.toLowerCase() === lowerCaseSearchingTag
+        : false;
 
-    return tagIncludes;
+    return tagMatches;
   });
 
   return (
     <div className="BackBoardMain">
       <div className="header_wrapper">
-      <button className="button_home" onClick={() => nav("/")}>
-        <img src="/logo_image_width.png" alt="로고(새로고침)" />
-      </button>
-      <div className="search">
-        <input
-          type="text"
-          value={searchWord}
-          className="search_input"
-          placeholder="검색어를 입력하세요"
-          onChange={onChange}
-        />
-      </div>
+        <button className="button_home" onClick={() => nav("/")}>
+          <img src="/logo_image_width.png" alt="로고(새로고침)" />
+        </button>
+        <div className="search">
+          <input
+            type="text"
+            value={searchWord}
+            className="search_input"
+            placeholder="검색어를 입력하세요"
+            onChange={onChange}
+          />
+        </div>
       </div>
       {scrolled ? (
         <button id="moveToTopButton" onClick={moveToTop}>
@@ -119,7 +121,7 @@ const BackBoard = ({ fetchPosts }) => {
         </button>
       ) : null}
 
-      <div className="list_wrapper">
+      <div>
         <BackBoardDispatchContext.Provider
           value={{
             setSearchWord,
@@ -141,20 +143,19 @@ const BackBoard = ({ fetchPosts }) => {
               </span>
               <BackPostList
                 posts={filteredPostsByTag}
-                entirePosts={entirePosts}
-                searchingTag={searchingTag}
-                s
-                setSearchingTag={setSearchingTag}
+                entirePosts={allPostsFromContext}
               />
             </div>
           ) : (
-            <BackPostList posts={filteredPosts} entirePosts={entirePosts} />
+            <BackPostList posts={filteredPosts} entirePosts={allPostsFromContext} />
           )}
-          <div ref={ref}></div>
+          {searchWord === "" && searchingTag === "" && (
+            <div ref={ref}></div>
+          )}
         </BackBoardDispatchContext.Provider>
       </div>
     </div>
   );
 };
 
-export default BackBoard;
+export default BackBoardMain;

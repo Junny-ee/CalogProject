@@ -37,12 +37,14 @@ const Summary = ({ date }) => {
             const weekday = d.toLocaleDateString("ko-KR", { weekday: "short" });
             return `${dateStr} (${weekday})`;
           })()}
-        </h4>
         {isToday ? (
-          <Button text={"+"} classtype={"Create"} onClick={() => nav("/new")} />
+          <button className="list_btn" onClick={() => nav("/new")}>
+            <img src="/plus.png" alt="글 추가 버튼" />
+          </button>
         ) : (
           ""
         )}
+        </h4>
       </div>
       <div className="Summary_Contents">
         <SummaryItem data={todaySummary} />

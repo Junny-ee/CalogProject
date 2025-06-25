@@ -32,14 +32,21 @@ const New = () => {
     nav(`/read/${currentId}`, { replace: true });
   };
 
+  const isStop = () => {
+    if (!window.confirm("글 작성을 멈추고 캘린더로 이동할까요?")) {
+      return;
+    } else {
+      nav("/");
+    }
+  };
+
   return (
     <div className="New">
       <div className="header_content">
         <button
           className="gotoCal"
           onClick={() => {
-            nav("/");
-            alert("글 작성을 멈추고 캘린더로 이동합니다");
+            isStop();
           }}
         >
           <img src="/logo_image_width.png" alt="가로 버전 로고" />

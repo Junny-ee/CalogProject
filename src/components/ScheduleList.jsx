@@ -68,19 +68,22 @@ const ScheduleList = ({ calendarData }) => {
 
   return (
     <div className={"ScheduleList"}>
-      <div className="ScheduleList_Wirte">
+      <div className="ScheduleList_Write">
         <h4>할일목록</h4>
       </div>
       <div className="ScheduleList_Contents">
         <div className="ScheduleList_Todo">
           <p>프로젝트 일정</p>
           <div className="Button_wrapper">
-            <Button
-              text={"+"}
-              classtype={"Create"}
-              onClick={() => openModal("project")}
-            />
-            <Button text={"👇"} onClick={toggleProject} />
+            <button className="list_btn" onClick={() => openModal("project")}>
+              <img src="/plus.png" alt="글 추가 버튼" />
+            </button>
+            <button className="list_btn" onClick={toggleProject}>
+              <img
+                src={isOpenList ? "/arrows_up.png" : "/arrows_under.png"}
+                alt="토글 버튼"
+              />
+            </button>
           </div>
         </div>
         <div className={`Todo-content ${isOpenList ? "open" : ""}`}>
@@ -105,12 +108,15 @@ const ScheduleList = ({ calendarData }) => {
         <div className="ScheduleList_Todo">
           <p>일일 일정</p>
           <div className="Button_wrapper">
-            <Button
-              text={"+"}
-              classtype={"Create"}
-              onClick={() => openModal("item")}
-            />
-            <Button text={"👇"} onClick={toggleItem} />
+            <button className="list_btn" onClick={() => openModal("item")}>
+              <img src="/plus.png" alt="글 추가 버튼" />
+            </button>
+            <button className="list_btn" onClick={toggleItem}>
+              <img
+                src={isOpenItem ? "/arrows_up.png" : "/arrows_under.png"}
+                alt="토글 버튼"
+              />
+            </button>
           </div>
         </div>
         <div className={`Todo-content ${isOpenItem ? "open" : ""}`}>

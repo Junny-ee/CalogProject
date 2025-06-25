@@ -1,8 +1,9 @@
 .ScheduleItem {
-  border-bottom: 1px solid #a7a7a7;
+  border-bottom: 1px solid var(--border-bg-color);
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 209, 0.473);
+  background-color: var(--sechdule-default-bg);
+  padding: 7px;
 }
 .ScheduleItem_title {
   cursor: pointer;
@@ -11,9 +12,26 @@
 .ScheduleItem_header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .SchduleItem_contents {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.list_delete_btn {
+  background-color: var(--button-default-bg);
+  color: var(--highlight-color);
+  width: 35px;
+  height: 35px;
+  margin: 5px 8px 0 0;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}
+.list_delete_btn img {
+  width: 18px;
+  height: 18px;
+  padding: 4px 0 1px 0;
 }

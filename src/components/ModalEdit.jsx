@@ -38,7 +38,10 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
       alert("내용을 입력해주세요!");
       return;
     }
-
+    if (end && start > end) {
+      alert("종료 날짜가 시작날짜보다 이전에 있습니다.");
+      return;
+    }
     if (modalType === "project") {
       onUpdate(data.type, data.id, title, color, start, end, description);
     } else {

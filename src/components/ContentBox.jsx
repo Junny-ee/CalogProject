@@ -11,13 +11,12 @@ const ContentBox = ({ content, setContent, onSubmitButtonClick }) => {
         placeholder="글을 입력하세요"
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        ></textarea>
+      ></textarea>
 
       <div className="markdown_preview">
         <h3>미리보기</h3>
         <ReactMarkdown components={markdown}>{content}</ReactMarkdown>
       </div>
-
     </div>
   );
 };

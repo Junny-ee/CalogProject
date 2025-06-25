@@ -2,17 +2,59 @@
   text-align: center;
   margin: 10px 0;
   display: flex;
-  justify-content: first baseline;
+  justify-content: space-between;
 }
 
 .HeaderCalendar button.current-month-button {
   font-size: 24px; /* 글꼴 크기 키우기 */
   font-weight: 700; /* 더 진하게 */
-  color: #333; /* 진한 회색으로 모던한 느낌 */
+  color: var(--primary-text-color); /* 진한 회색으로 모던한 느낌 */
   background: none;
   border: none;
   cursor: pointer;
   padding: 8px 15px;
   border-radius: 8px; /* 살짝 둥근 모서리 */
   transition: background-color 0.2s ease, color 0.2s ease; /* 호버 애니메이션 */
+}
+
+.Calendar_Button {
+  gap: 5px;
+  margin-right: 7px;
+  margin-top: 4px;
+}
+
+.Calendar_Button .button_schedule {
+  width: 40px;
+  height: 40px;
+  padding: 3px 0 0 0;
+}
+.Calendar_Button .button_schedule img {
+  width: 23px;
+  height: 24px;
+}
+
+.Calendar_Button .button_summary {
+  width: 40px;
+  height: 40px;
+  padding: 3px 0 0 0;
+}
+
+.Calendar_Button .button_theme {
+  width: 40px;
+  height: 40px;
+  padding: 4px 0 0 0;
+}
+.Calendar_Button .button_theme img {
+  width: 25px;
+  height: 25px;
+}
+
+.Calendar_Button .button_back {
+  width: 40px;
+  height: 40px;
+  padding: 4px 0 0 0;
+}
+.Calendar_Button .button_back img {
+  width: 25px;
+  height: 25px;
 }
