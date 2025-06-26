@@ -1,10 +1,10 @@
 import moment from "moment";
 import "./HeaderCalendar.css";
-
 import { useContext } from "react";
 import { ScheduleDispatchContext } from "../pages/Calendar";
 import { useNavigate } from "react-router-dom";
-moment.locale("ko"); // 한국어 적용
+
+moment.locale("ko");
 const HeaderCalendar = ({ date, onClick }) => {
   const { toggleScheduleList, toggleSummary, toggleTheme } = useContext(
     ScheduleDispatchContext

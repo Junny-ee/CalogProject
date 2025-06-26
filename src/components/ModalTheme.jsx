@@ -9,8 +9,6 @@ function ModalTheme({ isOpen, onModal, onColor }) {
       setColor("");
     }
   }, [isOpen]);
-  // console.log(radioButton);
-  // '저장' 버튼 클릭 시 실행될 함수
   const handleSave = () => {
     onColor(color);
     onModal(false);
@@ -18,12 +16,12 @@ function ModalTheme({ isOpen, onModal, onColor }) {
   return (
     <div>
       <Modal
-        isOpen={isOpen} // 모달 열림/닫힘 상태
-        onRequestClose={() => onModal(false)} // 오버레이 클릭 또는 Esc 키 누를 때 모달 닫기
-        contentLabel={"theme_select"} // 모달의 접근성 레이블 (동적 제목)
-        ariaHideApp={false} // React-modal의 경고를 방지하기 위해 추가
-        className="modal_content" // 모달 내용에 적용할 CSS 클래스
-        overlayClassName="modal_overlay" // 모달 오버레이에 적용할 CSS 클래스
+        isOpen={isOpen} 
+        onRequestClose={() => onModal(false)}
+        contentLabel={"theme_select"} 
+        ariaHideApp={false} 
+        className="modal_content" 
+        overlayClassName="modal_overlay" 
       >
         <div>
           <div className="radio_container">

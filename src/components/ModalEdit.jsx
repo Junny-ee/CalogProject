@@ -47,13 +47,12 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
     } else {
       onUpdate(data.type, data.id, title, color, start, end, description);
     }
-    onModal(false); // 모달 닫기
+    onModal(false);
   };
   const handleDelete = () => {
     onDelete(data.id);
     onModal(false);
   };
-  // modalType에 따라 모달 제목을 결정하는 함수
   const getModalTitle = () => {
     if (modalType === "project") {
       return "프로젝트 일정 수정";
@@ -68,14 +67,14 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
   return (
     <div>
       <Modal
-        isOpen={isOpen} // 모달 열림/닫힘 상태
-        onRequestClose={() => onModal(false)} // 오버레이 클릭 또는 Esc 키 누를 때 모달 닫기
-        contentLabel={getModalTitle()} // 모달의 접근성 레이블 (동적 제목)
-        ariaHideApp={false} // React-modal의 경고를 방지하기 위해 추가
-        className="modal_content" // 모달 내용에 적용할 CSS 클래스
-        overlayClassName="modal_overlay" // 모달 오버레이에 적용할 CSS 클래스
+        isOpen={isOpen}
+        onRequestClose={() => onModal(false)}
+        contentLabel={getModalTitle()}
+        ariaHideApp={false}
+        className="modal_content"
+        overlayClassName="modal_overlay"
       >
-        {data.type === "project" ? ( // 프로젝트 일정
+        {data.type === "project" ? (
           <div>
             <input
               type="text"
@@ -163,7 +162,6 @@ function ModalEdit({ isOpen, onModal, modalType, data }) {
             </div>
           </div>
         ) : (
-          // 일일 일정
           <div>
             <input
               type="text"

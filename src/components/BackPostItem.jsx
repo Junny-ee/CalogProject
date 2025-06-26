@@ -23,11 +23,11 @@ const BackPostItem = ({
     const lines = content.split("\n");
 
     return lines
-      .filter((line) => line.trim() !== "") // 빈 줄 제거
+      .filter((line) => line.trim() !== "") 
       .map((line) =>
         line
-          .replace(/^#+\s*/, "") // 제목 기호 제거
-          .replace(/[*_`>~-]/g, "") // 기타 기호 제거
+          .replace(/^#+\s*/, "") 
+          .replace(/[*_`>~-]/g, "")
           .trim()
       );
   };

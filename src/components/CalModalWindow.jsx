@@ -7,13 +7,11 @@ function CalModalWindow({ isOpen, onClose, onDateChange }) {
     <div>
       <Modal
         isOpen={isOpen}
-        // 문제 해결: 함수를 직접 전달합니다.
-        onRequestClose={onClose} // 또는 () => onClose(false)
-        ariaHideApp={false} // 에러 방지를 위해 추가
-        className="modal-content" // 모달 내용에 대한 클래스
-        overlayClassName="modal-overlay" // 모달 오버레이에 대한 클래스
+        onRequestClose={onClose}
+        ariaHideApp={false}
+        className="modal-content"
+        overlayClassName="modal-overlay"
       >
-        {/* 모달 내부 UI */}
         <h3>날짜 선택</h3>
         <input
           type="date"

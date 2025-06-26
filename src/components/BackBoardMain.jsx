@@ -12,16 +12,13 @@ const BackBoardMain = ({ fetchPosts }) => {
   const allPostsFromContext = useContext(CalogStateContext);
   const queryClient = useQueryClient();
 
-  const { data, fetchNextPage, hasNextPage, isLoadingNextPage, refetch } =
-    useInfiniteQuery({
-      queryKey: ["posts"],
-      queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam),
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-      staleTime: 5 * 60 * 1000,
-      cacheTime: 10 * 60 * 1000,
-    });
-  const paginatedPosts = data?.pages.flatMap((page) => page.data) || [];
-
+  const { fetchNextPage, hasNextPage, isLoadingNextPage } = useInfiniteQuery({
+    queryKey: ["posts"],
+    queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam),
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
+  });
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -79,11 +76,11 @@ const BackBoardMain = ({ fetchPosts }) => {
 
     const tagIncludes = Array.isArray(item.tag)
       ? item.tag.some(
-        (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
-      )
+          (tag) => typeof tag === "string" && tag.includes(lowerCaseSearchWord)
+        )
       : typeof item.tag === "string"
-        ? item.tag.includes(lowerCaseSearchWord)
-        : false;
+      ? item.tag.includes(lowerCaseSearchWord)
+      : false;
 
     return titleIncludes || contentIncludes || tagIncludes;
   });
@@ -93,8 +90,8 @@ const BackBoardMain = ({ fetchPosts }) => {
     const tagMatches = Array.isArray(item.tag)
       ? item.tag.some((t) => t.toLowerCase() === lowerCaseSearchingTag)
       : typeof item.tag === "string"
-        ? item.tag.toLowerCase() === lowerCaseSearchingTag
-        : false;
+      ? item.tag.toLowerCase() === lowerCaseSearchingTag
+      : false;
 
     return tagMatches;
   });
@@ -147,11 +144,12 @@ const BackBoardMain = ({ fetchPosts }) => {
               />
             </div>
           ) : (
-            <BackPostList posts={filteredPosts} entirePosts={allPostsFromContext} />
+            <BackPostList
+              posts={filteredPosts}
+              entirePosts={allPostsFromContext}
+            />
           )}
-          {searchWord === "" && searchingTag === "" && (
-            <div ref={ref}></div>
-          )}
+          {searchWord === "" && searchingTag === "" && <div ref={ref}></div>}
         </BackBoardDispatchContext.Provider>
       </div>
     </div>

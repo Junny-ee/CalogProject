@@ -9,7 +9,7 @@ import FrontCalendar from "./components/FrontCalendar";
 import { CalendarProvider } from "./components/FrontCalendar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createContext, useEffect, useReducer, useRef, useState } from "react";
-import { postContent } from "./util/postContent";
+
 const queryClient = new QueryClient();
 
 function reducer(state, action) {
@@ -75,10 +75,10 @@ const fetchDatas = async (startIndex = 0) => {
       const paginatedData = sortedData.slice(startIndex, endIndex);
       const nextCursor = endIndex < sortedData.length ? endIndex : undefined;
       resolve({ data: paginatedData, nextCursor });
-    }, 100); // 빠른 테스트를 위해 100으로 임시 설정함
+    }, 100);
   });
 };
-const entireDatas = localStorage.getItem("calog");
+
 function App() {
   const [data, dispatch] = useReducer(reducer, []);
   const [tagCount, setTagCount] = useState({});
@@ -87,26 +87,21 @@ function App() {
 
   useEffect(() => {
     const storedData = localStorage.getItem("calog");
-    let initialData;
     if (storedData) {
-      initialData = JSON.parse(storedData);
-    } else {
-      initialData = postContent;
-      localStorage.setItem("calog", JSON.stringify(postContent));
+      const parsedData = JSON.parse(storedData);
+      let maxId = 0;
+      parsedData.forEach((item) => {
+        if (Number(item.id) > maxId) {
+          maxId = item.id;
+        }
+      });
+      idRef.current = maxId + 1;
+      dispatch({
+        type: "INIT",
+        data: parsedData,
+      });
     }
-
-    let maxId = 0;
-    initialData.forEach((item) => {
-      if (Number(item.id) > maxId) {
-        maxId = item.id;
-      }
-    });
-    idRef.current = maxId + 1;
-    dispatch({
-      type: "INIT",
-      data: initialData,
-    });
-    setTagCount(tagCounting(initialData));
+    setTagCount(tagCounting(JSON.parse(localStorage.getItem("calog") || "[]")));
     setIsLoading(false);
   }, []);
 

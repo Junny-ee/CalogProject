@@ -4,27 +4,25 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75); /* 반투명 검정 배경 */
+  background-color: rgba(0, 0, 0, 0.75); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* 다른 요소들 위에 오도록 설정 */
+  z-index: 1000; 
 }
 
-/* 모달 내용 컨테이너 스타일 */
 .modal-content {
-  background: white; /* 모달 배경색 */
-  padding: 30px; /* 내부 여백 */
-  border-radius: 8px; /* 모서리 둥글게 */
-  max-width: 500px; /* 최대 너비 */
-  width: 90%; /* 화면 너비에 대한 비율 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-  outline: none; /* 포커스 시 생기는 외곽선 제거 */
-  position: relative; /* 자식 요소 포지셔닝을 위해 */
-  z-index: 1001; /* 오버레이 위에 오도록 설정 */
+  background: white;
+  padding: 30px; 
+  border-radius: 8px; 
+  max-width: 500px; 
+  width: 90%; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+  outline: none; 
+  position: relative; 
+  z-index: 1001;
 }
 
-/* 닫기 버튼 스타일 (선택 사항) */
 .close-modal-button {
   position: absolute;
   top: 10px;
@@ -40,9 +38,8 @@
   color: #000;
 }
 
-/* 날짜 선택 인풋 스타일 (선택 사항) */
 .modal-content input[type="date"] {
-  width: calc(100% - 20px); /* 패딩 고려한 너비 */
+  width: calc(100% - 20px); 
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid var(--border-bg-color); 
