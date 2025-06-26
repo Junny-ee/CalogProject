@@ -46,7 +46,6 @@
 
 .content_body {
   width: 100%;
-  /* white-space: pre-wrap; */
   word-break: break-word;
   font-size: large;
   overflow: hidden;
@@ -91,16 +90,10 @@
   cursor: pointer;
 }
 
-/* input[type="checkbox"] {
-  flex-shrink: 0;
-  transform: scale(1.5);
-  margin-right: 8px;
-} */
-
 input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  appearance: none; /* 브라우저 기본 체크박스 스타일 제거 */
+  appearance: none;
   border: 2px solid #aaa;
   border-radius: 4px;
   background-color: white;

@@ -14,22 +14,6 @@
 .Button .Create {
   background-color: #f6eaf0;
 }
-.Button .Editer {
-  color: rgb(131, 29, 226);
-}
-.Button .Delete {
-  color: rgb(92, 139, 17);
-}
-.Button .Theme {
-  color: rgb(30, 153, 122);
-}
-.Button .ListToggle {
-  color: black;
-}
-.Button .ScreenChange {
-  color: black;
-}
-
 
 .Button .Cancel {
   background: none;
@@ -42,13 +26,3 @@
   background-color: red;
   color: white;
 }
-
-/*버튼 스타일 참고용
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.open-modal-button:hover {
-  background-color: #218838;
-  transform: scale(1.05); /* 약간 확대 */

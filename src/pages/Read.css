@@ -98,14 +98,13 @@ img {
 
 .read_content {
   border-radius: 10px;
-  /* padding: 10px 20px; */
   margin-top: 10px;
   flex-grow: 1;
-  white-space: pre-wrap; /* 줄바꿈과 공백 유지 */
-  word-wrap: break-word; /* 너무 긴 단어도 줄바꿈 */
+  white-space: pre-wrap;
+  word-wrap: break-word; 
   overflow-wrap: break-word;
   overflow-y: auto;
-  line-height: 1.5; /* 줄 간격 설정 */
+  line-height: 1.5;
 }
 
 h1 {

@@ -3,9 +3,8 @@ import SummaryItem from "./SummaryItem";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { CalogStateContext } from "../App";
+
 const Summary = ({ date }) => {
-  // calendarData = 스토리지 데이터
-  // console.log(new Date(calendarData[0].start).getFullYear());
   const [todaySummary, setTodaySummary] = useState(null);
   const BackBoardData = useContext(CalogStateContext);
   const isToday =
@@ -19,12 +18,11 @@ const Summary = ({ date }) => {
           new Date(date).toLocaleDateString()
       )
     );
-  }, [date]); // 날짜 일치하는 객체 가져오기
+  }, [date]); 
 
   return (
     <div className="Summary">
       <div className="Summary_Header">
-        {/* <h4>{new Date(date).toLocaleDateString()}</h4> */}
         <h4>
           {(() => {
             const d = new Date(date);

@@ -67,8 +67,8 @@
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  background-color: #f8f9fa; /* 기본 배경 색상 (밝은 회색) */
-  border: 1px solid var(--border-bg-color); /* 테두리 */
+  background-color: #f8f9fa;
+  border: 1px solid var(--border-bg-color);
   border-radius: 0.375rem;
   cursor: pointer;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -77,19 +77,17 @@
 }
 
 .btn_check:checked + .btn {
-  color: #fff; /* 선택 시 텍스트 색상 (흰색) */
-  background-color: #0d6efd; /* 선택 시 배경 색상 (파란색) */
-  border-color: #0d6efd; /* 선택 시 테두리 색상 */
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* 선택 시 그림자 효과 */
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
-/* 포커스 시 스타일 (접근성 향상) */
 .btn_check:focus + .btn {
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
   border-color: #0a58ca;
 }
 
-/* 비활성화된 상태의 버튼 */
 .btn_check:disabled + .btn {
   pointer-events: none;
   opacity: 0.65;
@@ -98,7 +96,6 @@
   color: #6c757d;
 }
 
-/* 모달 내 버튼 컨테이너 */
 .modal_button-box {
   display: flex;
   justify-content: flex-end;
@@ -107,7 +104,6 @@
   margin-top: 20px;
 }
 
-/* 모달 저장/닫기 버튼 공통 스타일 */
 .create_modal_button,
 .close_modal_button,
 .delete_modal_button {
@@ -119,7 +115,6 @@
   transition: background-color 0.3s ease;
 }
 
-/* 모달 저장 버튼 스타일 */
 .create_modal_button {
   background-color: #aeb4ffd3;
   color: white;
@@ -130,7 +125,7 @@
 }
 
 .delete_modal_button {
-  background-color: #eb6969d3; /* 적색 계열 */
+  background-color: #eb6969d3;
   color: white;
 }
 
@@ -138,9 +133,8 @@
   background-color: #a74d4dd3;
 }
 
-/* 모달 닫기 버튼 스타일 */
 .close_modal_button {
-  background-color: #6c757d; /* 회색 */
+  background-color: #6c757d; 
   color: white;
 }
 
@@ -148,30 +142,26 @@
   background-color: #5a6268;
 }
 
-/* 날짜 입력 필드 라벨과 인풋 사이 간격 조정 */
 .modal_content label {
   margin-right: 10px;
 }
 .modal_content input[type="datetime-local"] {
-  width: auto; /* 자동 너비 조정 */
-  flex-grow: 1; /* flex 아이템으로 공간 채우기 */
+  width: auto; 
+  flex-grow: 1; 
 }
 
-/* 날짜 선택 섹션 레이아웃 개선 */
 .modal_content > div:nth-of-type(2) {
-  /* "시작 날짜"와 "종료 날짜"를 포함하는 div */
   display: flex;
-  flex-direction: column; /* 세로로 정렬 */
-  gap: 10px; /* 각 날짜 줄 사이 간격 */
+  flex-direction: column;
+  gap: 10px; 
 }
 .modal_content > div:nth-of-type(2) > div {
-  /* 각 날짜 줄 */
   display: flex;
   align-items: center;
   gap: 10px;
 }
 .modal_content > div:nth-of-type(2) > div label {
-  min-width: 80px; /* 라벨 너비 고정하여 정렬 */
+  min-width: 80px;
 }
 .radio_container {
   display: flex;
@@ -180,21 +170,21 @@
 }
 
 .radio_container input[type="radio"] {
-  appearance: none; /* 브라우저 기본 스타일 제거 */
+  appearance: none; 
   -webkit-appearance: none;
   -moz-appearance: none;
   border: none;
-  outline: none; /* 포커스 아웃라인 제거 */
-  margin: 0; /* 기본 마진 제거 */
-  padding: 0; /* 기본 패딩 제거 */
-  cursor: pointer; /* 커서 변경 */
-  position: relative; /* 가상 요소를 위한 기준점 */
-  width: 30px; /* 원형 버튼 크기 */
+  outline: none; 
+  margin: 0;
+  padding: 0; 
+  cursor: pointer; 
+  position: relative;
+  width: 30px; 
   height: 30px;
-  border-radius: 15px; /* 원형으로 만듦 */
-  box-sizing: border-box; /* 패딩, 보더 포함 크기 계산 */
-  transition: all 0.2s ease-in-out; /* 부드러운 전환 효과 */
-  border: 1px solid var(--border-bg-color); /* 기본 테두리 색상 */
+  border-radius: 15px; 
+  box-sizing: border-box; 
+  transition: all 0.2s ease-in-out;
+  border: 1px solid var(--border-bg-color); 
 }
 .radio_container .radio_blue {
   background-color: #a7c7e7;
@@ -212,7 +202,7 @@
   background-color: #ffb6c1;
 }
 .radio_container input[type="radio"]:checked {
-  box-shadow: 0 0 0 1px white, 0 0 0 2px #333; /* 선택 효과 */
+  box-shadow: 0 0 0 1px white, 0 0 0 2px #333; 
 }
 
 .radio_container input[type="radio"]:hover:not(:checked) {
@@ -220,7 +210,7 @@
 }
 
 .radio_container input[type="radio"]:focus-visible {
-  outline: 2px solid royalblue; /* 포커스 아웃라인 */
+  outline: 2px solid royalblue; 
   outline-offset: 2px;
 }
 .theme_one {

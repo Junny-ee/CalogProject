@@ -1,7 +1,7 @@
 import "./ProjectSchedule.css";
 import { ScheduleDispatchContext } from "../pages/Calendar";
 import { useContext } from "react";
-// ProjectSchedule에서도 모달을 열기 위한 콜백 함수를 prop으로 받습니다.
+
 const ProjectSchedule = ({ data, onItemClick }) => {
   const handleItemClick = () => {
     if (onItemClick) {

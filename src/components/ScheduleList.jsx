@@ -5,14 +5,15 @@ import ProjectSchedule from "./ProjectSchedule";
 import { useContext, useState } from "react";
 import { ScheduleStateContext } from "../pages/Calendar";
 import ModalEdit from "./ModalEdit";
+
 const ScheduleList = ({ calendarData }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 입력창 여는 state
-  const [isEditerOpen, setIsEditerOpen] = useState(false); // 모달 edit창 여는 state
-  const [modalType, setModalType] = useState(""); // 해당 모달 타입으로 일정 타입 구분
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isEditerOpen, setIsEditerOpen] = useState(false);
+  const [modalType, setModalType] = useState(""); 
   const schedule_data = useContext(ScheduleStateContext);
   const [findData, setFindData] = useState(null);
-  const [isOpenList, setIsOpenList] = useState(true); // projcet 아이템 토글
-  const [isOpenItem, setIsOpenItem] = useState(true); // 일일일정 토글
+  const [isOpenList, setIsOpenList] = useState(true); 
+  const [isOpenItem, setIsOpenItem] = useState(true); 
   const startMonth = new Date(
     calendarData.getFullYear(),
     calendarData.getMonth(),
@@ -23,7 +24,6 @@ const ScheduleList = ({ calendarData }) => {
     calendarData.getMonth() + 1,
     0
   );
-  // 슬라이드로 열고닫는 함수
   const toggleProject = () => {
     setIsOpenList(!isOpenList);
   };
@@ -45,7 +45,6 @@ const ScheduleList = ({ calendarData }) => {
       );
     }
   };
-  // 모달 열고닫는 함수
   const openModal = (type) => {
     setIsModalOpen(true);
     setModalType(type);
@@ -55,7 +54,6 @@ const ScheduleList = ({ calendarData }) => {
     setModalType("");
   };
 
-  // edit 모달 열고닫는 함수
   const editModalopen = (data) => {
     setIsEditerOpen(true);
     setFindData(data);
